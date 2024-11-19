@@ -3,12 +3,14 @@ import React from 'react'
 
 //component imports
 import Hero from '../components/homepage/Hero'
-import LinkCards from '../components/LinkCards'
+import LinkCards from '../components/homepage/LinkCards'
+import PromoSection from '../components/homepage/PromoSection'
 
 const index = () => {
   return (
     <ScrollView style={styles.mainCon}>
       <Hero />
+      <PromoSection />
       <LinkCards />
     </ScrollView>
   )
