@@ -1,10 +1,15 @@
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import React from 'react'
 
+//component imports
+import Hero from '../components/homepage/Hero'
+import LinkCards from '../components/LinkCards'
+
 const index = () => {
   return (
-    <ScrollView style={}>
-
+    <ScrollView style={styles.mainCon}>
+      <Hero />
+      <LinkCards />
     </ScrollView>
   )
 }
