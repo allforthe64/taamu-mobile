@@ -1,5 +1,6 @@
 import { Tabs } from "expo-router";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faHouse, faPerson, faFlagCheckered, faLock } from "@fortawesome/free-solid-svg-icons";
 
 export default function TabLayout() {
     return (
@@ -8,14 +9,47 @@ export default function TabLayout() {
                 name="index"
                 options={{
                 title: 'Home',
-                tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+                headerShown: false,
+                tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faHouse} color={color} />,
                 }}
             />
             <Tabs.Screen
-                name="settings"
+                name="[racer]"
                 options={{
-                title: 'Settings',
-                tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
+                    title: 'Racer Page',
+                    headerShown: false,
+                    tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faPerson} color={color} />,
+                    href: {
+                        pathname: '/[racer]',
+                        params: {
+                            racer: 'foobar'
+                        }
+                    }
+                }}
+            />
+            <Tabs.Screen
+                name="races"
+                options={{
+                title: 'Search Races',
+                headerShown: false,
+                tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faFlagCheckered} color={color} />,
+                }}
+            />
+            <Tabs.Screen
+                name="auth"
+                options={{
+                title: 'Log-in',
+                headerShown: false,
+                tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faLock} color={color} />,
+                }}
+            />
+            <Tabs.Screen
+                name="register"
+                options={{
+                title: 'Register',
+                headerShown: false,
+                tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faLock} color={color} />,
+                href: null
                 }}
             />
         </Tabs>

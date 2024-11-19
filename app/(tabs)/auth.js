@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const settings = () => {
+const auth = () => {
   return (
     <View>
-      <Text>settings</Text>
+      <Text>auth</Text>
     </View>
   )
 }
 
-export default settings
+export default auth
