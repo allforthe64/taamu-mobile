@@ -116,9 +116,9 @@ const styles = StyleSheet.create({
     PromoCardButton: {
         backgroundColor: '#09CAC7',
         paddingTop: 7,
-        paddingLeft: 10,
+        paddingLeft: 15,
         paddingBottom: 7,
-        paddingRight: 10,
+        paddingRight: 15,
         borderRadius: 100
     },
     buttonText: {
