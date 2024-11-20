@@ -5,6 +5,7 @@ import React from 'react'
 import Hero from '../components/homepage/Hero'
 import LinkCards from '../components/homepage/LinkCards'
 import PromoSection from '../components/homepage/PromoSection'
+import Contact from '../components/homepage/Contact'
 
 const index = () => {
   return (
@@ -12,6 +13,7 @@ const index = () => {
       <Hero />
       <PromoSection />
       <LinkCards />
+      <Contact />
     </ScrollView>
   )
 }
