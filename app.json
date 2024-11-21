@@ -27,6 +27,11 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra" : {
+      "PUBLIC_EMAIL_JS_API_KEY": "KTlfpdal13r0rSCP-",
+      "EXPO_PUBLIC_EMAIL_JS_TEMPLATE_ID": "template_auqa2se",
+      "EXPO_PUBLIC_EMAIL_JS_SERVICE_ID": "service_fctuxh9"
+    }
   }
 }

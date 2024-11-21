@@ -8,6 +8,7 @@ import PromoSection from '../components/homepage/PromoSection'
 import Contact from '../components/homepage/Contact'
 
 const index = () => {
+  
   return (
     <ScrollView style={styles.mainCon}>
       <Hero />
