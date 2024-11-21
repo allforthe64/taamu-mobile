@@ -15,7 +15,7 @@ const Contact = () => {
     const [message, setMessage] = useState('')
     const [focused, setFocused] = useState('')
 
-    console.log(Constants.expoConfig.extra.PUBLIC_EMAIL_JS_API_KEY)
+    /* console.log(Constants.expoConfig.extra.PUBLIC_EMAIL_JS_API_KEY) */
 
     const sendMessage = async () => {
         try {
