@@ -14,21 +14,24 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.taamudev.taamumobile"
+      "package": "com.taamudev.taamumobile",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router",
-      "@react-native-firebase/app-check"
+      "@react-native-firebase/app-check",
+      "@react-native-firebase/app"
     ],
     "extra": {
       "PUBLIC_EMAIL_JS_API_KEY": "KTlfpdal13r0rSCP-",
