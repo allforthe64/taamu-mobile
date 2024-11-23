@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 export default function Layout() {
 
-    /*   try { */
+      try {
     firebase.initializeApp({
         apiKey: "AIzaSyCjBjNmMQHRe1d3KYJZNJEWNbOe0exfypY",
         authDomain: "areregsoft.firebaseapp.com",
@@ -55,6 +55,9 @@ export default function Layout() {
           }
         };
         verifyAppCheckToken()
+    } catch (err) {
+        alert(err)
+    }
 
     return (
         <Stack>
