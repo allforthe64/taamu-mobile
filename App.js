@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 export default function App() {
 
-  try {
+/*   try { */
     firebase.initializeApp({
       apiKey: "AIzaSyCjBjNmMQHRe1d3KYJZNJEWNbOe0exfypY",
       authDomain: "areregsoft.firebaseapp.com",
@@ -21,6 +21,7 @@ export default function App() {
   
     // Activate Firebase App Check
     if (Platform.OS === 'android') {
+      alert('attempting android activation')
       appCheck().activate(
         null, // Play Integrity doesn't require a key
         true  // Auto-refresh is enabled
@@ -34,6 +35,7 @@ export default function App() {
   
     useEffect(() => {
       const verifyAppCheckToken = async () => {
+        alert('verifiying app check token')
         try {
           // Request the App Check token
           const tokenResult = await appCheck().getToken();
@@ -53,9 +55,9 @@ export default function App() {
       };
       verifyAppCheckToken()
     }, [])
-  } catch (err) {
+  /* } catch (err) {
     console.log('error with firebase: ', err)
-  }
+  } */
 
 
   return (
