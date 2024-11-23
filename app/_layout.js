@@ -36,7 +36,6 @@ export default function Layout() {
             );
         }
 
-      useEffect(() => {
         const verifyAppCheckToken = async () => {
             alert('running app check verification')
           try {
@@ -56,7 +55,6 @@ export default function Layout() {
           }
         };
         verifyAppCheckToken()
-      }, [])
 
     return (
         <Stack>
