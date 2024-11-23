@@ -20,6 +20,7 @@ export default function Layout() {
       
         // Activate Firebase App Check
         if (Platform.OS === 'android') {
+            alert('initialize app check')
             appCheck().activate(
             null, // Play Integrity doesn't require a key
             true  // Auto-refresh is enabled
@@ -46,7 +47,7 @@ export default function Layout() {
               alert('Error', 'No App Check Token received.');
             }
           } catch (error) {
-            Alert.alert('Error', error.message || 'Failed to get App Check token.');
+            alert('Error', error.message || 'Failed to get App Check token.');
           }
         };
         verifyAppCheckToken()
