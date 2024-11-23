@@ -17,19 +17,23 @@ export default function Layout() {
         appId: "1:793492515603:web:c48d44811cc4b603fb88e6",
         measurementId: "G-TMZ8L24SND"
       });
-    
-      // Activate Firebase App Check
-      if (Platform.OS === 'android') {
-        alert('attempting android activation')
-        appCheck().activate(
-          null, // Play Integrity doesn't require a key
-          true  // Auto-refresh is enabled
-        );
-      } else if (Platform.OS === 'ios') {
-        appCheck().activate(
-          null, // DeviceCheck doesn't require a key
-          true  // Auto-refresh is enabled
-        );
+      
+      try {
+        // Activate Firebase App Check
+        if (Platform.OS === 'android') {
+            alert('attempting android activation')
+            appCheck().activate(
+            null, // Play Integrity doesn't require a key
+            true  // Auto-refresh is enabled
+            );
+        } else if (Platform.OS === 'ios') {
+            appCheck().activate(
+            null, // DeviceCheck doesn't require a key
+            true  // Auto-refresh is enabled
+            );
+        }
+      } catch (err) {
+        alert(err)
       }
     
       useEffect(() => {
