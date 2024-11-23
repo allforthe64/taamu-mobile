@@ -22,7 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.taamudev.taamumobile",
+      "package": "com.taamudev.taamu",
       "googleServicesFile": "./google-services.json"
     },
     "web": {
