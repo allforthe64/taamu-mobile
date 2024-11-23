@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     contactForm: {
         width: '100%',
         display: 'flex',
-        flexDirection: 'coloumn',
+        flexDirection: 'column',
         alignItems: 'center'
     },
     singleLineTextInputs: {
