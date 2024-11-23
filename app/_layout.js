@@ -20,11 +20,15 @@ export default function Layout() {
       
         // Activate Firebase App Check
         if (Platform.OS === 'android') {
-            alert('initialize app check')
-            appCheck().activate(
-            null, // Play Integrity doesn't require a key
-            true  // Auto-refresh is enabled
-            );
+            try {
+                alert('initialize app check')
+                appCheck().activate(
+                null, // Play Integrity doesn't require a key
+                true  // Auto-refresh is enabled
+                );
+            } catch (err) {
+                alert('error in app check initialization: ', err)
+            }
         } else if (Platform.OS === 'ios') {
             appCheck().activate(
             null, // DeviceCheck doesn't require a key
@@ -34,6 +38,7 @@ export default function Layout() {
 
       useEffect(() => {
         const verifyAppCheckToken = async () => {
+            alert('running app check verification')
           try {
             // Request the App Check token
             const tokenResult = await appCheck().getToken();
