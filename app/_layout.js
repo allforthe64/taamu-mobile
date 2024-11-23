@@ -18,10 +18,8 @@ export default function Layout() {
         measurementId: "G-TMZ8L24SND"
       });
       
-      try {
         // Activate Firebase App Check
         if (Platform.OS === 'android') {
-            alert('attempting android activation')
             appCheck().activate(
             null, // Play Integrity doesn't require a key
             true  // Auto-refresh is enabled
@@ -32,13 +30,9 @@ export default function Layout() {
             true  // Auto-refresh is enabled
             );
         }
-      } catch (err) {
-        alert(err)
-      }
-    
+
       useEffect(() => {
         const verifyAppCheckToken = async () => {
-          alert('verifiying app check token')
           try {
             // Request the App Check token
             const tokenResult = await appCheck().getToken();
@@ -46,21 +40,17 @@ export default function Layout() {
       
             if (token) {
               console.log('App Check Token:', token); // Logs the token to the console
-              Alert.alert('App Check Token', token); // Displays the token in an alert for testing
+              alert('App Check Token', token); // Displays the token in an alert for testing
             } else {
               console.warn('No App Check Token received.');
-              Alert.alert('Error', 'No App Check Token received.');
+              alert('Error', 'No App Check Token received.');
             }
           } catch (error) {
-            console.error('Error retrieving App Check token:', error);
             Alert.alert('Error', error.message || 'Failed to get App Check token.');
           }
         };
         verifyAppCheckToken()
       }, [])
-    /* } catch (err) {
-      console.log('error with firebase: ', err)
-    } */
 
     return (
         <Stack>
