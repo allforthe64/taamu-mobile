@@ -15,14 +15,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "googleServicesFile": "./GoogleService-Info.pls"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.taamudev.taamu",
+      "package": "com.taamudev.taamumobile",
       "googleServicesFile": "./google-services.json"
     },
     "web": {
@@ -31,7 +31,15 @@
     "plugins": [
       "expo-router",
       "@react-native-firebase/app-check",
-      "@react-native-firebase/app"
+      "@react-native-firebase/app",
+      [
+        "@sentry/react-native",
+        {
+          "url": "https://sentry.io/",
+          "project": "taamu-mobile",
+          "organization": "myelephantapp"
+        }
+      ]
     ],
     "extra": {
       "PUBLIC_EMAIL_JS_API_KEY": "KTlfpdal13r0rSCP-",
