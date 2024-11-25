@@ -11,7 +11,7 @@ import * as Sentry from '@sentry/react-native';
 
 
 Sentry.init({
-  dsn: 'https://d460ada50918758584a197b5b1d0793e@o4507346968772608.ingest.us.sentry.io/4507346971328512',
+  dsn: 'https://78cc57d36d498aebafe0ee5f0448b6e8@o4507346968772608.ingest.us.sentry.io/4508355887759360',
 });
 
 
@@ -81,7 +81,7 @@ export default function Layout() {
     }
 
     return (
-        
+
         <Stack>
             <Stack.Screen name="(tabs)" options={{headerShown: false}} />
         </Stack>
