@@ -38,7 +38,8 @@
     "undefined": "@sentry/react-native/expo"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@sentry/cli": "^2.39.0"
   },
   "private": true
 }
