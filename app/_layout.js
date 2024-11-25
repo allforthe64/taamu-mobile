@@ -39,7 +39,7 @@ export default function Layout() {
         measurementId: "G-TMZ8L24SND"
       });
       
-        // Activate Firebase App Check
+        /* // Activate Firebase App Check
         if (Platform.OS === 'android') {
             try {
                 alert('initialize app check')
@@ -75,7 +75,33 @@ export default function Layout() {
             alert('Error', error.message || 'Failed to get App Check token.');
           }
         };
+        verifyAppCheckToken() */
+        rnfbProvider = firebase.appCheck().newReactNativeFirebaseAppCheckProvider();
+        rnfbProvider.configure({
+            android: {
+                provider: __DEV__ ? 'debug' : 'playIntegrity',
+                debugToken: 'C39EB47B-D902-4A8C-B0C8-5F8AA9034019',
+            },
+            /* apple: {
+                provider: __DEV__ ? 'debug' : 'appAttestWithDeviceCheckFallback',
+                debugToken: 'some token you have configured for your project firebase web console',
+            } */
+        });
+        firebase.appCheck().initializeAppCheck({ provider: rnfbProvider, isTokenAutoRefreshEnabled: true });
+
+        const verifyAppCheckToken = async () => {
+            try {
+                const { token } = await firebase.appCheck().getToken(true);
+            
+                if (token.length > 0) {
+                alert('AppCheck verification passed');
+                }
+            } catch (error) {
+                alert('AppCheck verification failed');
+            }
+        }
         verifyAppCheckToken()
+
     } catch (err) {
         alert(err)
     }
