@@ -29,10 +29,7 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router",
-      "@react-native-firebase/app-check",
-      "@react-native-firebase/app",
-      "@sentry/react-native"
+      "expo-router"
     ],
     "extra": {
       "PUBLIC_EMAIL_JS_API_KEY": "KTlfpdal13r0rSCP-",
