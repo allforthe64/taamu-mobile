@@ -11,11 +11,13 @@ import * as Sentry from '@sentry/react-native';
 
 
 Sentry.init({
-  dsn: 'https://78cc57d36d498aebafe0ee5f0448b6e8@o4507346968772608.ingest.us.sentry.io/4508355887759360',
-});
+    dsn: 'https://78cc57d36d498aebafe0ee5f0448b6e8@o4507346968772608.ingest.us.sentry.io/4508355887759360',
+  
+    // uncomment the line below to enable Spotlight (https://spotlightjs.com)
+    // enableSpotlight: __DEV__,
+  });
 
-
-//set a handler to take care of all native errors
+/* //set a handler to take care of all native errors
 setNativeExceptionHandler((errorString) => {
   Sentry.captureException(new Error(errorString))
 });
@@ -24,9 +26,9 @@ setNativeExceptionHandler((errorString) => {
 //set a handler to take care of all JS errors
 setJSExceptionHandler((error, isFatal) => {
   const sentryId = Sentry.captureException(new Error(error.name));
-})
+}) */
 
-export default function Layout() {
+function Layout() {
 
    try {
     firebase.initializeApp({
@@ -113,3 +115,5 @@ export default function Layout() {
         </Stack>
     )
 }
+
+export default Sentry.wrap(Layout);
