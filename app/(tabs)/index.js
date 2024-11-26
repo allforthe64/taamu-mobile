@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, StatusBar } from 'react-native'
 import React, { useEffect } from 'react'
 
 //component imports
@@ -10,12 +10,15 @@ import Contact from '../components/homepage/Contact'
 const index = () => {
 
   return (
-    <ScrollView style={styles.mainCon}>
-      <Hero />
-      <PromoSection />
-      <LinkCards />
-      <Contact />
-    </ScrollView>
+    <>
+      <ScrollView style={styles.mainCon}>
+        <Hero />
+        <PromoSection />
+        <LinkCards />
+        <Contact />
+      </ScrollView>
+      <StatusBar />
+    </>
   )
 }
 

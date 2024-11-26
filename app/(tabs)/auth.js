@@ -1,11 +1,15 @@
-import { View, Text } from 'react-native'
+import { View, Text, StatusBar } from 'react-native'
 import React from 'react'
+
+//AuthComponent import
+import AuthComponent from '../components/auth/register/AuthComponent'
 
 const auth = () => {
   return (
-    <View>
-      <Text>auth</Text>
-    </View>
+    <>
+      <AuthComponent />
+      <StatusBar />
+    </>
   )
 }
 

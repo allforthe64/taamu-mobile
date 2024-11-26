@@ -12,7 +12,7 @@ const PromoSection = () => {
   return (
     <View style={styles.mainContainer}>
         <View style={styles.headingContainer}>
-            <Text style={styles.sectionHeading}>Taamu:</Text>
+            <Text style={styles.sectionHeading}>Tuaro Life:</Text>
             <Text style={styles.sectionTagLine}>Two ways to register, two ways to interact with the paddling community</Text>
         </View>
         <View style={styles.promoSectionContainer}>
@@ -22,7 +22,7 @@ const PromoSection = () => {
                 </View>
             </View>
             <Text style={styles.promoCardHeadings}>Register as an organizer</Text>
-            <Text style={styles.promoCardText}>A Taamu Orginization account makes it easy to create and edit races, view participants, and enter live race results. Get access to the information you need to keep your next event ticking over smoothly. Hit the button below to get started:</Text>
+            <Text style={styles.promoCardText}>A Tuaro Life Orginization account makes it easy to create and edit races, view participants, and enter live race results. Get access to the information you need to keep your next event ticking over smoothly. Hit the button below to get started:</Text>
             <TouchableOpacity style={styles.PromoCardButton} onPress={() => router.push('/register')}>
                 <Text style={styles.buttonText}>Go to registration</Text>
             </TouchableOpacity>
@@ -34,7 +34,7 @@ const PromoSection = () => {
                 </View>
             </View>
             <Text style={styles.promoCardHeadings}>Register as a racer</Text>
-            <Text style={styles.promoCardText}>A Taamu racer account keeps the latest races right at the tips of your fingers. With our augmented registration process, it&#39;s never been this easy to register yourself for your next race. Hit the button below to get started:</Text>
+            <Text style={styles.promoCardText}>A Tuaro Life racer account keeps the latest races right at the tips of your fingers. With our augmented registration process, it&#39;s never been this easy to register yourself for your next race. Hit the button below to get started:</Text>
             <TouchableOpacity style={styles.PromoCardButton} onPress={() => router.push('/register')}>
                 <Text style={styles.buttonText}>Go to registration</Text>
             </TouchableOpacity>

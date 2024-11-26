@@ -43,7 +43,7 @@ export default function Hero() {
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.mainHeading}>Taamu</Text>
+      <Text style={styles.mainHeading}>Tuaro Life</Text>
       <View style={styles.taglineContainer}>
         <Text style={styles.taglineWhiteText}>Create. Register.</Text>
         <Text style={styles.taglineTealText}> Race</Text>
