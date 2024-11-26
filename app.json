@@ -14,16 +14,14 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true,
-      "googleServicesFile": "./GoogleService-Info.pls"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.taamudev.taamumobile",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.taamudev.taamumobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"

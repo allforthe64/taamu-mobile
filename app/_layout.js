@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 export default function Layout() {
 
-    useEffect(() => {
+   /*  useEffect(() => {
         const testFetch = async () => {
           console.log('running')
           try {
@@ -24,7 +24,7 @@ export default function Layout() {
           
         }
         testFetch()
-      }, [])
+      }, []) */
 
     return (
 
