@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
-import React from 'react'
+import React, {useEffect} from 'react'
 
 export default function Hero() {
 
