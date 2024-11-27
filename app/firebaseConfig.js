@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app'
+/* import { initializeApp } from 'firebase/app'
 import { initializeAuth } from 'firebase/auth'
 import { getReactNativePersistence } from '@firebase/auth/dist/rn/index.js';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
@@ -47,7 +47,7 @@ const appCheck = initializeAppCheck(app, {
   isTokenAutoRefreshEnabled: true, // Enable auto-refresh of tokens
 });
 
-console.log(appCheck)
+console.log(appCheck) */
 
 /* const testToken = async () => {
   try {
