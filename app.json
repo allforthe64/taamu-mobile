@@ -14,14 +14,17 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.taamudev.taamumobile",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.taamudev.taamumobile"
+      "package": "com.taamudev.taamumobile",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,6 +36,7 @@
       "PUBLIC_EMAIL_JS_API_KEY": "KTlfpdal13r0rSCP-",
       "EXPO_PUBLIC_EMAIL_JS_TEMPLATE_ID": "template_auqa2se",
       "EXPO_PUBLIC_EMAIL_JS_SERVICE_ID": "service_fctuxh9",
+      "EXPO_PUBLIC_RECAPTCHA_PUBLIC_KEY": "6Lf0Bk8qAAAAAOKbmY2kociXf83YLdWG7VPNxXKR",
       "router": {
         "origin": false
       },

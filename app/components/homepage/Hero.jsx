@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import React, {useEffect} from 'react'
 
+import { firebaseAuth } from '../../firebaseConfig'
+
 export default function Hero() {
 
     //get device height to be used in setting container dimension

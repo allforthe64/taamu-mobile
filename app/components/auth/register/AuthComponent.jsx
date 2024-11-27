@@ -1,11 +1,16 @@
 import { Image, StyleSheet, Text, View, TextInput, Platform, TouchableOpacity, Pressable } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { appCheckInstance, firebaseAuth } from '../../../firebaseConfig'
+
 //import useRouter hook
 import { useRouter } from 'expo-router'
 
 //email regex
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+import { getToken } from 'firebase/app-check'
 
 const AuthComponent = () => {
 
@@ -15,20 +20,48 @@ const AuthComponent = () => {
     const [password, setPassword] = useState('')
     const [validEmail, setValidEmail] = useState(false)
 
+    //instantiate firebase auth object
+    const auth = firebaseAuth
+
     //verify email is valid
     useEffect(() => {
         setValidEmail(() => EMAIL_REGEX.test(email))
     }, [email])
 
+    useEffect(() => {
+        const getAppCheckToken = async () => {
+            try {
+              const token = await getToken(appCheckInstance);
+              console.log('App Check Token:', token.token); // Log the token for debugging
+              return token.token;
+            } catch (error) {
+              console.error('Error getting App Check token:', error);
+            }
+          };
+        getAppCheckToken()
+    }, [])
+
     //instantiate router object
     const router = useRouter()
 
     const signInUser = async () => {
+
+        //log in the user
+        let response
+        let userUID
+        try {
+            response = await signInWithEmailAndPassword(auth, email, password)
+            userUID = response.user.uid
+        } catch (err) {
+            console.log(err)
+        }
+        console.log(userUID)
         try {
             await fetch('http://localhost:3000/api/tm-dblink', {
             body: JSON.stringify({ 
                 target: 'auth',
-                function: 'log-in' 
+                method: 'log-in',
+                payload: userUID
             }),
               method: "POST",
               headers: {

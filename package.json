@@ -1,5 +1,5 @@
 {
-  "name": "taamu-mobile",
+  "name": "taamumobile",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@emailjs/react-native": "^4.2.2",
+    "@firebase/auth": "^1.8.1",
     "@fortawesome/fontawesome-svg-core": "^6.7.0",
     "@fortawesome/free-brands-svg-icons": "^6.7.0",
     "@fortawesome/free-regular-svg-icons": "^6.7.0",
@@ -22,6 +23,7 @@
     "expo-linking": "~7.0.2",
     "expo-router": "~4.0.6",
     "expo-status-bar": "~2.0.0",
+    "firebase": "^11.0.2",
     "i": "^0.3.7",
     "npm": "^10.9.0",
     "react": "18.3.1",
