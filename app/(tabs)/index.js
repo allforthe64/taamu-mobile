@@ -6,8 +6,17 @@ import Hero from '../components/homepage/Hero'
 import LinkCards from '../components/homepage/LinkCards'
 import PromoSection from '../components/homepage/PromoSection'
 import Contact from '../components/homepage/Contact'
+import { getUser } from '../firebase/firestore'
 
 const index = () => {
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const userData = await getUser({uid: 'xhX6FwzcSCMkGak0nnPTbapS0ik2'})
+      console.log(userData)
+    } 
+    getUserData()
+  }, [])
 
   return (
     <>
