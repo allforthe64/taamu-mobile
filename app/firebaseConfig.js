@@ -4,6 +4,7 @@ import { getReactNativePersistence } from '@firebase/auth/dist/rn/index.js';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import firebase from 'firebase/compat/app'
 import { initializeAppCheck, CustomProvider } from 'firebase/app-check';
+import { Platform } from 'react-native';
 
 //configure firebase
 const firebaseConfig = {
@@ -26,7 +27,7 @@ export const firebaseAuth = initializeAuth(app, {
 const generateCustomToken = async () => {
   const response = await fetch('http://localhost:3000/tm-dblink', {
     method: 'POST',
-    body: JSON.stringify({ appId: 'areregsoft' }),
+    body: JSON.stringify({ appId: Platform.OS = 'android' ? '1:793492515603:android:f62d3080aa6d59b5fb88e6' : '1:793492515603:android:f62d3080aa6d59b5fb88e6' }),
     headers: { 'Content-Type': 'application/json' },
   });
   const data = await response.json();
@@ -49,7 +50,7 @@ const appCheck = initializeAppCheck(app, {
 
 console.log(appCheck)
 
-/* const testToken = async () => {
+const testToken = async () => {
   try {
     const result = await validateToken({ token: "your-secret-key" });
     console.log("Token validation result:", result.data);
@@ -59,6 +60,6 @@ console.log(appCheck)
 };
 
 testToken();
- */
+
 
 export { firebase, appCheck }
