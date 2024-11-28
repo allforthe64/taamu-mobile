@@ -33,7 +33,7 @@ const generateCustomToken = async () => {
   });
   const data = await response.json();
   console.log('appcheck token: ', data.appCheckToken)
-  return data.appCheckToken;
+  return data.appCheckToken.token;
 };
 
 // Initialize App Check with the custom provider
