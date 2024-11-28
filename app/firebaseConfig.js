@@ -4,7 +4,7 @@ import { getReactNativePersistence } from '@firebase/auth/dist/rn/index.js';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import firebase from 'firebase/compat/app'
 import { getFirestore } from 'firebase/firestore';
-import { initializeAppCheck, CustomProvider } from 'firebase/app-check';
+import { initializeAppCheck, CustomProvider, getToken } from 'firebase/app-check';
 import { Platform } from 'react-native';
 
 //configure firebase
@@ -50,6 +50,20 @@ const appCheck = initializeAppCheck(app, {
 });
 
 console.log(appCheck)
+
+// Get the current App Check token
+async function fetchAppCheckToken() {
+  try {
+    const tokenResult = await getToken(appCheck, /* forceRefresh */ false);
+    console.log('App Check token:', tokenResult.token); // Log the token
+    return tokenResult.token;
+  } catch (error) {
+    console.error('Error fetching App Check token:', error);
+    return null;
+  }
+}
+
+fetchAppCheckToken();
 
 export const db = getFirestore(app)
 
