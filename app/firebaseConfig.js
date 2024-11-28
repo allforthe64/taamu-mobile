@@ -33,7 +33,11 @@ const generateCustomToken = async () => {
   });
   const data = await response.json();
   console.log('appcheck token: ', data.appCheckToken)
-  return data.appCheckToken.token;
+  if (data.appCheckToken) {
+    return data.appCheckToken.token;
+  } else {
+    throw new Error("Token not received from backend");
+  }
 };
 
 // Initialize App Check with the custom provider
