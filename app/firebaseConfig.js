@@ -50,16 +50,4 @@ const appCheck = initializeAppCheck(app, {
 
 console.log(appCheck)
 
-const testToken = async () => {
-  try {
-    const result = await validateToken({ token: "your-secret-key" });
-    console.log("Token validation result:", result.data);
-  } catch (error) {
-    console.error("Token validation failed:", error.message);
-  }
-};
-
-testToken();
-
-
 export { firebase, appCheck }
