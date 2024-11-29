@@ -12,7 +12,7 @@ import {
     where,
     deleteDoc
 } from 'firebase/firestore'
-import { db } from './firebase'
+import { db } from '../firebaseConfig'
 
 
 //search firestore for a user using the incoming user objects.id
