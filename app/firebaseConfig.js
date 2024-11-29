@@ -26,7 +26,7 @@ export const firebaseAuth = initializeAuth(app, {
 
 // Generate your custom token
 const generateCustomToken = async () => {
-  const response = await fetch('http://localhost:3000/tm-dblink', {
+  const response = await fetch('http://localhost:3000/api/tm-dblink', {
     method: 'POST',
     body: JSON.stringify({ appId: Platform.OS = 'android' ? '1:793492515603:android:f62d3080aa6d59b5fb88e6' : '1:793492515603:android:f62d3080aa6d59b5fb88e6' }),
     headers: { 'Content-Type': 'application/json' },
