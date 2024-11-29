@@ -1,8 +1,8 @@
-import { Image, StyleSheet, Text, View, TextInput, Platform, TouchableOpacity, Pressable } from 'react-native'
+import { Image, StyleSheet, Text, View, TextInput, Platform, TouchableOpacity, Pressable, Keyboard } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { appCheckInstance, firebaseAuth } from '../../../firebaseConfig'
+import { firebaseAuth } from '../../../firebaseConfig'
 
 //import useRouter hook
 import { useRouter } from 'expo-router'
@@ -30,6 +30,20 @@ const AuthComponent = () => {
 
     //instantiate firebase auth object
     const auth = firebaseAuth
+
+    //set focused to null when the keyboard is closed
+    useEffect(() => {
+        const keyboardDidHideListener = Keyboard.addListener(
+          'keyboardDidHide',
+          () => {
+            setFocused(''); // or some other action
+          }
+        );
+    
+        return () => {
+          keyboardDidHideListener.remove();
+        };
+      }, []);
 
     //verify email is valid
     useEffect(() => {
@@ -62,11 +76,11 @@ const AuthComponent = () => {
             <Text style={styles.authHeading}>Please login to <Text style={{color: '#09CAC7'}}>Tuaro Life</Text> to continue</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel} aria-label="Label for email" nativeID="labelEmail">Email:</Text>
-                <TextInput onFocus={() => setFocused('email')} onBlur={() => setFocused('')} style={focused === 'email' ? [styles.inputFocused, Platform.OS === 'web' && ({ outlineStyle: 'none' }) ] : [styles.input, Platform.OS === 'web' && ({ outlineStyle: 'none' }) ]} aria-label="email" aria-labelledby="labelEmail" value={email} onChange={(e) => setEmail(e.target.value)} inputMode='email' placeholder='Email'/>
+                <TextInput onFocus={() => setFocused('email')} style={focused === 'email' ? [styles.inputFocused, Platform.OS === 'web' && ({ outlineStyle: 'none' }) ] : [styles.input, Platform.OS === 'web' && ({ outlineStyle: 'none' }) ]} aria-label="email" aria-labelledby="labelEmail" value={email} onChange={(e) => setEmail(e.target.value)} inputMode='email' placeholder='Email'/>
             </View>
             <View style={[styles.inputContainer, {marginTop: '10%'}]}>
                 <Text style={styles.inputLabel} aria-label="Label for password" nativeID="labelPassword">Password:</Text>
-                <TextInput onFocus={() => setFocused('password')} onBlur={() => setFocused('')} style={focused === 'password' ? [styles.inputFocused, Platform.OS === 'web' && ({ outlineStyle: 'none' }) ] : [styles.input, Platform.OS === 'web' && ({ outlineStyle: 'none' }) ]} aria-label="password" aria-labelledby="labelPassword" value={password} onChange={(e) => setPassword(e.target.value)} secureTextEntry placeholder='Password'/>
+                <TextInput onFocus={() => setFocused('password')} style={focused === 'password' ? [styles.inputFocused, Platform.OS === 'web' && ({ outlineStyle: 'none' }) ] : [styles.input, Platform.OS === 'web' && ({ outlineStyle: 'none' }) ]} aria-label="password" aria-labelledby="labelPassword" value={password} onChange={(e) => setPassword(e.target.value)} secureTextEntry placeholder='Password'/>
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={password.length === 0 || password === '' || !validEmail ? styles.loginButtonDim : styles.loginButton} disabled={password.length === 0 || password === '' || !validEmail} onPress={() => signInUser()}>
@@ -88,7 +102,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     bgImage: {
-        objectFit: 'contain',
+        objectFit: 'cover',
         width: '100%',
         height: '100%'
     },

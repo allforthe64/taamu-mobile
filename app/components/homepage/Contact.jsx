@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Keyboard } from 'react-native'
 import React, { useState, useRef, useEffect } from 'react'
 
 //emailJS imports
@@ -15,7 +15,19 @@ const Contact = () => {
     const [message, setMessage] = useState('')
     const [focused, setFocused] = useState('')
 
-    /* console.log(Constants.expoConfig.extra.PUBLIC_EMAIL_JS_API_KEY) */
+    //set focused to '' when the keyboard is closed
+    useEffect(() => {
+        const keyboardDidHideListener = Keyboard.addListener(
+          'keyboardDidHide',
+          () => {
+            setFocused(''); // or some other action
+          }
+        );
+    
+        return () => {
+          keyboardDidHideListener.remove();
+        };
+      }, []);
 
     const sendMessage = async () => {
         try {
@@ -64,7 +76,6 @@ const Contact = () => {
                 onChangeText={setEmail}
                 style={focused === 'email' ? [styles.focusedSingleLineTextInputs, {marginBottom: 20}] : [styles.singleLineTextInputs, {marginBottom: 20}]}
                 onFocus={() => setFocused('email')}
-                onBlur={() => setFocused('')}
             />
             <TextInput
                 inputMode="text"
@@ -73,7 +84,6 @@ const Contact = () => {
                 onChangeText={setFName}
                 style={focused === 'fName' ? [styles.focusedSingleLineTextInputs, {marginBottom: 20}] : [styles.singleLineTextInputs, {marginBottom: 20}]}
                 onFocus={() => setFocused('fName')}
-                onBlur={() => setFocused('')}
             />
             <TextInput
                 inputMode="text"
@@ -82,7 +92,6 @@ const Contact = () => {
                 onChangeText={setLName}
                 style={focused === 'lName' ? [styles.focusedSingleLineTextInputs, {marginBottom: 20}] : [styles.singleLineTextInputs, {marginBottom: 20}]}
                 onFocus={() => setFocused('lName')}
-                onBlur={() => setFocused('')}
             />
             <TextInput
                 inputMode="text"
@@ -91,7 +100,6 @@ const Contact = () => {
                 onChangeText={setOrgName}
                 style={focused === 'orgName' ? [styles.focusedSingleLineTextInputs, {marginBottom: 20}] : [styles.singleLineTextInputs, {marginBottom: 20}]}
                 onFocus={() => setFocused('orgName')}
-                onBlur={() => setFocused('')}
             />
             <TextInput
                 inputMode="text"
@@ -102,7 +110,6 @@ const Contact = () => {
                 numberOfLines={2}
                 style={focused === 'message' ? [styles.focusedSingleLineTextInputs, {marginBottom: 20, height: 200, textAlignVertical: 'top'}] : [styles.singleLineTextInputs, {marginBottom: 20, height: 200, textAlignVertical: 'top'}]}
                 onFocus={() => setFocused('message')}
-                onBlur={() => setFocused('')}
             />
             <TouchableOpacity style={[styles.contactButton, {marginBottom: 20}]} onPress={() => sendMessage()}>
                 <Text style={styles.buttonText}>Send Message</Text>
