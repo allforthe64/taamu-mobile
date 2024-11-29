@@ -1,9 +1,15 @@
 import { Tabs } from "expo-router";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faHouse, faPerson, faFlagCheckered, faLock } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faPerson, faFlagCheckered, faLock, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { AuthContextProvider } from "../firebase/authContext";
 
+//firebase auth import
+import { firebaseAuth } from "../firebaseConfig";
+
 export default function TabLayout() {
+
+    console.log(firebaseAuth)
+
     return (
         <AuthContextProvider>
             <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
@@ -21,7 +27,7 @@ export default function TabLayout() {
                         title: 'Racer Page',
                         headerShown: false,
                         tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faPerson} color={color} />,
-                        href: {
+                        href: !firebaseAuth.currentUser ? null : {
                             pathname: '/[racer]',
                             params: {
                                 racer: 'foobar'
@@ -37,14 +43,25 @@ export default function TabLayout() {
                     tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faFlagCheckered} color={color} />,
                     }}
                 />
-                <Tabs.Screen
-                    name="auth"
-                    options={{
-                    title: 'Log-in',
-                    headerShown: false,
-                    tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faLock} color={color} />,
-                    }}
-                />
+                {firebaseAuth.currentUser ? 
+                    <Tabs.Screen
+                        name="logout"
+                        options={{
+                        title: 'Log Out',
+                        headerShown: false,
+                        tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faRightFromBracket} color={'red'} />,
+                        }}
+                    />
+                :
+                    <Tabs.Screen
+                        name="auth"
+                        options={{
+                        title: 'Log-in',
+                        headerShown: false,
+                        tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faLock} color={color} />,
+                        }}
+                    />
+                }
                 <Tabs.Screen
                     name="register"
                     options={{

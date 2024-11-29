@@ -10,7 +10,12 @@ import { useRouter } from 'expo-router'
 //email regex
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
-import { getToken } from 'firebase/app-check'
+//getUser Function
+import { getUser } from '../../../firebase/firestore'
+
+//context import 
+import { useContext } from 'react'
+import { AuthContext } from '../../../firebase/authContext'
 
 const AuthComponent = () => {
 
@@ -20,6 +25,9 @@ const AuthComponent = () => {
     const [password, setPassword] = useState('')
     const [validEmail, setValidEmail] = useState(false)
 
+    //consume auth context
+    const {setAuthUser} = useContext(AuthContext)
+
     //instantiate firebase auth object
     const auth = firebaseAuth
 
@@ -27,19 +35,6 @@ const AuthComponent = () => {
     useEffect(() => {
         setValidEmail(() => EMAIL_REGEX.test(email))
     }, [email])
-
-    useEffect(() => {
-        const getAppCheckToken = async () => {
-            try {
-              const token = await getToken(appCheckInstance);
-              console.log('App Check Token:', token.token); // Log the token for debugging
-              return token.token;
-            } catch (error) {
-              console.error('Error getting App Check token:', error);
-            }
-          };
-        getAppCheckToken()
-    }, [])
 
     //instantiate router object
     const router = useRouter()
@@ -52,29 +47,11 @@ const AuthComponent = () => {
         try {
             response = await signInWithEmailAndPassword(auth, email, password)
             userUID = response.user.uid
+            const userData = await getUser({uid: userUID})
+            setAuthUser({...userData})
         } catch (err) {
             console.log(err)
         }
-        console.log(userUID)
-        try {
-            await fetch('http://localhost:3000/api/tm-dblink', {
-            body: JSON.stringify({ 
-                target: 'auth',
-                method: 'log-in',
-                payload: userUID
-            }),
-              method: "POST",
-              headers: {
-                'Content-Type': 'application/json',
-              }
-            }).then((response) => 
-              {
-                console.log(response)
-                return response.json()
-              }).then((data) => console.log('data: ', data))
-          } catch (err) {
-            console.log(err)
-          }
     }
 
   return (

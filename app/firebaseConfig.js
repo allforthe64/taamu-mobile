@@ -54,22 +54,6 @@ const appCheck = initializeAppCheck(app, {
   isTokenAutoRefreshEnabled: true, // Enable auto-refresh of tokens
 });
 
-console.log(appCheck)
-
-// Get the current App Check token
-async function fetchAppCheckToken() {
-  try {
-    const tokenResult = await getToken(appCheck, /* forceRefresh */ false);
-    console.log('App Check token:', tokenResult.token); // Log the token
-    return tokenResult.token;
-  } catch (error) {
-    console.error('Error fetching App Check token:', error);
-    return null;
-  }
-}
-
-fetchAppCheckToken();
-
 export const db = getFirestore(app)
 
 export { firebase, appCheck }
