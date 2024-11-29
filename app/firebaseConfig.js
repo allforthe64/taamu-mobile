@@ -44,7 +44,6 @@ const appCheck = initializeAppCheck(app, {
   provider: new CustomProvider({
     getToken: async () => {
       const token = await generateCustomToken();
-      console.log(token)
       return {
         token,
         expireTimeMillis: Date.now() + 60 * 60 * 1000, // 1 hour expiration
