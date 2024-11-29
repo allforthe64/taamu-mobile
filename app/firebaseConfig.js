@@ -14,7 +14,7 @@ const firebaseConfig = {
     projectId: "areregsoft",
     storageBucket: "areregsoft.appspot.com",
     messagingSenderId: "793492515603",
-    appId: "1:793492515603:web:c48d44811cc4b603fb88e6",
+    appId: Platform.OS = 'android' ? '1:793492515603:android:f62d3080aa6d59b5fb88e6' : '1:793492515603:android:f62d3080aa6d59b5fb88e6',
     measurementId: "G-TMZ8L24SND"
 };
   
