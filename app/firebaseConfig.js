@@ -32,7 +32,6 @@ const generateCustomToken = async () => {
     headers: { 'Content-Type': 'application/json' },
   });
   const data = await response.json();
-  console.log('appcheck token: ', data)
   if (data.appCheckToken) {
     return data.appCheckToken.token;
   } else {
