@@ -21,17 +21,19 @@ const logout = () => {
     const router = useRouter()
 
     useEffect(() => {
-        signOut(firebaseAuth).then(() => {
-            setAuthUser(null)
-            router.push('/')
-        }).catch((error) => {
-            console.log(error)
-        })
+        setTimeout(() => {
+            signOut(firebaseAuth).then(() => {
+                setAuthUser(null)
+                router.push('/index')
+            }).catch((error) => {
+                console.log(error)
+            })
+        }, 2000)
     }, [])
 
   return (
     <View style={styles.container}>    
-        <Text>Logging out...</Text>
+        <Text style={{color: '#09CAC7', fontSize: 16}}>Logging out...</Text>
         <ActivityIndicator style={{marginLeft: '5%'}} color={'#09CAC7'}/>
     </View>
   )
