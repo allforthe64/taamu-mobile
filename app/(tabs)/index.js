@@ -10,13 +10,13 @@ import { getUser } from '../firebase/firestore'
 
 const index = () => {
 
-  useEffect(() => {
+  /* useEffect(() => {
     const getUserData = async () => {
       const userData = await getUser({uid: 'xhX6FwzcSCMkGak0nnPTbapS0ik2'})
       console.log(userData)
     } 
     getUserData()
-  }, [])
+  }, []) */
 
   return (
     <>

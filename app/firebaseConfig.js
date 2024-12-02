@@ -4,6 +4,7 @@ import { getReactNativePersistence } from '@firebase/auth/dist/rn/index.js';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import firebase from 'firebase/compat/app'
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 import { initializeAppCheck, CustomProvider, getToken } from 'firebase/app-check';
 import { Platform } from 'react-native';
 
@@ -54,5 +55,6 @@ const appCheck = initializeAppCheck(app, {
 });
 
 export const db = getFirestore(app)
+export const storage = getStorage(app)
 
 export { firebase, appCheck }

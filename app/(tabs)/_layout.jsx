@@ -2,6 +2,7 @@ import { Tabs } from "expo-router";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faHouse, faPerson, faFlagCheckered, faLock, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { AuthContextProvider } from "../firebase/authContext";
+import { useState } from "react";
 
 //firebase auth import
 import { firebaseAuth } from "../firebaseConfig";
@@ -9,7 +10,7 @@ import { firebaseAuth } from "../firebaseConfig";
 export default function TabLayout() {
 
     console.log('current user: ', firebaseAuth.currentUser)
-
+    
     return (
         <AuthContextProvider>
             <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
@@ -28,7 +29,7 @@ export default function TabLayout() {
                         headerShown: false,
                         tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faPerson} color={color} />,
                         href: firebaseAuth.currentUser === null ? null : {
-                            pathname: '/[racer]',
+                            pathname: `/[${firebaseAuth.currentUser}]`,
                             params: {
                                 racer: 'foobar'
                             }

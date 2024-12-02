@@ -10,13 +10,6 @@ import { useRouter } from 'expo-router'
 //email regex
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
-//getUser Function
-import { getUser } from '../../../firebase/firestore'
-
-//context import 
-import { useContext } from 'react'
-import { AuthContext } from '../../../firebase/authContext'
-
 const AuthComponent = () => {
 
     //initialize state
@@ -61,9 +54,9 @@ const AuthComponent = () => {
         try {
             response = await signInWithEmailAndPassword(auth, email, password)
             userUID = response.user.uid
-            const userData = await getUser({uid: userUID})
-            setAuthUser({...userData})
-            router.push('/')
+            setEmail('')
+            setPassword('')
+            router.push(`/${userUID}`)
         } catch (err) {
             console.log(err)
         }
