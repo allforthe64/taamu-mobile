@@ -27,7 +27,7 @@ export default function TabLayout() {
                         title: 'Racer Page',
                         headerShown: false,
                         tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faPerson} color={color} />,
-                        href: !firebaseAuth.currentUser ? null : {
+                        href: firebaseAuth.currentUser === null ? null : {
                             pathname: '/[racer]',
                             params: {
                                 racer: 'foobar'
@@ -43,7 +43,7 @@ export default function TabLayout() {
                     tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faFlagCheckered} color={color} />,
                     }}
                 />
-                {firebaseAuth.currentUser ? 
+                {firebaseAuth.currentUser !== null ? 
                     <Tabs.Screen
                         name="logout"
                         options={{
