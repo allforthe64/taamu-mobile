@@ -24,7 +24,7 @@ const logout = () => {
         setTimeout(() => {
             signOut(firebaseAuth).then(() => {
                 setAuthUser(null)
-                router.push('/index')
+                router.push('/')
             }).catch((error) => {
                 console.log(error)
             })

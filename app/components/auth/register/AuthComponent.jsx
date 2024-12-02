@@ -63,6 +63,7 @@ const AuthComponent = () => {
             userUID = response.user.uid
             const userData = await getUser({uid: userUID})
             setAuthUser({...userData})
+            router.push('/')
         } catch (err) {
             console.log(err)
         }
