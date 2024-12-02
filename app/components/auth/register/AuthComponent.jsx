@@ -18,9 +18,6 @@ const AuthComponent = () => {
     const [password, setPassword] = useState('')
     const [validEmail, setValidEmail] = useState(false)
 
-    //consume auth context
-    const {setAuthUser} = useContext(AuthContext)
-
     //instantiate firebase auth object
     const auth = firebaseAuth
 
