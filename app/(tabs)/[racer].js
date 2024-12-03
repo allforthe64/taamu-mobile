@@ -45,14 +45,11 @@ const RacerPage = () => {
 
     useEffect(() => {
       const getRacerData = async () => {
-        console.log('running getRacerData')
         const racerDataObj = await getUser({uid: racer})
         setRacerData(racerDataObj)
       }
       getRacerData()
     }, [])
-
-    console.log('racerData: ', racerData)
 
   return (
     <View style={styles.mainContainer}>

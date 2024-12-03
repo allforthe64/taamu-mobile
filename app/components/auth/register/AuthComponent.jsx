@@ -58,10 +58,7 @@ const AuthComponent = () => {
             console.log(err)
         }
     }
-
-    console.log(password)
-    console.log(validEmail)
-
+    
   return (
     <View style={styles.mainContainer}>
       <Image style={styles.bgImage} source={require('../../../../assets/wave_breaking.jpg')}/>

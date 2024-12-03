@@ -1,12 +1,10 @@
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getDownloadableURL } from '../../firebase/storage'
 
 const Hero = ({pfpRAW}) => {
 
     const [pfpURL, setPFPURL] = useState('')
-
-    console.log('pfpRAW: ', pfpRAW)
 
     useEffect(() => {
         if (pfpRAW) {
