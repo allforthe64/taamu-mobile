@@ -7,6 +7,9 @@ import { useLocalSearchParams } from 'expo-router'
 //component imports
 import Hero from '../components/racerPage/Hero'
 
+//
+import { getUser } from '../firebase/firestore'
+
 const RacerPage = () => {
 
     const {racer} = useLocalSearchParams()
@@ -43,7 +46,7 @@ const RacerPage = () => {
     useEffect(() => {
       const getRacerData = async () => {
         console.log('running getRacerData')
-        const racerDataObj = await getRacerData({uid: racer})
+        const racerDataObj = await getUser({uid: racer})
         setRacerData(racerDataObj)
       }
       getRacerData()
