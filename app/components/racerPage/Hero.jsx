@@ -49,7 +49,7 @@ const Hero = ({pfpRAW}) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.pfpContainer}>
-        <Image style={styles.pfp} source={pfpURL}/>
+        <Image style={styles.pfp} source={{ uri: pfpURL }}/>
       </View>
     </View>
   )
