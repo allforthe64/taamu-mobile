@@ -43,7 +43,7 @@ const Hero = ({pfpRAW}) => {
         }
     })
 
-    console.log(pfpURL)
+    console.log('pfp url: ', pfpURL)
 
   return (
     <View style={styles.mainContainer}>
