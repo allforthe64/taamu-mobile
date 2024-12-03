@@ -45,6 +45,7 @@ const RacerPage = () => {
         const racerDataObj = await getRacerData({uid: racer})
         setRacerData(racerDataObj)
       }
+      getRacerData()
     }, [])
 
   return (

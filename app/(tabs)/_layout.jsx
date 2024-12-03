@@ -8,8 +8,6 @@ import { useState } from "react";
 import { firebaseAuth } from "../firebaseConfig";
 
 export default function TabLayout() {
-
-    console.log('current user: ', firebaseAuth.currentUser)
     
     return (
         <AuthContextProvider>
