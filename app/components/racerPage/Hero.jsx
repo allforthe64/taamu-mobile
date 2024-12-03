@@ -6,9 +6,12 @@ const Hero = ({pfpRAW}) => {
 
     const [pfpURL, setPFPURL] = useState('')
 
+    console.log('pfpRAW: ', pfpRAW)
+
     useEffect(() => {
         if (pfpRAW) {
             const getPFPURL = async () => {
+                console.log('running getPFPURL')
                 const downloadedPFPURL = await getDownloadableURL(pfpRAW)
                 setPFPURL(downloadedPFPURL)
             }
