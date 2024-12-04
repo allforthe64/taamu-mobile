@@ -2,9 +2,10 @@ import { StyleSheet, Text, View, Dimensions, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getDownloadableURL } from '../../firebase/storage'
 
+//encryption imports
 import * as crypto from 'react-native-quick-crypto'
-
 import { getKey } from '../../firebase/firestore'
+import { Buffer } from 'buffer'
 
 const Hero = ({pfpRAW, racerData}) => {
 
@@ -34,10 +35,13 @@ const Hero = ({pfpRAW, racerData}) => {
             console.log('fName: ', racerData.fName)
             console.log('typeof fName: ', typeof racerData.fName)
 
+            const fNameBuffer = Buffer.from(racerData.fName, 'hex');
             const fNameDecipher = crypto.createDecipheriv('aes256', keyData.key, keyData.iv)
-            const decipheredFName = cipher.update(racerData.fName, 'hex', 'utf-8') + fNameDecipher.final('utf-8')
+            const decipheredFName = cipher.update(fNameBuffer, 'hex', 'utf-8') + fNameDecipher.final('utf-8')
+            
+            const lNameBuffer = Buffer.from(racerData.lName, 'hex')
             const lNameDecipher = crypto.createDecipheriv('aes256', keyData.key, keyData.iv)
-            const decipheredLName = crypto.createDecipheriv(racerData.lName, 'hex', 'utf-8') + lNameDecipher.final('utf-8')
+            const decipheredLName = crypto.createDecipheriv(lNameBuffer, 'hex', 'utf-8') + lNameDecipher.final('utf-8')
             setDecipheredDisplayName(decipheredFName + ' ' + decipheredLName)
         }
     }, [pfpRAW, racerData, keyData])
