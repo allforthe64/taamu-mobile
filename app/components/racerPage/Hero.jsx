@@ -30,13 +30,17 @@ const Hero = ({pfpRAW, racerData}) => {
         getKeyData()
 
         if (racerData && keyData) {
+
+            console.log('fName: ', racerData.fName)
+            console.log('typeof fName: ', typeof racerData.fName)
+
             const fNameDecipher = crypto.createDecipheriv('aes256', keyData.key, keyData.iv)
             const decipheredFName = cipher.update(racerData.fName, 'hex', 'utf-8') + fNameDecipher.final('utf-8')
             const lNameDecipher = crypto.createDecipheriv('aes256', keyData.key, keyData.iv)
             const decipheredLName = crypto.createDecipheriv(racerData.lName, 'hex', 'utf-8') + lNameDecipher.final('utf-8')
             setDecipheredDisplayName(decipheredFName + ' ' + decipheredLName)
         }
-    }, [pfpRAW, racerData])
+    }, [pfpRAW, racerData, keyData])
 
     console.log(decipheredDisplayName)
 
@@ -66,8 +70,6 @@ const Hero = ({pfpRAW, racerData}) => {
             borderRadius: 25
         }
     })
-
-    console.log('pfp url: ', pfpURL)
 
   return (
     <View style={styles.mainContainer}>

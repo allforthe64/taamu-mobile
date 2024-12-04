@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         height: 'auto',
         borderRadius: 10,
         display: 'flex',
-        flexDirection: 'coloumn',
+        flexDirection: 'column',
         alignItems: 'center',
         paddingTop: '5%',
         paddingBottom: '5%'
