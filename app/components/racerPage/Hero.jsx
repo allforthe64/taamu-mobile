@@ -32,15 +32,21 @@ const Hero = ({pfpRAW, racerData}) => {
 
         if (racerData && keyData) {
 
+            alert('running')
+
             console.log('fName: ', racerData.fName)
             console.log('typeof fName: ', typeof racerData.fName)
 
+            // Convert them into buffers
+            const keyBuffer = Buffer.from(keyHex, 'hex');
+            const ivBuffer = Buffer.from(ivHex, 'hex');
+
             const fNameBuffer = Buffer.from(racerData.fName, 'hex');
-            const fNameDecipher = crypto.createDecipheriv('aes256', keyData.key, keyData.iv)
+            const fNameDecipher = crypto.createDecipheriv('aes256', keyBuffer, ivBuffer)
             const decipheredFName = cipher.update(fNameBuffer, 'hex', 'utf-8') + fNameDecipher.final('utf-8')
             
             const lNameBuffer = Buffer.from(racerData.lName, 'hex')
-            const lNameDecipher = crypto.createDecipheriv('aes256', keyData.key, keyData.iv)
+            const lNameDecipher = crypto.createDecipheriv('aes256', keyBuffer, ivBuffer)
             const decipheredLName = crypto.createDecipheriv(lNameBuffer, 'hex', 'utf-8') + lNameDecipher.final('utf-8')
             setDecipheredDisplayName(decipheredFName + ' ' + decipheredLName)
         }
