@@ -1,4 +1,4 @@
-/* import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import { storage } from '../firebaseConfig'
 
 import {format} from 'date-fns'
@@ -28,4 +28,4 @@ export const deleteFile = (path) => {
 //get the downloadable url from incoming path
 export const getDownloadableURL = async (path) => {
     return await getDownloadURL(ref(storage, path))
-} */
+}

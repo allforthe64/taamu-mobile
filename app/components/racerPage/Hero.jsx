@@ -4,7 +4,7 @@ import { getDownloadableURL } from '../../firebase/storage'
 
 import * as crypto from 'react-native-quick-crypto'
 
-/* import { getKey } from '../../firebase/firestore' */
+import { getKey } from '../../firebase/firestore'
 
 const Hero = ({pfpRAW, racerData}) => {
 

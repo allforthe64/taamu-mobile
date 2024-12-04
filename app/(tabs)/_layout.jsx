@@ -6,13 +6,13 @@ import { useState } from "react";
 import { install } from 'react-native-quick-crypto';
 
 //firebase auth import
-/* import { firebaseAuth } from "../firebaseConfig"; */
+import { firebaseAuth } from "../firebaseConfig";
 
 export default function TabLayout() {
 
     /* console.log('current user: ', firebaseAuth.currentUser) */
 
-    const [firebaseAuth, setFirebaseAuth] = useState({currentUser: true})
+    /* const [firebaseAuth, setFirebaseAuth] = useState({currentUser: true}) */
 
     //override global.Buffer and global.crypto 
     install();
