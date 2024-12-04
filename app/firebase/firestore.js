@@ -1,4 +1,4 @@
-import {
+/* import {
     getDoc,
     getDocs,
     setDoc,
@@ -345,7 +345,7 @@ export const resultsTableListener = async (raceId, setResultsObject, racePage) =
 
 //get a resultTable out of firestore database and overwrite with the new incoming data
 export const updateResultsTable = async (updatedResultsTable) => {
-    /* console.log('updatedResultsTable: ', updatedResultsTable) */
+    console.log('updatedResultsTable: ', updatedResultsTable)
     const resultsRef = doc(db, 'results', updatedResultsTable.id)
     await updateDoc(resultsRef, updatedResultsTable)
 }
@@ -439,4 +439,4 @@ export function generateRandomString(length) {
     }
     console.log(result)
     return result;
-}
+} */

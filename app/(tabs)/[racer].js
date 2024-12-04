@@ -14,7 +14,7 @@ const RacerPage = () => {
 
     const {racer} = useLocalSearchParams()
 
-    /* const [racerData, setRacerData] = useState({ contactLinks: 
+    const [racerData, setRacerData] = useState({ contactLinks: 
       [ 'https://www.instagram.com/r_d_outrigger/',
         'https://www.instagram.com/b_is_for_billiam/' ],
      gender: '31bbcb73ca9bee3bb1280e3ffb60bff1',
@@ -39,23 +39,23 @@ const RacerPage = () => {
         'gs://areregsoft.appspot.com/xhX6FwzcSCMkGak0nnPTbapS0ik2/Screenshot (69).png.2024-11-15T13:18:58',
         'gs://areregsoft.appspot.com/xhX6FwzcSCMkGak0nnPTbapS0ik2/Screenshot (70).png.2024-11-15T13:18:59',
         'gs://areregsoft.appspot.com/xhX6FwzcSCMkGak0nnPTbapS0ik2/Screenshot (71).png.2024-11-15T13:19:00' ],
-     craftCategories: [ 'V6', 'OC1', 'V1' ] }) */
+     craftCategories: [ 'V6', 'OC1', 'V1' ] })
 
-    const [racerData, setRacerData] = useState()
+    /* const [racerData, setRacerData] = useState() */
 
-    useEffect(() => {
+    /* useEffect(() => {
       const getRacerData = async () => {
         const racerDataObj = await getUser({uid: racer})
         setRacerData(racerDataObj)
       }
       getRacerData()
-    }, [])
+    }, []) */
 
   return (
     <View style={styles.mainContainer}>
       {racerData &&
         <ScrollView>
-          <Hero pfpRAW={racerData.pfp}/>
+          <Hero pfpRAW={racerData.pfp} racerData={racerData}/>
         </ScrollView>
       }
     </View>
