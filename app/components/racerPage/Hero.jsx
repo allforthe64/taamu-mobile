@@ -3,11 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { getDownloadableURL } from '../../firebase/storage'
 
 //encryption imports
-import * as crypto from 'react-native-quick-crypto'
 import { getKey } from '../../firebase/firestore'
 import { Buffer } from 'buffer'
 
-const Hero = ({pfpRAW, racerData}) => {
+const Hero = ({pfpRAW}) => {
 
     const [pfpURL, setPFPURL] = useState('')
     const [keyData, setKeyData] = useState({})
@@ -16,41 +15,12 @@ const Hero = ({pfpRAW, racerData}) => {
     useEffect(() => {
         if (pfpRAW) {
             const getPFPURL = async () => {
-                console.log('running getPFPURL')
                 const downloadedPFPURL = await getDownloadableURL(pfpRAW)
                 setPFPURL(downloadedPFPURL)
             }
             getPFPURL()
         } 
-
-        //get decryption key data
-        const getKeyData = async () => {
-            const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
-            setKeyData(keyDataObj)
-        }
-        getKeyData()
-
-        if (racerData && keyData) {
-
-            alert('running')
-
-            console.log('fName: ', racerData.fName)
-            console.log('typeof fName: ', typeof racerData.fName)
-
-            // Convert them into buffers
-            const keyBuffer = Buffer.from(keyHex, 'hex');
-            const ivBuffer = Buffer.from(ivHex, 'hex');
-
-            const fNameBuffer = Buffer.from(racerData.fName, 'hex');
-            const fNameDecipher = crypto.createDecipheriv('aes256', keyBuffer, ivBuffer)
-            const decipheredFName = cipher.update(fNameBuffer, 'hex', 'utf-8') + fNameDecipher.final('utf-8')
-            
-            const lNameBuffer = Buffer.from(racerData.lName, 'hex')
-            const lNameDecipher = crypto.createDecipheriv('aes256', keyBuffer, ivBuffer)
-            const decipheredLName = crypto.createDecipheriv(lNameBuffer, 'hex', 'utf-8') + lNameDecipher.final('utf-8')
-            setDecipheredDisplayName(decipheredFName + ' ' + decipheredLName)
-        }
-    }, [pfpRAW, racerData, keyData])
+    }, [pfpRAW])
 
     console.log(decipheredDisplayName)
 

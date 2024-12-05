@@ -8,7 +8,7 @@ import { useLocalSearchParams } from 'expo-router'
 import Hero from '../components/racerPage/Hero'
 
 //
-import { getUser } from '../firebase/firestore'
+/* import { getUser } from '../firebase/firestore' */
 
 const RacerPage = () => {
 
@@ -51,11 +51,34 @@ const RacerPage = () => {
       getRacerData()
     }, [])
 
+    useEffect(() => {
+      if (racerData) {
+        console.log('running')
+        try {
+          const operationDetatchement = async () => {
+            const response = await fetch('https://www.tuarolife.com/api/p3XvA7kM9qZT2BwRfY1N', {
+              method: 'POST',
+              body: JSON.stringify({ payload: {
+                rnf: racerData.fName,
+                rnl: racerData.lName
+            }}),
+              headers: { 'Content-Type': 'application/json' },
+            })
+            const data = await response.json();
+            console.log('response: ', data)
+          }
+          operationDetatchement()
+        } catch (err) {
+          console.log('err: ', err)
+        }
+      }
+    }, [racerData])
+
   return (
     <View style={styles.mainContainer}>
       {racerData &&
         <ScrollView>
-          <Hero pfpRAW={racerData.pfp} racerData={racerData}/>
+          <Hero pfpRAW={racerData.pfp} />
         </ScrollView>
       }
     </View>
