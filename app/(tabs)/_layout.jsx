@@ -9,9 +9,7 @@ import { firebaseAuth } from "../firebaseConfig";
 
 export default function TabLayout() {
 
-    console.log('current user: ', firebaseAuth.currentUser)
-
-    const [firebaseAuth, setFirebaseAuth] = useState({currentUser: true})
+    /* const [firebaseAuth, setFirebaseAuth] = useState({currentUser: true}) */
     
     return (
         <AuthContextProvider>
