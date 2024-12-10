@@ -5,11 +5,11 @@ import { AuthContextProvider } from "../firebase/authContext";
 import { useState } from "react";
 
 //firebase auth import
-/* import { firebaseAuth } from "../firebaseConfig"; */
+import { firebaseAuth } from "../firebaseConfig";
 
 export default function TabLayout() {
 
-    const [firebaseAuth, setFirebaseAuth] = useState({currentUser: true})
+    /* const [firebaseAuth, setFirebaseAuth] = useState({currentUser: true}) */
     
     return (
         <AuthContextProvider>

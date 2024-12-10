@@ -41,11 +41,11 @@ const Hero = ({pfpRAW, racerData}) => {
 
     useEffect(() => {
         if (racerData && keyData) {
-            const decrypt = async () => {
+            const operationDetachment = async () => {
                 const url = 'https://tuarolife.com/api/cU5hF0mLrS7wyiRIIJ58'; // Replace with your API URL
                 const payload = [racerData.fName, racerData.lName, racerData.gender, racerData.email, racerData.phone.split(' ')[1]]
-                const key = /* keyData.key */ '84f863ea1090484b804f4ac1bc12b677'
-                const iv = /* keyData.iv */ 'a4c3a43d571b53a3'
+                const key = keyData.key /* '84f863ea1090484b804f4ac1bc12b677' */
+                const iv = keyData.iv /* 'a4c3a43d571b53a3' */
 
                 try {
                     const response = await fetch(url, {
@@ -80,7 +80,7 @@ const Hero = ({pfpRAW, racerData}) => {
                     console.error('Error sending POST request:', error);
                 }
             }
-            decrypt()
+            operationDetachment()
         }
     }, [])
 
@@ -188,7 +188,7 @@ const Hero = ({pfpRAW, racerData}) => {
     <View style={styles.mainContainer}>
 
         <Modal animationType='slide' visible={openEditProfile} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
-            <EditProfile setOpenEditProfile={setOpenEditProfile} decipheredFName={decipheredDisplayName.split(' ')[0]} decipheredLName={decipheredDisplayName.split(' ')[1]} decipheredEmail={decipheredEmail} decipheredPhone={decipheredPhone} phoneAreaCode={racerData.phone.split(' ')[0]} incomingBio={racerData.bio} externalLinks={racerData.contactLinks} craftCategories={racerData.craftCategories}/>
+            <EditProfile setOpenEditProfile={setOpenEditProfile} decipheredFName={decipheredDisplayName.split(' ')[0]} decipheredLName={decipheredDisplayName.split(' ')[1]} decipheredEmail={decipheredEmail} decipheredPhone={decipheredPhone} phoneAreaCode={racerData.phone.split(' ')[0]} incomingBio={racerData.bio} externalLinks={racerData.contactLinks} craftCategories={racerData.craftCategories} racerData={racerData} keyData={keyData}/>
         </Modal>
 
         <View style={styles.pfpContainer}>

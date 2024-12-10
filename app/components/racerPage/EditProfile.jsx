@@ -9,9 +9,9 @@ import { faTrash, faXmark } from '@fortawesome/free-solid-svg-icons'
 import {Picker} from '@react-native-picker/picker';
 
 //hook imports
-import { addCategory, addLink, removeCategory, removeLink } from './hooks'
+import { addCategory, addLink, removeCategory, removeLink, encrypt } from './hooks'
 
-const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, decipheredEmail, decipheredPhone, phoneAreaCode, incomingBio, externalLinks, craftCategories}) => {
+const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, decipheredEmail, decipheredPhone, phoneAreaCode, incomingBio, externalLinks, craftCategories, racerData, keyData}) => {
 
     //functionality state
     const [focused, setFocused] = useState('')
@@ -63,7 +63,102 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
         return () => {
           keyboardDidHideListener.remove();
         };
-      }, []);
+    }, []);
+
+    const saveChanges = async () => {
+
+        let newRacerData
+
+       /*  if (racerData.captain) {
+
+            if (fName === '') {
+                setMessage(language === "fr" ? "Prénom manquant" : 'Missing first name')
+                return
+            } else if (lName === '') {
+                setMessage(language === "fr" ? "Nom de famille manquant" : 'Missing last name')
+                return
+            } else if (email === '') {
+                setMessage(language === "fr" ? "E-mail manquant" : 'Missing email')
+                return
+            } else if (phone === '') {
+                setMessage(language === "fr" ? "Numéro de téléphone manquant" : 'Missing phone number')
+                return
+            } else if (teamName === '') {
+                setMessage(language === "fr" ? "Nom de l'équipe manquant" : 'Missing team name')
+                return
+            } else {
+                //encrypt information
+                //encrypt team name
+                const teamNameCipher = createCipheriv('aes256', keyData.key, keyData.iv)
+                const encryptedTeamName = teamNameCipher.update(teamName, 'utf-8', 'hex') + teamNameCipher.final('hex')
+
+                //encrypt fName
+                const fNameCipher = createCipheriv('aes256', keyData.key, keyData.iv)
+                const encryptedFName = fNameCipher.update(fName, 'utf-8', 'hex') + fNameCipher.final('hex')
+
+                //encrypt lName
+                const lNameCipher = createCipheriv('aes256', keyData.key, keyData.iv)
+                const encryptedLName = lNameCipher.update(lName, 'utf-8', 'hex') + lNameCipher.final('hex')
+
+                //encrypt email
+                const emailCipher = createCipheriv('aes256', keyData.key, keyData.iv)
+                const encryptedEmail = emailCipher.update(email, 'utf-8', 'hex') + emailCipher.final('hex')
+
+                //encrypt phone
+                const phoneCipher = createCipheriv('aes256', keyData.key, keyData.iv)
+                const encryptedPhone = phoneCipher.update(phone, 'utf-8', 'hex') + phoneCipher.final('hex')
+
+                newRacerData = {
+                    ...racerData,
+                    fName: encryptedFName,
+                    lName: encryptedLName,
+                    email: encryptedEmail,
+                    phone: racerData.phone.split(' ')[0] + ' ' + encryptedPhone,
+                    bio: bio,
+                    contactLinks: links,
+                    craftCategories: craftCategories,
+                    uid: racerId,
+                    teamName: encryptedTeamName
+                }
+            }
+        } else { */
+
+            if (racerFName === '') {
+                /* setMessage(language === "fr" ? "Prénom manquant" : 'Missing first name') */
+                alert('missing fName')
+                return
+            } else if (racerLName === '') {
+                /* setMessage(language === "fr" ? "Nom de famille manquant" : 'Missing last name') */
+                alert('missingLName')
+                return
+            } else if (racerEmail === '') {
+                /* setMessage(language === "fr" ? "E-mail manquant" : 'Missing email') */
+                alert('missing email')
+                return
+            } else if (racerPhone === '') {
+                /* setMessage(language === "fr" ? "Numéro de téléphone manquant" : 'Missing phone number') */
+                alert('missing phone')
+                return
+            } else {
+                
+                const data = await encrypt([racerFName, racerLName, racerEmail, racerPhone], keyData)
+                newRacerData = {
+                    ...racerData,
+                    fName: data.data[0],
+                    lName: data.data[1],
+                    email: data.data[2],
+                    phone: racerData.phone.split(' ')[0] + ' ' + data.data[3],
+                    bio: bio,
+                    contactLinks: links,
+                    craftCategories: craftCategories,
+                    uid: racerId
+                }
+            }
+
+            await updateUser(newRacerData)
+            setOpenEditProfile(false)
+        /* } */
+    }
 
   return (
     <View style={styles.mainContainer}>
@@ -120,7 +215,9 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                 <View style={{width: '90%', borderWidth: 2, borderRadius: 100, borderColor: '#09CAC7', marginTop: 10}}></View>
                 <TextInput style={focused === 'links' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]} onFocus={() => setFocused('links')} value={newLink} inputMode="text" placeholder="Paste/Type new link" onChangeText={(e) => setNewLink(e)}/>
                 <View style={{width: '90%', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                    <TouchableOpacity style={[styles.button, {width: '35%'}]} onPress={() => addLink(newLink, setRacerExternalLinks, setNewLink)}>
+                    <TouchableOpacity style={[styles.button, {width: '35%'}]} onPress={() => {
+                        if (newLink !== '') addLink(newLink, setRacerExternalLinks, setNewLink)
+                    }}>
                         <Text style={styles.buttonText}>Add Link</Text>
                     </TouchableOpacity>
                 </View>
@@ -166,7 +263,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
             </View>
 
             <View style={{width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '10%'}}>
-                <TouchableOpacity style={[styles.button, {width: '60%'}]}>
+                <TouchableOpacity style={[styles.button, {width: '60%'}]} onPress={() => saveChanges()}>
                     <Text style={styles.buttonTextL}>Save Changes</Text>
                 </TouchableOpacity>
             </View>
