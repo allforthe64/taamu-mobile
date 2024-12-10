@@ -1,19 +1,31 @@
-import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Modal } from 'react-native'
 import React, { useEffect, useState } from 'react'
 /* import { getDownloadableURL } from '../../firebase/storage' */
 
 //encryption imports
 import { getKey } from '../../firebase/firestore'
-import { Buffer } from 'buffer'
+
+//expo Link component import
 import { Link } from 'expo-router'
 
+//component imports
+import EditProfile from './EditProfile';
+
 const Hero = ({pfpRAW, racerData}) => {
-
-    const [pfpURL, setPFPURL] = useState('')
+    
+    //general state
     const [keyData, setKeyData] = useState({})
-    const [decipheredDisplayName, setDecipheredDisplayName] = useState('')
+    const [openPFP, setOpenPFP] = useState(false)
+    const [openEditProfile, setOpenEditProfile] = useState(false)
 
-   /*  useEffect(() => {
+    //racer data state
+    const [decipheredDisplayName, setDecipheredDisplayName] = useState('')
+    const [decipheredGender, setDecipheredGender] = useState('')
+    const [decipheredEmail, setDecipheredEmail] = useState('')
+    const [decipheredPhone, setDecipheredPhone] = useState('')
+    const [pfpURL, setPFPURL] = useState('')
+
+    useEffect(() => {
         if (pfpRAW) {
             const getPFPURL = async () => {
                 const downloadedPFPURL = await getDownloadableURL(pfpRAW)
@@ -21,13 +33,57 @@ const Hero = ({pfpRAW, racerData}) => {
             }
             getPFPURL()
         } 
-    }, [pfpRAW]) */
+    }, [pfpRAW])
 
     useEffect(() => {
-        if (racerData) {
-            setDecipheredDisplayName(racerData.fName + ' ' + racerData.lName)
+        setKeyData(async () => await getKey('2L5AoMJxKYqiPuSERhul7wFBO'))
+    }, [])
+
+    useEffect(() => {
+        if (racerData && keyData) {
+            const decrypt = async () => {
+                const url = 'https://tuarolife.com/api/cU5hF0mLrS7wyiRIIJ58'; // Replace with your API URL
+                const payload = [racerData.fName, racerData.lName, racerData.gender, racerData.email, racerData.phone.split(' ')[1]]
+                const key = /* keyData.key */ '84f863ea1090484b804f4ac1bc12b677'
+                const iv = /* keyData.iv */ 'a4c3a43d571b53a3'
+
+                try {
+                    const response = await fetch(url, {
+                    method: 'POST', // Specifies the request method
+                    headers: {
+                        'Content-Type': 'application/json', // Sets the request body as JSON
+                        'Authorization': 'Bearer your-token', // Optional: Add an authorization token if needed
+                    },
+                    body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
+                    });
+
+                    // Check if the response was successful
+                    if (response.ok) {
+                        const data = await response.json(); // Parse JSON response
+                        console.log(data)
+
+                        //set the deciphered display name
+                        setDecipheredDisplayName(data.data[0] + ' ' + data.data[1])
+
+                        //set the deciphered gender
+                        setDecipheredGender(data.data[2])
+
+                        //set the deciphered email
+                        setDecipheredEmail(data.data[3])
+
+                        //set the deciphered phone
+                        setDecipheredPhone(data.data[4])
+                    } else {
+                    console.error('Failed to send data:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Error sending POST request:', error);
+                }
+            }
+            decrypt()
         }
-    }, [racerData])
+    }, [])
+
 
     //get device height to be used in setting container dimension
     const ScreenHeight = Dimensions.get("window").height
@@ -126,8 +182,15 @@ const Hero = ({pfpRAW, racerData}) => {
 
     })
 
+    console.log(openPFP)
+
   return (
     <View style={styles.mainContainer}>
+
+        <Modal animationType='slide' visible={openEditProfile} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
+            <EditProfile setOpenEditProfile={setOpenEditProfile} decipheredFName={decipheredDisplayName.split(' ')[0]} decipheredLName={decipheredDisplayName.split(' ')[1]} decipheredEmail={decipheredEmail} decipheredPhone={decipheredPhone} phoneAreaCode={racerData.phone.split(' ')[0]} incomingBio={racerData.bio}/>
+        </Modal>
+
         <View style={styles.pfpContainer}>
             <Image style={styles.pfp} source={{ uri: pfpURL }}/>
         </View>
@@ -144,7 +207,7 @@ const Hero = ({pfpRAW, racerData}) => {
             <Text style={styles.label}>Bio:</Text>
             <Text style={styles.bioText}>{racerData.bio}</Text>
             <Text style={styles.label}>Age Category: <Text style={{color: 'white'}}>{racerData.ageCategory}</Text></Text>
-            <Text style={styles.label}>Gender: <Text style={{color: 'white'}}>{racerData.gender === 'm' ? 'Male' : racerData.gender === 'f' ? 'female' : racerData.gender}</Text></Text>
+            <Text style={styles.label}>Gender: <Text style={{color: 'white'}}>{decipheredGender === 'm' ? 'Male' : decipheredGender === 'f' ? 'female' : decipheredGender}</Text></Text>
             <Text style={styles.label}>Craft Categories:</Text>
             <View style={styles.categoriesContainer}>
                 {racerData.craftCategories.map((cat) => <Text key={cat} style={styles.cat}>{cat}</Text>)}
@@ -152,10 +215,10 @@ const Hero = ({pfpRAW, racerData}) => {
             <Text style={styles.label}>External links/contacts:</Text>
             {racerData.contactLinks.map((link) => <Link href={link} key={link} style={styles.link} numberOfLines={1}>{link}</Link>)}
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => setOpenPFP(true)}>
                     <Text style={styles.buttonText}>Update profile picture</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => setOpenEditProfile(true)}>
                     <Text style={styles.buttonText}>Edit profile</Text>
                 </TouchableOpacity>
             </View>

@@ -161,7 +161,9 @@ const styles = StyleSheet.create({
         fontSize: 18,
         borderRadius: 15,
         paddingLeft: 10,
-        paddingRight: 10
+        paddingRight: 10,
+        borderColor: 'white',
+        borderWidth: 2
     },
     focusedSingleLineTextInputs: {
         backgroundColor: 'white',
