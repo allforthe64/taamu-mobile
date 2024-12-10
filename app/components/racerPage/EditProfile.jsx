@@ -5,7 +5,11 @@ import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faTrash, faXmark } from '@fortawesome/free-solid-svg-icons'
 
+//picker component import
 import {Picker} from '@react-native-picker/picker';
+
+//hook imports
+import { addCategory, addLink, removeCategory, removeLink } from './hooks'
 
 const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, decipheredEmail, decipheredPhone, phoneAreaCode, incomingBio, externalLinks, craftCategories}) => {
 
@@ -21,7 +25,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
     const [racerExternalLinks, setRacerExternalLinks] = useState([])
     const [newLink, setNewLink] = useState('')
     const [racerCraftCategories, setRacerCraftCategories] = useState([])
-    const [selectedCraftCategory, setSelectedSelectedCraftCategory] = useState()
+    const [selectedCraftCategory, setSelectedCraftCategory] = useState()
 
     const craftCategoriesArr = [
         'V1',
@@ -105,7 +109,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                             return (
                                 <View style={styles.externalLink} key={i}>
                                     <Text style={styles.linkText} numberOfLines={1}>{link}</Text>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={() => removeLink(link, setRacerExternalLinks)}>
                                         <FontAwesomeIcon icon={faTrash} color='white' size={18}/>
                                     </TouchableOpacity>
                                 </View>
@@ -116,7 +120,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                 <View style={{width: '90%', borderWidth: 2, borderRadius: 100, borderColor: '#09CAC7', marginTop: 10}}></View>
                 <TextInput style={focused === 'links' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]} onFocus={() => setFocused('links')} value={newLink} inputMode="text" placeholder="Paste/Type new link" onChangeText={(e) => setNewLink(e)}/>
                 <View style={{width: '90%', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                    <TouchableOpacity style={[styles.button, {width: '35%'}]}>
+                    <TouchableOpacity style={[styles.button, {width: '35%'}]} onPress={() => addLink(newLink, setRacerExternalLinks, setNewLink)}>
                         <Text style={styles.buttonText}>Add Link</Text>
                     </TouchableOpacity>
                 </View>
@@ -126,11 +130,11 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                 <Text style={{color: 'white', fontSize: 25, width: '90%', fontWeight: '500', marginBottom: 10}}>Edit <Text style={{color: '#09CAC7'}}>Favorite Craft Categories (optional):</Text></Text>
                 {racerCraftCategories.length > 0 &&
                     <View style={styles.linkCraftsContainer}>
-                        {racerCraftCategories.map((link, i) => {
+                        {racerCraftCategories.map((category, i) => {
                             return (
                                 <View style={styles.externalLink} key={i}>
-                                    <Text style={styles.linkText} numberOfLines={1}>{link}</Text>
-                                    <TouchableOpacity>
+                                    <Text style={styles.linkText} numberOfLines={1}>{category}</Text>
+                                    <TouchableOpacity onPress={() => removeCategory(category, setRacerCraftCategories)}>
                                         <FontAwesomeIcon icon={faTrash} color='white' size={18}/>
                                     </TouchableOpacity>
                                 </View>
@@ -144,7 +148,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                     style={focused === 'craftCategory' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]}
                     selectedValue={selectedCraftCategory}
                     onValueChange={(itemValue, itemIndex) =>
-                        setSelectedSelectedCraftCategory(itemValue)
+                        setSelectedCraftCategory(itemValue)
                     }
                     onFocus={() => setFocused('craftCategory')}
                     >
@@ -155,7 +159,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                     }
                 </Picker>
                 <View style={{width: '90%', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                    <TouchableOpacity style={[styles.button, {width: '75%'}]}>
+                    <TouchableOpacity style={[styles.button, {width: '75%'}]} onPress={() => addCategory(selectedCraftCategory, setRacerCraftCategories, setSelectedCraftCategory)}>
                         <Text style={styles.buttonText}>Add Craft Category</Text>
                     </TouchableOpacity>
                 </View>
@@ -214,7 +218,7 @@ const styles = StyleSheet.create({
     focusedSingleLineTextInputs: {
         backgroundColor: 'white',
         color: '#808080',
-        width: '90%',
+        width: '95%',
         fontSize: 18,
         borderRadius: 15,
         paddingLeft: 10,
