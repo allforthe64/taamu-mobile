@@ -44,11 +44,16 @@ const RacerPage = () => {
     const [racerData, setRacerData] = useState()
 
     useEffect(() => {
-      const getRacerData = async () => {
-        const racerDataObj = await getUser({uid: racer})
-        setRacerData(racerDataObj)
+      try {
+        const getRacerData = async () => {
+          const racerDataObj = await getUser({uid: racer})
+          setRacerData(racerDataObj)
+        }
+        getRacerData()
+      } catch (err) {
+        console.log('err trying to grab racer data: ', err)
       }
-      getRacerData()
+      
     }, [])
 
     /* useEffect(() => {
