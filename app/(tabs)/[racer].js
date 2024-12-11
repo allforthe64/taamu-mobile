@@ -13,6 +13,7 @@ import Hero from '../components/racerPage/Hero'
 const RacerPage = () => {
 
     const {racer} = useLocalSearchParams()
+    console.log('racer id: ', racer)
 
     const [racerData, setRacerData] = useState({ contactLinks: 
       [ 'https://www.instagram.com/r_d_outrigger/',

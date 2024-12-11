@@ -28,6 +28,7 @@ const Hero = ({pfpRAW, racerData}) => {
     useEffect(() => {
         if (pfpRAW) {
             const getPFPURL = async () => {
+                alert('running pfp url')
                 const downloadedPFPURL = await getDownloadableURL(pfpRAW)
                 setPFPURL(downloadedPFPURL)
             }
@@ -45,6 +46,7 @@ const Hero = ({pfpRAW, racerData}) => {
 
     console.log('keyData: ', keyData)
     console.log('racerData: ', racerData)
+    console.log(pfpURL)
 
     
 
