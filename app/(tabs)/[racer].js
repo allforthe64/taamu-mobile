@@ -7,6 +7,9 @@ import { useLocalSearchParams } from 'expo-router'
 //component imports
 import Hero from '../components/racerPage/Hero'
 
+import { getDoc, doc } from 'firebase/firestore'
+import { db } from '../firebaseConfig'
+
 //
 /* import { getUser } from '../firebase/firestore' */
 
@@ -45,17 +48,35 @@ const RacerPage = () => {
     const [racerData, setRacerData] = useState()
 
     useEffect(() => {
-      try {
+
+      let isMounted = true; // Prevent state updates on unmounted components
+
+      if (!racerData) {
+        /* try {
+          const getRacerData = async () => {
+            const racerDataObj = await getUser({uid: racer})
+            
+          }
+          getRacerData()
+        } catch (err) {
+          console.log('err trying to grab racer data: ', err)
+        } */
         const getRacerData = async () => {
-          const racerDataObj = await getUser({uid: racer})
-          setRacerData(racerDataObj)
-        }
-        getRacerData()
-      } catch (err) {
-        console.log('err trying to grab racer data: ', err)
-      }
+          try {
+            const docSnap = await getDoc(doc(db, 'users', user.uid))
+            if (isMounted) setRacerData(docSnap)
+          } catch (err) {
+            console.log('Error trying to grab racer data:', err);
+          }
+        };
       
-    }, [])
+        if (racer) getRacerData();
+      }
+
+      return () => {
+        isMounted = false; // Cleanup to avoid memory leaks
+      };
+    }, [racerData])
 
     /* useEffect(() => {
       if (racerData) {
