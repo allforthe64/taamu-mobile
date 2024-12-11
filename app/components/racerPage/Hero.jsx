@@ -46,7 +46,7 @@ const Hero = ({pfpRAW, racerData}) => {
 
     console.log('keyData: ', keyData)
     console.log('racerData: ', racerData)
-    console.log(pfpURL)
+    console.log('pfpURL: ', pfpURL)
 
     
 
@@ -147,8 +147,6 @@ const Hero = ({pfpRAW, racerData}) => {
         },
 
     })
-
-    console.log(openPFP)
 
   return (
     <View style={styles.mainContainer}>

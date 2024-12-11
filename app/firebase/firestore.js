@@ -206,7 +206,7 @@ export const addUser = async (user) => {
             }
         }
     } catch (err) {
-        alert(err)
+        console.log(err)
     }
     
 }

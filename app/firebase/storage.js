@@ -27,5 +27,9 @@ export const deleteFile = (path) => {
 
 //get the downloadable url from incoming path
 export const getDownloadableURL = async (path) => {
-    return await getDownloadURL(ref(storage, path))
+    try {
+        return await getDownloadURL(ref(storage, path))
+    } catch (err) {
+        console.log(err)
+    }
 }
