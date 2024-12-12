@@ -15,13 +15,15 @@ export default function TabLayout() {
 
     //grab racer data
     useEffect(() => {
-        //activate single user listener based on the id passed through the url params
-        const getRacerData = async () => {
-            const unsubscribe = await singleUserListener(racer, setRacerData)
-            return () => unsubscribe()
-        }
-        getRacerData()
-      }, [])
+        if (racer) {
+            //activate single user listener based on the id passed through the url params
+            const getRacerData = async () => {
+                const unsubscribe = await singleUserListener(racer, setRacerData)
+                return () => unsubscribe()
+            }
+            getRacerData()
+        } 
+      }, [racer])
   
     
     return (
