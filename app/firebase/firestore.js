@@ -215,6 +215,7 @@ export const addUser = async (user) => {
 export const singleUserListener = async (docId, setCurrentUser) => {
     try {
         const docSnap = onSnapshot(doc(db, 'users', docId), (snapShot) => {
+            console.log('snapshot: ', snapShot)
             setCurrentUser({...snapShot.data()})
         })
     } catch (err) {
