@@ -10,7 +10,8 @@ import { firebaseAuth } from "../firebaseConfig";
 export default function TabLayout() {
 
     /* const [firebaseAuth, setFirebaseAuth] = useState({currentUser: true}) */
-    const racer = firebaseAuth.currentUser.uid
+    const racer = firebaseAuth?.currentUser?.uid
+    console.log('racer: ', racer)
     const [racerData, setRacerData] = useState()
 
     //grab racer data
