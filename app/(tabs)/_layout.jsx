@@ -2,7 +2,7 @@ import { Tabs } from "expo-router";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faHouse, faPerson, faFlagCheckered, faLock, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { AuthContextProvider } from "../firebase/authContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //firebase auth import
 import { firebaseAuth } from "../firebaseConfig";
