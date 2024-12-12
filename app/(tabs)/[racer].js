@@ -63,7 +63,7 @@ const RacerPage = () => {
         } */
         const getRacerData = async () => {
           try {
-            const docSnap = await getDoc(doc(db, 'users', user.uid))
+            const docSnap = await getDoc(doc(db, 'users', racer))
             if (isMounted) setRacerData(docSnap)
           } catch (err) {
             console.log('Error trying to grab racer data:', err);
