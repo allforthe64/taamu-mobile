@@ -17,6 +17,7 @@ export default function TabLayout() {
     //grab racer data
     useEffect(() => {
         if (racer) {
+            alert('running useEffect')
             //activate single user listener based on the id passed through the url params
             const getRacerData = async () => {
                 const unsubscribe = await singleUserListener(racer, setRacerData)
