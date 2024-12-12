@@ -10,6 +10,19 @@ import { firebaseAuth } from "../firebaseConfig";
 export default function TabLayout() {
 
     /* const [firebaseAuth, setFirebaseAuth] = useState({currentUser: true}) */
+    const racer = firebaseAuth.currentUser.uid
+    const [racerData, setRacerData] = useState()
+
+    //grab racer data
+    useEffect(() => {
+        //activate single user listener based on the id passed through the url params
+        const getRacerData = async () => {
+            const unsubscribe = await singleUserListener(racer, setRacerData)
+            return () => unsubscribe()
+        }
+        getRacerData()
+      }, [])
+  
     
     return (
         <AuthContextProvider>

@@ -17,8 +17,8 @@ import { firebaseAuth } from '../firebaseConfig'
 const RacerPage = () => {
 
    /*  const {racer} = useLocalSearchParams() */
-    const racer = firebaseAuth.currentUser.uid
-    console.log('racer id: ', racer)
+    /* const racer = firebaseAuth.currentUser.uid */
+    /* console.log('racer id: ', racer) */
 
     /* const [racerData, setRacerData] = useState({ contactLinks: 
       [ 'https://www.instagram.com/r_d_outrigger/',
@@ -47,9 +47,9 @@ const RacerPage = () => {
         'gs://areregsoft.appspot.com/xhX6FwzcSCMkGak0nnPTbapS0ik2/Screenshot (71).png.2024-11-15T13:19:00' ],
      craftCategories: [ 'V6', 'OC1', 'V1' ] }) */
 
-    const [racerData, setRacerData] = useState()
+    /* const [racerData, setRacerData] = useState() */
 
-    //grab racer data
+    /* //grab racer data
     useEffect(() => {
       //activate single user listener based on the id passed through the url params
       const getRacerData = async () => {
@@ -58,7 +58,7 @@ const RacerPage = () => {
       }
       getRacerData()
     }, [])
-
+ */
 
     /* useEffect(() => {
       if (racerData) {

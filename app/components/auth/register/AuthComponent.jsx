@@ -53,7 +53,7 @@ const AuthComponent = () => {
             userUID = response.user.uid
             setEmail('')
             setPassword('')
-            router.push(`/${userUID}`)
+            router.push(`/`)
         } catch (err) {
             console.log(err)
         }
