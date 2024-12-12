@@ -9,13 +9,15 @@ import Hero from '../components/racerPage/Hero'
 
 import { getDoc, doc } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
+import { firebaseAuth } from '../firebaseConfig'
 
 //
 /* import { getUser } from '../firebase/firestore' */
 
 const RacerPage = () => {
 
-    const {racer} = useLocalSearchParams()
+   /*  const {racer} = useLocalSearchParams() */
+    const racer = firebaseAuth.currentUser
     console.log('racer id: ', racer)
 
     /* const [racerData, setRacerData] = useState({ contactLinks: 
@@ -47,36 +49,16 @@ const RacerPage = () => {
 
     const [racerData, setRacerData] = useState()
 
+    //grab racer data
     useEffect(() => {
-
-      let isMounted = true; // Prevent state updates on unmounted components
-
-      if (!racerData) {
-        /* try {
-          const getRacerData = async () => {
-            const racerDataObj = await getUser({uid: racer})
-            
-          }
-          getRacerData()
-        } catch (err) {
-          console.log('err trying to grab racer data: ', err)
-        } */
-        const getRacerData = async () => {
-          try {
-            const docSnap = await getDoc(doc(db, 'users', racer))
-            if (isMounted) setRacerData(docSnap)
-          } catch (err) {
-            console.log('Error trying to grab racer data:', err);
-          }
-        };
-      
-        if (racer) getRacerData();
+      //activate single user listener based on the id passed through the url params
+      const getRacerData = async () => {
+          const unsubscribe = await singleUserListener(racer, setRacerData)
+          return () => unsubscribe()
       }
+      getRacerData()
+    }, [])
 
-      return () => {
-        isMounted = false; // Cleanup to avoid memory leaks
-      };
-    }, [racerData])
 
     /* useEffect(() => {
       if (racerData) {
