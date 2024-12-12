@@ -25,6 +25,8 @@ export default function TabLayout() {
             getRacerData()
         } 
       }, [racer])
+
+      console.log(racerData)
   
     
     return (
