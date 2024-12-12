@@ -17,7 +17,7 @@ import { firebaseAuth } from '../firebaseConfig'
 const RacerPage = () => {
 
    /*  const {racer} = useLocalSearchParams() */
-    const racer = firebaseAuth.currentUser
+    const racer = firebaseAuth.currentUser.uid
     console.log('racer id: ', racer)
 
     /* const [racerData, setRacerData] = useState({ contactLinks: 

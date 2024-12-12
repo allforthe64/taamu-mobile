@@ -213,9 +213,13 @@ export const addUser = async (user) => {
 
 //take snapshot of a single user, listen for changes and return
 export const singleUserListener = async (docId, setCurrentUser) => {
-    const docSnap = onSnapshot(doc(db, 'users', docId), (snapShot) => {
-        setCurrentUser({...snapShot.data()})
-    })
+    try {
+        const docSnap = onSnapshot(doc(db, 'users', docId), (snapShot) => {
+            setCurrentUser({...snapShot.data()})
+        })
+    } catch (err) {
+        console.log('error within singleUserListener: ', err)
+    }
 }
 
 //find a user by email
