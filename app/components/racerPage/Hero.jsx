@@ -27,12 +27,17 @@ const Hero = ({racerData}) => {
 
     useEffect(() => {
         if (racerData.pfp) {
-            const getPFPURL = async () => {
-                alert('running pfp url')
-                const downloadedPFPURL = await getDownloadableURL(racerData.pfp)
-                setPFPURL(downloadedPFPURL)
+            try {
+                const getPFPURL = async () => {
+                    alert('running pfp url')
+                    const downloadedPFPURL = await getDownloadableURL(racerData.pfp)
+                    setPFPURL(downloadedPFPURL)
+                }
+                getPFPURL()
+            } catch (err) {
+                console.log('error within pfp fetch: ', err.message)
             }
-            getPFPURL()
+           
         } 
     }, [racerData])
 
@@ -45,7 +50,7 @@ const Hero = ({racerData}) => {
     }, [])
 
     useEffect(() => {
-        if (racerData && keyData) {
+        if (racerData.fName && keyData.key) {
             try {
                 const operationDetachment = async () => {
                     const url = 'https://tuarolife.com/api/cU5hF0mLrS7wyiRIIJ58'; // Replace with your API URL
