@@ -14,7 +14,7 @@ import EditProfile from './EditProfile';
 const Hero = ({racerData}) => {
     
     //general state
-    const [keyData, setKeyData] = useState({})
+    const [keyData, setKeyData] = useState()
     const [openPFP, setOpenPFP] = useState(false)
     const [openEditProfile, setOpenEditProfile] = useState(false)
 
@@ -26,7 +26,7 @@ const Hero = ({racerData}) => {
     const [pfpURL, setPFPURL] = useState('')
 
     useEffect(() => {
-        if (racerData) {
+        if (racerData.pfp) {
             const getPFPURL = async () => {
                 alert('running pfp url')
                 const downloadedPFPURL = await getDownloadableURL(racerData.pfp)
