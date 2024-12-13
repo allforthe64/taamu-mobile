@@ -53,13 +53,15 @@ const RacerPage = () => {
 
     //grab racer data
     useEffect(() => {
-      //activate single user listener based on the id passed through the url params
-      const getRacerData = async () => {
-          const unsubscribe = await singleUserListener(racer, setRacerData)
+      if (firebaseAuth.currentUser.uid) {
+        //activate single user listener based on the id passed through the url params
+        const getRacerData = async () => {
+          const unsubscribe = await singleUserListener(firebaseAuth.currentUser.uid, setRacerData)
           return () => unsubscribe()
+        }
+        getRacerData()
       }
-      getRacerData()
-    }, [])
+    }, [firebaseAuth.currentUser.uid])
 
 
     /* useEffect(() => {
