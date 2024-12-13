@@ -11,7 +11,7 @@ import { Link } from 'expo-router'
 //component imports
 import EditProfile from './EditProfile';
 
-const Hero = ({pfpRAW, racerData}) => {
+const Hero = ({racerData}) => {
     
     //general state
     const [keyData, setKeyData] = useState({})
@@ -26,15 +26,15 @@ const Hero = ({pfpRAW, racerData}) => {
     const [pfpURL, setPFPURL] = useState('')
 
     useEffect(() => {
-        if (pfpRAW) {
+        if (racerData) {
             const getPFPURL = async () => {
                 alert('running pfp url')
-                const downloadedPFPURL = await getDownloadableURL(pfpRAW)
+                const downloadedPFPURL = await getDownloadableURL(racerData.pfp)
                 setPFPURL(downloadedPFPURL)
             }
             getPFPURL()
         } 
-    }, [pfpRAW])
+    }, [racerData])
 
     useEffect(() => {
         const getKeyData = async () => {
@@ -151,9 +151,9 @@ const Hero = ({pfpRAW, racerData}) => {
   return (
     <View style={styles.mainContainer}>
 
-        {/* <Modal animationType='slide' visible={openEditProfile} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
+        <Modal animationType='slide' visible={openEditProfile} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
             <EditProfile setOpenEditProfile={setOpenEditProfile} decipheredFName={decipheredDisplayName.split(' ')[0]} decipheredLName={decipheredDisplayName.split(' ')[1]} decipheredEmail={decipheredEmail} decipheredPhone={decipheredPhone} phoneAreaCode={racerData.phone.split(' ')[0]} incomingBio={racerData.bio} externalLinks={racerData.contactLinks} craftCategories={racerData.craftCategories} racerData={racerData} keyData={keyData}/>
-        </Modal> */}
+        </Modal>
 
         <View style={styles.pfpContainer}>
             <Image style={styles.pfp} source={{ uri: pfpURL }}/>

@@ -6,45 +6,10 @@ import { useState, useEffect } from "react";
 
 //firebase auth import
 import { firebaseAuth } from "../firebaseConfig";
-import { getUser, singleUserListener } from "../firebase/firestore";
 
 export default function TabLayout() {
 
     /* const [firebaseAuth, setFirebaseAuth] = useState({currentUser: true}) */
-    const racer = firebaseAuth?.currentUser?.uid
-    console.log('racer: ', racer)
-    const [racerData, setRacerData] = useState()
-
-    useEffect(() => {
-        if (racer) {
-            const testFirebaseConnection = async () => {
-                const userData = await getUser({uid: racer})
-                console.log('getUser: ', userData)
-            }
-        }
-    }, [racer])
-
-    //grab racer data
-    useEffect(() => {
-        if (racer) {
-            alert('running useEffect')
-            try {
-                //activate single user listener based on the id passed through the url params
-                const getRacerData = async () => {
-                    alert('running singleUserListener')
-                    const unsubscribe = await singleUserListener(racer, setRacerData)
-                    return () => unsubscribe()
-                }
-                getRacerData()
-            } catch (err) {
-                console.log('error within useEffect: ', err)
-            }
-            
-        } 
-      }, [racer])
-
-      console.log(racerData)
-  
     
     return (
         <AuthContextProvider>

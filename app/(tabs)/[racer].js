@@ -91,7 +91,7 @@ const RacerPage = () => {
     <View style={styles.mainContainer}>
       {racerData &&
         <ScrollView>
-          <Hero pfpRAW={racerData.pfp} racerData={racerData}/>
+          <Hero racerData={racerData}/>
         </ScrollView>
       }
     </View>
