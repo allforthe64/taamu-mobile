@@ -11,6 +11,8 @@ import { getDoc, doc } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 import { firebaseAuth } from '../firebaseConfig'
 
+import { singleUserListener } from '../firebase/firestore'
+
 //
 /* import { getUser } from '../firebase/firestore' */
 
@@ -47,9 +49,9 @@ const RacerPage = () => {
         'gs://areregsoft.appspot.com/xhX6FwzcSCMkGak0nnPTbapS0ik2/Screenshot (71).png.2024-11-15T13:19:00' ],
      craftCategories: [ 'V6', 'OC1', 'V1' ] }) */
 
-    /* const [racerData, setRacerData] = useState() */
+    const [racerData, setRacerData] = useState()
 
-    /* //grab racer data
+    //grab racer data
     useEffect(() => {
       //activate single user listener based on the id passed through the url params
       const getRacerData = async () => {
@@ -58,7 +60,7 @@ const RacerPage = () => {
       }
       getRacerData()
     }, [])
- */
+
 
     /* useEffect(() => {
       if (racerData) {
