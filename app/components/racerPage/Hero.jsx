@@ -50,7 +50,7 @@ const Hero = ({racerData}) => {
     }, [])
 
     useEffect(() => {
-        if (racerData.fName && keyData.key) {
+        if (racerData.fName && keyData) {
             try {
                 const operationDetachment = async () => {
                     const url = 'https://tuarolife.com/api/cU5hF0mLrS7wyiRIIJ58'; // Replace with your API URL
