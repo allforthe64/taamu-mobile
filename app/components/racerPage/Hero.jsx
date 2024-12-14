@@ -97,7 +97,7 @@ const Hero = ({racerData}) => {
                 console.log('err within decipher function: ', err)
             }
         }
-    }, [])
+    }, [racerData, keyData])
 
 
     console.log('keyData: ', keyData)
