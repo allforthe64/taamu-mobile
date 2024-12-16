@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Modal } from 'react-native'
 import React, { useEffect, useState, useCallback } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
-/* import { getDownloadableURL } from '../../firebase/storage' */
+import { getDownloadableURL } from '../../firebase/storage'
 
 //encryption imports
 import { getKey } from '../../firebase/firestore'
