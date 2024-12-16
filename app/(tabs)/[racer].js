@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useState} from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 
 //localSearchParams import
 import { useLocalSearchParams } from 'expo-router'
@@ -52,17 +53,20 @@ const RacerPage = () => {
     const [racerData, setRacerData] = useState()
 
     //grab racer data
-    useEffect(() => {
-      if (firebaseAuth.currentUser.uid) {
-        //activate single user listener based on the id passed through the url params
-        const getRacerData = async () => {
-          const unsubscribe = await singleUserListener(firebaseAuth.currentUser.uid, setRacerData)
-          return () => unsubscribe()
-        }
-        getRacerData()
-      }
-    }, [firebaseAuth.currentUser.uid])
+    useFocusEffect(
+      useCallback(() => {
+        if (firebaseAuth.currentUser.uid) {
+          //activate single user listener based on the id passed through the url params
+          const getRacerData = async () => {
+            const unsubscribe = await singleUserListener(firebaseAuth.currentUser.uid, setRacerData)
 
+            return () => unsubscribe()
+          }
+          getRacerData()
+        }
+
+      }, [firebaseAuth.currentUser.uid])
+    )
 
     /* useEffect(() => {
       if (racerData) {

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Modal } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 /* import { getDownloadableURL } from '../../firebase/storage' */
 
 //encryption imports
@@ -25,30 +26,34 @@ const Hero = ({racerData}) => {
     const [decipheredPhone, setDecipheredPhone] = useState('')
     const [pfpURL, setPFPURL] = useState('')
 
-    useEffect(() => {
-        if (racerData.pfp) {
-            try {
-                const getPFPURL = async () => {
-                    alert('running pfp url')
-                    const downloadedPFPURL = await getDownloadableURL(racerData.pfp)
-                    setPFPURL(downloadedPFPURL)
+    useFocusEffect(
+        useCallback(() => {
+            if (racerData.pfp) {
+                try {
+                    const getPFPURL = async () => {
+                        alert('running pfp url')
+                        const downloadedPFPURL = await getDownloadableURL(racerData.pfp)
+                        setPFPURL(downloadedPFPURL)
+                    }
+                    getPFPURL()
+                } catch (err) {
+                    console.log('error within pfp fetch: ', err.message)
                 }
-                getPFPURL()
-            } catch (err) {
-                console.log('error within pfp fetch: ', err.message)
+               
+            } 
+        }, [racerData])
+    )
+
+    useFocusEffect(
+        useCallback(() => {
+            const getKeyData = async () => {
+                const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
+                setKeyData(keyDataObj)
             }
-           
-        } 
-    }, [racerData])
-
-    useEffect(() => {
-        const getKeyData = async () => {
-            const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
-            setKeyData(keyDataObj)
-        }
-        getKeyData()
-    }, [])
-
+            getKeyData()
+        }, [])
+    )
+    
     useEffect(() => {
         if (racerData.fName && keyData) {
             try {
@@ -71,7 +76,7 @@ const Hero = ({racerData}) => {
                         // Check if the response was successful
                         if (response.ok) {
                             const data = await response.json(); // Parse JSON response
-                            console.log(data)
+                            console.log('response data: ', data)
     
                             //set the deciphered display name
                             setDecipheredDisplayName(data.data[0] + ' ' + data.data[1])

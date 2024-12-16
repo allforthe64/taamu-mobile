@@ -40,7 +40,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
     ]
 
     useEffect(() => {
-        if (decipheredFName && decipheredLName) {
+        if (decipheredFName) {
             setRacerFName(decipheredFName)
             setRacerLName(decipheredLName)
             setRacerEmail(decipheredEmail)
@@ -49,7 +49,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
             setRacerExternalLinks([...externalLinks])
             setRacerCraftCategories([...craftCategories])
         }
-    }, [])
+    }, [decipheredFName])
 
     //set focused to '' when the keyboard is closed
     useEffect(() => {
