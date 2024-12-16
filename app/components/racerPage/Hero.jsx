@@ -31,7 +31,7 @@ const Hero = ({racerData}) => {
             if (racerData.pfp) {
                 try {
                     const getPFPURL = async () => {
-                        alert('running pfp url')
+                        console.log('racerData.pfp: ', racerData.pfp)
                         const downloadedPFPURL = await getDownloadableURL(racerData.pfp)
                         setPFPURL(downloadedPFPURL)
                     }
