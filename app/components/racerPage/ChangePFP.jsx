@@ -32,44 +32,51 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
 
     //upload new profile picture and update user
     const updatePFP = async () => {
-        //if the pfp is still a default, upload the new one and change the url held in firestore
-        if (racerData.pfp === 'gs://areregsoft.appspot.com/default_pfp.png') {
-            
-            //upload the new image and set the new path
-            const result = await uploadImage(newPFPUrl, racerData.uid)
+        alert('running')
+        console.log('racerData: ', racerData)
+        try {
+            //if the pfp is still a default, upload the new one and change the url held in firestore
+            if (racerData.pfp === 'gs://areregsoft.appspot.com/default_pfp.png') {
+                
+                //upload the new image and set the new path
+                const result = await uploadImage(newPFPUrl, racerData.uid)
 
-            //create a new racer data object
-            const newRacerData = {
-                ...racerData,
-                pfp: `gs://${result.metadata.bucket}/${result.metadata.fullPath}`
+                //create a new racer data object
+                const newRacerData = {
+                    ...racerData,
+                    pfp: `gs://${result.metadata.bucket}/${result.metadata.fullPath}`
+                }
+
+                //update the existing racer's data
+                await updateUser(newRacerData)
+                setOpenPFP(false)
+
+            } 
+            //if pfp has already been changed, remove the existing pfp, upload the new one, replace the url within the racer data structure
+            else {
+
+                //delete the current pfp
+                deleteFile(racerData.pfp)
+                
+                //upload the new image and set the new path
+                const result = await uploadImage(newPFPUrl, racerData.uid)
+
+                //create a new racerData object
+                const newRacerData = {
+                    ...racerData,
+                    pfp: `gs://${result.metadata.bucket}/${result.metadata.fullPath}`,
+                    uid: racerId
+                }
+
+                //update the existing racer's data
+                await updateUser(newRacerData)
+                setOpenPFP(false)
+
             }
-
-            //update the existing racer's data
-            await updateUser(newRacerData)
-            setOpenPFP(false)
-
-        } 
-        //if pfp has already been changed, remove the existing pfp, upload the new one, replace the url within the racer data structure
-        else {
-
-            //delete the current pfp
-            deleteFile(racerData.pfp)
-            
-            //upload the new image and set the new path
-            const result = await uploadImage(newPFPUrl, racerData.uid)
-
-            //create a new racerData object
-            const newRacerData = {
-                ...racerData,
-                pfp: `gs://${result.metadata.bucket}/${result.metadata.fullPath}`,
-                uid: racerId
-            }
-
-            //update the existing racer's data
-            await updateUser(newRacerData)
-            setOpenPFP(false)
-
+        } catch (err) {
+            console.log('error within update pfp: ', err)
         }
+        
     }
 
   return (
