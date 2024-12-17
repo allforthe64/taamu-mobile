@@ -19,10 +19,6 @@ import { singleUserListener } from '../firebase/firestore'
 
 const RacerPage = () => {
 
-   /*  const {racer} = useLocalSearchParams() */
-    /* const racer = firebaseAuth.currentUser.uid */
-    /* console.log('racer id: ', racer) */
-
     /* const [racerData, setRacerData] = useState({ contactLinks: 
       [ 'https://www.instagram.com/r_d_outrigger/',
         'https://www.instagram.com/b_is_for_billiam/' ],
@@ -67,29 +63,6 @@ const RacerPage = () => {
 
       }, [firebaseAuth.currentUser.uid])
     )
-
-    /* useEffect(() => {
-      if (racerData) {
-        console.log('running')
-        try {
-          const operationDetatchement = async () => {
-            const response = await fetch('https://www.tuarolife.com/api/p3XvA7kM9qZT2BwRfY1N', {
-              method: 'POST',
-              body: JSON.stringify({ payload: {
-                rnf: racerData.fName,
-                rnl: racerData.lName
-            }}),
-              headers: { 'Content-Type': 'application/json' },
-            })
-            const data = await response.json();
-            console.log('response: ', data)
-          }
-          operationDetatchement()
-        } catch (err) {
-          console.log('err: ', err)
-        }
-      }
-    }, [racerData]) */
 
   return (
     <View style={styles.mainContainer}>

@@ -11,6 +11,7 @@ import { Link } from 'expo-router'
 
 //component imports
 import EditProfile from './EditProfile';
+import ChangePFP from './ChangePFP'
 
 const Hero = ({racerData}) => {
     
@@ -105,13 +106,6 @@ const Hero = ({racerData}) => {
     }, [racerData, keyData])
 
 
-    console.log('keyData: ', keyData)
-    console.log('racerData: ', racerData)
-    console.log('pfpURL: ', pfpURL)
-
-    
-
-
     //get device height to be used in setting container dimension
     const ScreenHeight = Dimensions.get("window").height
 
@@ -126,8 +120,6 @@ const Hero = ({racerData}) => {
         pfpContainer: {
             width: '90%',
             height: ScreenHeight / 2.4,
-            borderWidth: 1,
-            borderColor: 'black',
             marginTop: '10%',
             borderRadius: 25
         },
@@ -139,7 +131,6 @@ const Hero = ({racerData}) => {
         },
         racerDataContainer: {
             width: '100%',
-            borderWidth: 1,
             paddingLeft: '5%',
             paddingRight: '5%',
             paddingTop: '5%'
@@ -214,6 +205,10 @@ const Hero = ({racerData}) => {
 
         <Modal animationType='slide' visible={openEditProfile} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
             <EditProfile setOpenEditProfile={setOpenEditProfile} decipheredFName={decipheredDisplayName.split(' ')[0]} decipheredLName={decipheredDisplayName.split(' ')[1]} decipheredEmail={decipheredEmail} decipheredPhone={decipheredPhone} phoneAreaCode={racerData.phone.split(' ')[0]} incomingBio={racerData.bio} externalLinks={racerData.contactLinks} craftCategories={racerData.craftCategories} racerData={racerData} keyData={keyData}/>
+        </Modal>
+
+        <Modal animationType='slide' visible={openPFP} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
+            <ChangePFP setOpenPFP={setOpenPFP} racerData={racerData}/>
         </Modal>
 
         <View style={styles.pfpContainer}>
