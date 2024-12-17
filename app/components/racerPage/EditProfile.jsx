@@ -10,6 +10,7 @@ import {Picker} from '@react-native-picker/picker';
 
 //hook imports
 import { addCategory, addLink, removeCategory, removeLink, encrypt } from './hooks'
+import { updateUser } from '../../firebase/firestore';
 
 const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, decipheredEmail, decipheredPhone, phoneAreaCode, incomingBio, externalLinks, craftCategories, racerData, keyData}) => {
 
@@ -67,7 +68,9 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
 
     const saveChanges = async () => {
 
-        let newRacerData
+        try {
+
+            let newRacerData
 
        /*  if (racerData.captain) {
 
@@ -151,13 +154,15 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                     bio: bio,
                     contactLinks: links,
                     craftCategories: craftCategories,
-                    uid: racerId
                 }
             }
 
             await updateUser(newRacerData)
             setOpenEditProfile(false)
         /* } */
+        } catch (err) {
+            alert('error within edit profile: ', err)
+        }
     }
 
   return (
