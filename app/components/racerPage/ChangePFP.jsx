@@ -9,7 +9,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import * as ImagePicker from 'expo-image-picker'
 
 //import uploadImage function/updateUser function
-import { uploadImage } from '../../firebase/storage'
+import { uploadImage, deleteFile } from '../../firebase/storage'
 import { updateUser } from '../../firebase/firestore'
 
 const ChangePFP = ({setOpenPFP, racerData}) => {
