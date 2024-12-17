@@ -65,7 +65,6 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
                 const newRacerData = {
                     ...racerData,
                     pfp: `gs://${result.metadata.bucket}/${result.metadata.fullPath}`,
-                    uid: racerId
                 }
 
                 //update the existing racer's data
