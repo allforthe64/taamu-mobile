@@ -73,9 +73,8 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
 
     const saveChanges = async () => {
 
-        try {
 
-            let newRacerData
+        let newRacerData
 
        /*  if (racerData.captain) {
 
@@ -165,9 +164,6 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
             await updateUser(newRacerData)
             setOpenEditProfile(false)
         /* } */
-        } catch (err) {
-            alert('error within edit profile: ', err)
-        }
     }
 
   return (

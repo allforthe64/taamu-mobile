@@ -218,11 +218,12 @@ const Hero = ({racerData}) => {
         </View>
 
         <View style={styles.racerDataContainer}>
-            {racerData.captain || racerData.coach ?
+            {/* {racerData.captain || racerData.coach ?
                 <></>
             :
-                <Text style={styles.displayName}>{decipheredDisplayName}</Text>
-            }
+                
+            } */}
+            <Text style={styles.displayName}>{decipheredDisplayName}</Text>
             <Text style={styles.label}>Current account type: <Text style={{color: 'white'}}>{racerData.role === 'racer' && !racerData.captain ? /* (language === "fr" ? "Individuel" : */ 'Individual'/* ) */ : racerData.captain ? /* (language === "fr" ? "Capitaine d'Equipe" : */ 'Team captain'/* ) */ : racerData.role === 'coach' ? /* (language === "fr" ? "Entraîneur" : */ 'Coach'/* ) */ : ''}</Text></Text>
             <TouchableOpacity style={styles.button}>
                 <Text style={styles.buttonText}>Change Account Type</Text>
