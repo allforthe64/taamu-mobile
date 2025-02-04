@@ -15,7 +15,7 @@ const firebaseConfig = {
     projectId: "areregsoft",
     storageBucket: "areregsoft.appspot.com",
     messagingSenderId: "793492515603",
-    appId: Platform.OS = 'android' ? '1:793492515603:android:f62d3080aa6d59b5fb88e6' : '1:793492515603:android:f62d3080aa6d59b5fb88e6',
+    appId: Platform.OS = 'android' ? '1:793492515603:android:f62d3080aa6d59b5fb88e6' : '1:793492515603:ios:fce8379ae97a35ecfb88e6',
     measurementId: "G-TMZ8L24SND"
 };
   
@@ -29,7 +29,7 @@ export const firebaseAuth = initializeAuth(app, {
 const generateCustomToken = async () => {
   const response = await fetch('https://www.tuarolife.com/api/tm-dblink', {
     method: 'POST',
-    body: JSON.stringify({ appId: Platform.OS = 'android' ? '1:793492515603:android:f62d3080aa6d59b5fb88e6' : '1:793492515603:android:f62d3080aa6d59b5fb88e6' }),
+    body: JSON.stringify({ appId: Platform.OS = 'android' ? '1:793492515603:android:f62d3080aa6d59b5fb88e6' : '1:793492515603:ios:fce8379ae97a35ecfb88e6' }),
     headers: { 'Content-Type': 'application/json' },
   });
   const data = await response.json();
