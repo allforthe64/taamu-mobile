@@ -21,9 +21,9 @@ export const removeCategory = (input, setterFunction) => {
 }
 
 export const encrypt = async (input, keyData) => {
-    const url = 'https://tuarolife.com/api/wl4h8nrciBCNXW9IybL2'; // Replace with your API URL
-    const key = keyData.key /* '84f863ea1090484b804f4ac1bc12b677' */
-    const iv = keyData.iv /* 'a4c3a43d571b53a3' */
+    const url = 'https://tuarolife.com/api/wl4h8nrciBCNXW9IybL2';
+    const key = keyData.key
+    const iv = keyData.iv
 
     try {
         const response = await fetch(url, {

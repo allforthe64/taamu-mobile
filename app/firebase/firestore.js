@@ -103,7 +103,7 @@ export const addUser = async (user) => {
                         contactLinks: userData.contactLinks,
                         countryOfOrigin: userData.location,
                         bio: userData.bio,
-                        role: userData.role,
+                        role: 'racer',
                         pfp: 'gs://areregsoft.appspot.com/default_pfp.png',
                         photos: [], 
                         craftCategories: [],
@@ -186,6 +186,8 @@ export const addUser = async (user) => {
                     phone: userData.phone,
                     displayName: userData.fName + ' ' + userData.lName,
                     fName: userData.fName,
+                    gender: userData.gender,
+                    ageCategory: userData.ageCategory,
                     lName: userData.lName,
                     contactLinks: userData.contactLinks,
                     countryOfOrigin: userData.location,
@@ -199,6 +201,7 @@ export const addUser = async (user) => {
                     coach: true,
                     crews: []
                 }
+                console.log(userObj)
                 setDoc(doc(db, 'users', id), userObj)
 
                 //return user data
@@ -206,21 +209,16 @@ export const addUser = async (user) => {
             }
         }
     } catch (err) {
-        console.log(err)
+        alert(err)
     }
     
 }
 
 //take snapshot of a single user, listen for changes and return
 export const singleUserListener = async (docId, setCurrentUser) => {
-    try {
-        const docSnap = onSnapshot(doc(db, 'users', docId), (snapShot) => {
-            console.log('snapshot: ', snapShot)
-            setCurrentUser({...snapShot.data()})
-        })
-    } catch (err) {
-        console.log('error within singleUserListener: ', err)
-    }
+    const docSnap = onSnapshot(doc(db, 'users', docId), (snapShot) => {
+        setCurrentUser({...snapShot.data()})
+    })
 }
 
 //find a user by email
@@ -283,7 +281,11 @@ export const racesListener = async (setRaceData) => {
 //take snapshot of a single race, listen for any changes and return
 export const singleRaceListener = async (docId, setSingleRaceData) => {
     const docSnap = onSnapshot(doc(db, 'races', docId), (snapShot) => {
-        setSingleRaceData({...snapShot.data()})
+        if (snapShot.exists()) {
+            setSingleRaceData({...snapShot.data()})
+        } else {
+            setSingleRaceData('does not exist')
+        }
     })
 }
 
@@ -291,6 +293,12 @@ export const singleRaceListener = async (docId, setSingleRaceData) => {
 export const getRace = async (raceId) => {
     const docSnap = await getDoc(doc(db, 'races', raceId))
     return {...docSnap.data()}
+}
+
+//delete a race
+export const deleteRace = async (raceId) => {
+    const fileRef = doc(db, 'races', raceId)
+    await deleteDoc(fileRef)
 }
 
 //pull results data where the results.raceId === incoming raceId
@@ -350,7 +358,7 @@ export const resultsTableListener = async (raceId, setResultsObject, racePage) =
 
 //get a resultTable out of firestore database and overwrite with the new incoming data
 export const updateResultsTable = async (updatedResultsTable) => {
-    console.log('updatedResultsTable: ', updatedResultsTable)
+    /* console.log('updatedResultsTable: ', updatedResultsTable) */
     const resultsRef = doc(db, 'results', updatedResultsTable.id)
     await updateDoc(resultsRef, updatedResultsTable)
 }
@@ -372,6 +380,15 @@ export const getCrews = async (coachId) => {
     })
     return crewArray
     
+}
+
+//query all crews in the crews collection
+export const getAllCrews = async () => {
+    const crewsQuery = query(collection(db, 'crews'))
+    const querySnapshot = await getDocs(crewsQuery)
+    let data = []
+    querySnapshot.forEach(doc => data.push({...doc.data(), id: doc.id}))
+    return data
 }
 
 //get a single crew data object
@@ -429,7 +446,6 @@ export const getTransactionDoc = async (orgId) => {
 }
 
 export const updateTransactionDoc = async (updatedTransactionObj) => {
-    console.log(updatedTransactionObj)
     const transactionsRef = doc(db, 'transactions', updatedTransactionObj.id)
     await updateDoc(transactionsRef, updatedTransactionObj)
 }
@@ -444,4 +460,9 @@ export function generateRandomString(length) {
     }
     console.log(result)
     return result;
+}
+
+//latency logs
+export const addLatencyLog = async (logData) => {
+    setDoc(doc(db, 'latencyLogs', logData.id), logData)
 }

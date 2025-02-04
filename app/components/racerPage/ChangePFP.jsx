@@ -32,7 +32,6 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
 
     //upload new profile picture and update user
     const updatePFP = async () => {
-        alert('running')
         console.log('racerData: ', racerData)
         try {
             //if the pfp is still a default, upload the new one and change the url held in firestore

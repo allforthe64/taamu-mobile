@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Keyboard, ScrollView } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 //fontAwesome import
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -11,6 +11,7 @@ import {Picker} from '@react-native-picker/picker';
 //hook imports
 import { addCategory, addLink, removeCategory, removeLink, encrypt } from './hooks'
 import { updateUser } from '../../firebase/firestore';
+import { useFocusEffect } from 'expo-router';
 
 const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, decipheredEmail, decipheredPhone, phoneAreaCode, incomingBio, externalLinks, craftCategories, racerData, keyData}) => {
 
@@ -40,31 +41,35 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
         'Surfski Double'
     ]
 
-    useEffect(() => {
-        if (decipheredFName) {
-            setRacerFName(decipheredFName)
-            setRacerLName(decipheredLName)
-            setRacerEmail(decipheredEmail)
-            setRacerPhone(decipheredPhone)
-            setRacerBio(incomingBio)
-            setRacerExternalLinks([...externalLinks])
-            setRacerCraftCategories([...craftCategories])
-        }
-    }, [decipheredFName])
+    useFocusEffect(
+        useCallback(() => {
+            if (decipheredFName) {
+                setRacerFName(decipheredFName)
+                setRacerLName(decipheredLName)
+                setRacerEmail(decipheredEmail)
+                setRacerPhone(decipheredPhone)
+                setRacerBio(incomingBio)
+                setRacerExternalLinks([...externalLinks])
+                setRacerCraftCategories([...craftCategories])
+            }
+        }, [decipheredFName])
+    )
 
     //set focused to '' when the keyboard is closed
-    useEffect(() => {
-        const keyboardDidHideListener = Keyboard.addListener(
-          'keyboardDidHide',
-          () => {
-            setFocused(''); // or some other action
-          }
-        );
-    
-        return () => {
-          keyboardDidHideListener.remove();
-        };
-    }, []);
+    useFocusEffect(
+        useCallback(() => {
+            const keyboardDidHideListener = Keyboard.addListener(
+              'keyboardDidHide',
+              () => {
+                setFocused(''); // or some other action
+              }
+            );
+        
+            return () => {
+              keyboardDidHideListener.remove();
+            };
+        }, [])
+    )
 
     const saveChanges = async () => {
 

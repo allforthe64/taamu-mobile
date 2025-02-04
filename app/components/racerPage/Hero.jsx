@@ -48,62 +48,64 @@ const Hero = ({racerData}) => {
     useFocusEffect(
         useCallback(() => {
             const getKeyData = async () => {
-                const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
-                setKeyData(keyDataObj)
+                setKeyData({iv: 'a4c3a43d571b53a3', key: '84f863ea1090484b804f4ac1bc12b677'})
+                /* const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
+                setKeyData(keyDataObj) */
             }
             getKeyData()
         }, [])
     )
-    
-    useEffect(() => {
-        if (racerData.fName && keyData) {
-            try {
-                const operationDetachment = async () => {
-                    const url = 'https://tuarolife.com/api/cU5hF0mLrS7wyiRIIJ58'; // Replace with your API URL
-                    const payload = [racerData.fName, racerData.lName, racerData.gender, racerData.email, racerData.phone.split(' ')[1]]
-                    const key = keyData.key /* '84f863ea1090484b804f4ac1bc12b677' */
-                    const iv = keyData.iv /* 'a4c3a43d571b53a3' */
-    
-                    try {
-                        const response = await fetch(url, {
-                        method: 'POST', // Specifies the request method
-                        headers: {
-                            'Content-Type': 'application/json', // Sets the request body as JSON
-                            'Authorization': 'Bearer your-token', // Optional: Add an authorization token if needed
-                        },
-                        body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
-                        });
-    
-                        // Check if the response was successful
-                        if (response.ok) {
-                            const data = await response.json(); // Parse JSON response
-                            console.log('response data: ', data)
-    
-                            //set the deciphered display name
-                            setDecipheredDisplayName(data.data[0] + ' ' + data.data[1])
-    
-                            //set the deciphered gender
-                            setDecipheredGender(data.data[2])
-    
-                            //set the deciphered email
-                            setDecipheredEmail(data.data[3])
-    
-                            //set the deciphered phone
-                            setDecipheredPhone(data.data[4])
-                        } else {
-                        console.error('Failed to send data:', response.status);
+
+    useFocusEffect(
+        useCallback(() => {
+            if (racerData.fName && keyData) {
+                try {
+                    const operationDetachment = async () => {
+                        const url = 'https://tuarolife.com/api/cU5hF0mLrS7wyiRIIJ58';
+                        const payload = [racerData.fName, racerData.lName, racerData.gender, racerData.email, racerData.phone.split(' ')[1]]
+                        const key = keyData.key
+                        const iv = keyData.iv
+        
+                        try {
+                            const response = await fetch(url, {
+                            method: 'POST', // Specifies the request method
+                            headers: {
+                                'Content-Type': 'application/json', // Sets the request body as JSON
+                                'Authorization': 'Bearer your-token', // Optional: Add an authorization token if needed
+                            },
+                            body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
+                            });
+        
+                            // Check if the response was successful
+                            if (response.ok) {
+                                const data = await response.json();
+        
+                                //set the deciphered display name
+                                setDecipheredDisplayName(data.data[0] + ' ' + data.data[1])
+        
+                                //set the deciphered gender
+                                setDecipheredGender(data.data[2])
+        
+                                //set the deciphered email
+                                setDecipheredEmail(data.data[3])
+        
+                                //set the deciphered phone
+                                setDecipheredPhone(data.data[4])
+                            } else {
+                            console.error('Failed to send data:', response.status);
+                            }
+                        } catch (error) {
+                            console.error('Error sending POST request:', error);
                         }
-                    } catch (error) {
-                        console.error('Error sending POST request:', error);
                     }
+                    operationDetachment()
                 }
-                operationDetachment()
+                catch (err) {
+                    console.log('err within decipher function: ', err)
+                }
             }
-            catch (err) {
-                console.log('err within decipher function: ', err)
-            }
-        }
-    }, [racerData, keyData])
+        }, [racerData, keyData])
+    )
 
 
     //get device height to be used in setting container dimension
