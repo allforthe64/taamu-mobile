@@ -73,7 +73,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
 
     const saveChanges = async () => {
 
-
+        try {
         let newRacerData
 
        /*  if (racerData.captain) {
@@ -149,6 +149,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
             } else {
                 
                 const data = await encrypt([racerFName, racerLName, racerEmail, racerPhone], keyData)
+                console.log(data)
                 newRacerData = {
                     ...racerData,
                     fName: data.data[0],
@@ -164,6 +165,9 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
             await updateUser(newRacerData)
             setOpenEditProfile(false)
         /* } */
+        } catch (err) {
+            console.log('error: ', err)
+        }
     }
 
   return (
