@@ -157,8 +157,8 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                     email: data.data[2],
                     phone: racerData.phone.split(' ')[0] + ' ' + data.data[3],
                     bio: racerBio,
-                    contactLinks: externalLinks,
-                    craftCategories: craftCategories,
+                    contactLinks: racerExternalLinks,
+                    craftCategories: racerCraftCategories,
                 }
             }
 
@@ -169,9 +169,6 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
             console.log('error: ', err)
         }
     }
-
-    console.log(craftCategories)
-    console.log(externalLinks)
 
   return (
     <View style={styles.mainContainer}>
@@ -229,10 +226,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                 <TextInput style={focused === 'links' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]} onFocus={() => setFocused('links')} value={newLink} inputMode="text" placeholder="Paste/Type new link" onChangeText={(e) => setNewLink(e)}/>
                 <View style={{width: '90%', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
                     <TouchableOpacity style={[styles.button, {width: '35%'}]} onPress={() => {
-                        if (newLink !== '') {
-                            setRacerExternalLinks(prev => [...prev, newLink])
-                            setNewLink('')
-                        }
+                        if (newLink !== '') addLink(newLink, setRacerExternalLinks, setNewLink)
                     }}>
                         <Text style={styles.buttonText}>Add Link</Text>
                     </TouchableOpacity>
@@ -261,10 +255,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                     style={focused === 'craftCategory' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]}
                     selectedValue={selectedCraftCategory}
                     onValueChange={(itemValue, itemIndex) =>
-                        {
-                            alert('item value: ', itemValue)
-                            setSelectedCraftCategory(itemValue)   
-                        }
+                        setSelectedCraftCategory(itemValue)
                     }
                     onFocus={() => setFocused('craftCategory')}
                     >
@@ -275,10 +266,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                     }
                 </Picker>
                 <View style={{width: '90%', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                    <TouchableOpacity style={[styles.button, {width: '75%'}]} onPress={() => {
-                        setRacerCraftCategories(prev => [...prev, selectedCraftCategory])
-                        setSelectedCraftCategory('')
-                    }}>
+                    <TouchableOpacity style={[styles.button, {width: '75%'}]} onPress={() => addCategory(selectedCraftCategory, setRacerCraftCategories, setSelectedCraftCategory)}>
                         <Text style={styles.buttonText}>Add Craft Category</Text>
                     </TouchableOpacity>
                 </View>
