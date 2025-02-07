@@ -1,11 +1,13 @@
 //add the new link to the array of external
 export const addLink = (input, setterFunction, setterFunction1) => {
+    alert(input)
     setterFunction(prev => [input, ...prev])
     setterFunction1('')
 }
 
 //add the new category to the array of craftCategories
 export const addCategory = (input, setterFunction, setterFunction1) => {
+    alert(input)
     setterFunction(prev => [input, ...prev])
     setterFunction1('')
 }

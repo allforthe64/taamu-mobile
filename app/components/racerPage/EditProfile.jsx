@@ -171,6 +171,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
     }
 
     console.log(craftCategories)
+    console.log(externalLinks)
 
   return (
     <View style={styles.mainContainer}>
