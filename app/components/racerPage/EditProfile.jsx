@@ -157,7 +157,7 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                     email: data.data[2],
                     phone: racerData.phone.split(' ')[0] + ' ' + data.data[3],
                     bio: racerBio,
-                    contactLinks: links,
+                    contactLinks: externalLinks,
                     craftCategories: craftCategories,
                 }
             }
