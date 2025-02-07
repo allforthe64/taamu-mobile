@@ -170,6 +170,8 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
         }
     }
 
+    console.log(craftCategories)
+
   return (
     <View style={styles.mainContainer}>
         <ScrollView>
@@ -255,7 +257,10 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
                     style={focused === 'craftCategory' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]}
                     selectedValue={selectedCraftCategory}
                     onValueChange={(itemValue, itemIndex) =>
-                        setSelectedCraftCategory(itemValue)
+                        {
+                            alert('item value: ', itemValue)
+                            setSelectedCraftCategory(itemValue)   
+                        }
                     }
                     onFocus={() => setFocused('craftCategory')}
                     >
