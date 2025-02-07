@@ -9,6 +9,8 @@ const BUCKET_URL = 'gs://areregsoft.appspot.com'
 //upload image and return the storage bucket
 export const uploadImage = async (image, currentUser) => {
 
+    console.log(image)
+
     //generate bucket path
     const bucket = `${BUCKET_URL}/${currentUser}/${image.name}.${format(new Date(), "yyyy-MM-dd'T'HH:mm:ss")}`
 
