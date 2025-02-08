@@ -58,7 +58,7 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
                 deleteFile(racerData.pfp)
                 
                 //upload the new image and set the new path
-                const result = await uploadImage(newPFPUrl, racerData.uid)
+                const result = await uploadImage(newPFP, racerData.uid)
 
                 //create a new racerData object
                 const newRacerData = {
@@ -87,16 +87,16 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
       <View style={styles.contentContainer}>
         <Text style={styles.heading}>Replace <Text style={{color: '#09CAC7'}}>profile picture</Text></Text>
         <View style={styles.pfpContainer}>
-            {newPFPUrl === '' ?
+            {newPFP ?
                 <Text style={styles.noPFPSelected}>No new profile picture selected...</Text>
             :
-                <Image source={{uri: newPFPUrl}} style={styles.newPFPImage}/>
+                <Image source={{uri: newPFP.uri}} style={styles.newPFPImage}/>
             }
         </View>
         <TouchableOpacity style={[styles.button, {marginBottom: '2%'}]} onPress={pickImage}>
             <Text style={styles.buttonText}>Select a photo</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={updatePFP} style={newPFPUrl === '' ? [styles.button, {opacity: .5}] : styles.button} disabled={newPFPUrl === '' ? true : false}>
+        <TouchableOpacity onPress={updatePFP} style={newPFP ? [styles.button, {opacity: .5}] : styles.button} disabled={newPFP ? true : false}>
             <Text style={styles.buttonText}>Upload new profile picture</Text>
         </TouchableOpacity>
       </View>
