@@ -14,7 +14,7 @@ import { updateUser } from '../../firebase/firestore'
 
 const ChangePFP = ({setOpenPFP, racerData}) => {
 
-    const [newPFPUrl, setNewPFPUrl] = useState('')
+    const [newPFP, setNewPFP] = useState('')
 
     //select an image from the phone using expo image picker
     const pickImage = async () => {
@@ -26,7 +26,7 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
         })
 
         if (!result.canceled) {
-            setNewPFPUrl(result.assets[0].uri)
+            setNewPFP(result.assets[0])
         }
     }
 
@@ -38,7 +38,7 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
             if (racerData.pfp === 'gs://areregsoft.appspot.com/default_pfp.png') {
                 
                 //upload the new image and set the new path
-                const result = await uploadImage(newPFPUrl, racerData.uid)
+                const result = await uploadImage(newPFP, racerData.uid)
 
                 //create a new racer data object
                 const newRacerData = {
