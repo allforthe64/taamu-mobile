@@ -12,7 +12,7 @@ export const uploadImage = async (image, currentUser) => {
     console.log(image)
 
     //generate bucket path
-    const bucket = `${BUCKET_URL}/${currentUser}/${image.name}.${format(new Date(), "yyyy-MM-dd'T'HH:mm:ss")}`
+    const bucket = `${BUCKET_URL}/${currentUser}/${image.fileName}.${format(new Date(), "yyyy-MM-dd'T'HH:mm:ss")}`
 
     //upload image and return result object
     const result = uploadBytes(ref(storage, bucket), image.uri)
