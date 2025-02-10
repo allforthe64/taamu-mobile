@@ -77,6 +77,8 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
         
     }
 
+    //foo
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.xMarkContainer}>
@@ -87,7 +89,7 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
       <View style={styles.contentContainer}>
         <Text style={styles.heading}>Replace <Text style={{color: '#09CAC7'}}>profile picture</Text></Text>
         <View style={styles.pfpContainer}>
-            {newPFP ?
+            {!newPFP ?
                 <Text style={styles.noPFPSelected}>No new profile picture selected...</Text>
             :
                 <Image source={{uri: newPFP.uri}} style={styles.newPFPImage}/>
@@ -96,7 +98,7 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
         <TouchableOpacity style={[styles.button, {marginBottom: '2%'}]} onPress={pickImage}>
             <Text style={styles.buttonText}>Select a photo</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={updatePFP} style={newPFP ? [styles.button, {opacity: .5}] : styles.button} disabled={newPFP ? true : false}>
+        <TouchableOpacity onPress={updatePFP} style={!newPFP ? [styles.button, {opacity: .5}] : styles.button} disabled={!newPFP ? true : false}>
             <Text style={styles.buttonText}>Upload new profile picture</Text>
         </TouchableOpacity>
       </View>
