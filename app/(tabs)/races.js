@@ -25,10 +25,8 @@ const races = () => {
     setIsLoading(false)
   }, []))
 
-  console.log(races)
-
   return (
-    <View>
+    <>
       {isLoading ?
         <View style={styles.loadingContainer}>
           <View style={styles.loadingIndicatorContainer}>
@@ -38,10 +36,10 @@ const races = () => {
         </View>
       :
         <View style={styles.mainContainer}>
-          
+          <Text style={{color: '#09CAC7'}}>Races page</Text>
         </View>
       }
-    </View>
+    </>
   )
 }
 
