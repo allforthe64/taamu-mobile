@@ -14,8 +14,22 @@ export const uploadImage = async (image, currentUser) => {
     //generate bucket path
     const bucket = `${BUCKET_URL}/${currentUser}/${image.fileName}.${format(new Date(), "yyyy-MM-dd'T'HH:mm:ss")}`
 
+    //create blob using the incoming photo
+    const blob = await new Promise(async (resolve, reject) => {
+        const xhr = new XMLHttpRequest()
+        xhr.onload = () => {
+        resolve(xhr.response) 
+        }
+        xhr.onerror = (e) => {
+            reject(new TypeError('Network request failed'))
+        }
+        xhr.responseType = 'blob'
+        xhr.open('GET', image.uri, true)
+        xhr.send(null)
+    })
+
     //upload image and return result object
-    const result = uploadBytes(ref(storage, bucket), image)
+    const result = uploadBytes(ref(storage, bucket), blob)
     return result
 }
 
