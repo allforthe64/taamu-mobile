@@ -48,9 +48,8 @@ const Hero = ({racerData}) => {
     useFocusEffect(
         useCallback(() => {
             const getKeyData = async () => {
-                setKeyData({iv: 'a4c3a43d571b53a3', key: '84f863ea1090484b804f4ac1bc12b677'})
-                /* const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
-                setKeyData(keyDataObj) */
+                const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
+                setKeyData(keyDataObj)
             }
             getKeyData()
         }, [])

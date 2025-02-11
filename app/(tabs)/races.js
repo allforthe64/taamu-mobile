@@ -7,6 +7,9 @@ import { useFocusEffect } from 'expo-router'
 //firebase hook imports
 import { getAllRaces } from '../firebase/firestore'
 
+//component imports
+import RacesMain from '../components/racesPage/RacesMain'
+
 const races = () => {
 
   //initialize state
@@ -36,7 +39,7 @@ const races = () => {
         </View>
       :
         <View style={styles.mainContainer}>
-          <Text style={{color: '#09CAC7'}}>Races page</Text>
+          <RacesMain races={races}/>
         </View>
       }
     </>
