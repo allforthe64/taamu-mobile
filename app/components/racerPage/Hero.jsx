@@ -70,7 +70,6 @@ const Hero = ({racerData}) => {
                             method: 'POST', // Specifies the request method
                             headers: {
                                 'Content-Type': 'application/json', // Sets the request body as JSON
-                                'Authorization': 'Bearer your-token', // Optional: Add an authorization token if needed
                             },
                             body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
                             });
