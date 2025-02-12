@@ -61,7 +61,7 @@ const RacesMain = ({races}) => {
                             console.error('Error sending POST request:', error);
                         }
                     }
-                    operationDetachment()
+                    operationFish()
                 } catch (err) {
                     console.log(err)
                 }
