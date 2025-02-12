@@ -36,7 +36,7 @@ const RacesMain = ({races}) => {
             if (races && keyData) {
                 try {
                     const operationFish = async () => {
-                        const url = 'https://tuarolife.com/api/X8pQ3Lz7B1vW9KYa5MdN';
+                        const url = 'http://localhost:3000/api/X8pQ3Lz7B1vW9KYa5MdN';
                         const payload = races
                         const key = keyData.key
                         const iv = keyData.iv
@@ -55,7 +55,7 @@ const RacesMain = ({races}) => {
                                 const data = await response.json();
                                 setDecryptedRaces(data)
                             } else {
-                            console.error('Failed to send data:', response.status);
+                                console.error('Failed to send data:', response.status);
                             }
                         } catch (error) {
                             console.error('Error sending POST request:', error);
