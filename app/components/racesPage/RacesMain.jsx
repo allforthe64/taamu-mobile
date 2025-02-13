@@ -34,6 +34,7 @@ const RacesMain = ({races}) => {
     useFocusEffect(
         useCallback(() => {
             if (races && keyData) {
+                console.log(keyData)
                 try {
                     const operationFish = async () => {
                         const url = 'https://tuarolife.com/api/X8pQ3Lz7B1vW9KYa5MdN';
