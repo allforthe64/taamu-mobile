@@ -36,8 +36,8 @@ const RacesMain = ({races}) => {
             if (races && keyData) {
                 try {
                     const operationFish = async () => {
-                        const url = 'http://localhost:3000/api/X8pQ3Lz7B1vW9KYa5MdN';
-                        const payload = races
+                        const url = 'https://tuarolife.com/api/X8pQ3Lz7B1vW9KYa5MdN';
+                        const payload = [...races]
                         const key = keyData.key
                         const iv = keyData.iv
 
