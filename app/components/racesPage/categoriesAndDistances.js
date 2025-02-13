@@ -1,13 +1,18 @@
 //craft categories array
 export const craftCategories = [
     'V1',
+    'V1 - relay',
     'OC1',
+    'OC1 - relay',
+    'OC2',
+    'OC2 - relay',
+    'Surfski Double',
+    'Surfski Double - relay',
+    'Surfski Single - relay',
     'SUP',
     'Surfski Single',
-    'OC2',
     'V6',
-    'V12',
-    'Surfski Double'
+    'V12'
 ]
 
 //race distances array
