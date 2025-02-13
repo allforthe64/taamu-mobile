@@ -76,6 +76,7 @@ const RacesMain = ({races}) => {
 
     useEffect(() => {
         if (decryptedRaces.length > 0) {
+            alert('running')
             let newRaceArray = decryptedRaces.filter(race => !race.draft)
 
             //initially filter for races with a matching org name or race title
