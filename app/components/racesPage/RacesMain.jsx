@@ -57,7 +57,7 @@ const RacesMain = ({races}) => {
                             // Check if the response was successful
                             if (response.ok) {
                                 const data = await response.json();
-                                setDecryptedRaces(...data.data)
+                                setDecryptedRaces(data.data)
                             } else {
                                 console.error('Failed to send data:', response.status);
                             }
