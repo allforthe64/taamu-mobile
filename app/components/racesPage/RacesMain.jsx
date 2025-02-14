@@ -73,7 +73,7 @@ const RacesMain = ({races}) => {
         }, [races, keyData])
     )
 
-    console.log('decryptedRaces: ', decryptedRaces)
+    console.log('decryptedRaces: ', decryptedRaces.length)
 
     useEffect(() => {
         if (decryptedRaces.length > 0) {
