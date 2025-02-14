@@ -158,6 +158,9 @@ const RacesMain = ({races}) => {
         }, [decryptedRaces, raceTypeFilter, craftTypeFilter, distanceFilter, startDate, endDate, timeFilter, query])
     )
 
+    console.log('decrypted races: ', decryptedRaces)
+    console.log('decrypted races length: ', decryptedRaces.length)
+
   return (
     <View>
       <RaceList races={filteredRaces}/>
