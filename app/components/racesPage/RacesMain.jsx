@@ -166,14 +166,8 @@ const RacesMain = ({races}) => {
             else if (timeFilter === 'results') {
                 newRaceArray = newRaceArray.filter(race => new Date(race.startDate) < new Date(currentDate) &&  new Date(race.endDate) <= new Date(currentDate))
             }
-<<<<<<< HEAD
-
-            console.log('newRaceArray: ', newRaceArray)
-
-=======
             
             console.log('newRaceArray: ', newRaceArray)
->>>>>>> main
 
             setFilteredRaces(newRaceArray)
         }
