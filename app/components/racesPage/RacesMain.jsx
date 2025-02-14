@@ -145,15 +145,17 @@ const RacesMain = ({races}) => {
             }
 
             //results vs ongoing results vs registration
-                if (timeFilter === 'upcoming') {
-                    newRaceArray = newRaceArray.filter(race => new Date(race.startDate) >= new Date(currentDate) && new Date(race.endDate) >= new Date(currentDate))
-                }
-                else if (timeFilter === 'ongoing') {
-                    newRaceArray = newRaceArray.filter(race => new Date(currentDate) >= new Date(race.startDate) && new Date(currentDate) <= new Date(race.endDate))
-                }
-                else if (timeFilter === 'results') {
-                    newRaceArray = newRaceArray.filter(race => new Date(race.startDate) < new Date(currentDate) &&  new Date(race.endDate) <= new Date(currentDate))
-                }
+            if (timeFilter === 'upcoming') {
+                newRaceArray = newRaceArray.filter(race => new Date(race.startDate) >= new Date(currentDate) && new Date(race.endDate) >= new Date(currentDate))
+            }
+            else if (timeFilter === 'ongoing') {
+                newRaceArray = newRaceArray.filter(race => new Date(currentDate) >= new Date(race.startDate) && new Date(currentDate) <= new Date(race.endDate))
+            }
+            else if (timeFilter === 'results') {
+                newRaceArray = newRaceArray.filter(race => new Date(race.startDate) < new Date(currentDate) &&  new Date(race.endDate) <= new Date(currentDate))
+            }
+
+            console.log('newRaceArray: ', newRaceArray)
 
 
             setFilteredRaces(newRaceArray)
