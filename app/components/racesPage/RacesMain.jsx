@@ -10,6 +10,9 @@ import { getKey } from '../../firebase/firestore'
 //component imports
 import RaceList from './RaceList'
 
+//date-fns format import
+import { format } from 'date-fns'
+
 const RacesMain = ({races}) => {
 
     //initialize state
@@ -73,12 +76,11 @@ const RacesMain = ({races}) => {
         }, [races, keyData])
     )
 
-    console.log('decryptedRaces length: ', decryptedRaces.length)
-    console.log('decryptedRaces typeof: ', typeof decryptedRaces)
+    //create currentDate
+    const currentDate = format(new Date(), 'MM/dd/yyyy')
 
     useEffect(() => {
         if (decryptedRaces.length > 0) {
-            alert('running')
             let newRaceArray = decryptedRaces.filter(race => !race.draft)
 
             //initially filter for races with a matching org name or race title
