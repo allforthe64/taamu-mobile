@@ -38,7 +38,6 @@ const RacesMain = ({races}) => {
     useFocusEffect(
         useCallback(() => {
             if (races && keyData) {
-                console.log(keyData)
                 try {
                     const operationFish = async () => {
                         const url = 'https://tuarolife.com/api/X8pQ3Lz7B1vW9KYa5MdN';
@@ -58,8 +57,7 @@ const RacesMain = ({races}) => {
                             // Check if the response was successful
                             if (response.ok) {
                                 const data = await response.json();
-                                console.log('data: ', data)
-                                setDecryptedRaces(data)
+                                setDecryptedRaces(...data.data)
                             } else {
                                 console.error('Failed to send data:', response.status);
                             }
@@ -74,6 +72,8 @@ const RacesMain = ({races}) => {
             }
         }, [races, keyData])
     )
+
+    console.log('decryptedRaces: ', decryptedRaces)
 
     useEffect(() => {
         if (decryptedRaces.length > 0) {
