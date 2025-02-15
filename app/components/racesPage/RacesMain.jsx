@@ -163,8 +163,6 @@ const RacesMain = ({races}) => {
                     isBefore(parseDate(race.endDate), today)
                 );
             }
-            
-            console.log('newRaceArray: ', newRaceArray)
 
             setFilteredRaces(newRaceArray)
         }

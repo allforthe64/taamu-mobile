@@ -1,12 +1,59 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, Image } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { getDownloadableURL } from '../../firebase/storage'
+import { Link } from 'expo-router'
 
-const RaceCard = () => {
+const RaceCard = ({ raceData }) => {
+
+  //initialize state
+  const [cardImage, setCardImage] = useState('')
+
+  useEffect(() => {
+    if (raceData) {
+      const getRaceCardImage = async () => {
+        const cardLink = await getDownloadableURL(raceData.thumbNail)
+        setCardImage(cardLink)
+      }
+      getRaceCardImage()
+    }
+  }, [raceData])
+
   return (
-    <View>
-      <Text>RaceCard</Text>
+    <View style={styles.raceCardContainer}>
+      <Image style={styles.raceCardImage} source={{ uri: cardImage }}/>
+      {raceData &&
+        <>
+          <Text style={styles.raceTitle}>{raceData.raceTitle}</Text>
+          <Link style={styles.orgName} href={`/organizer/${raceData.creator}`}>{raceData.orgName}</Link>
+        </>
+      }
     </View>
   )
 }
 
 export default RaceCard
+
+const styles = StyleSheet.create({
+  raceCardContainer: {
+    width: '90%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  raceCardImage: {
+    width: '100%',
+    height: 250
+  },
+  raceTitle: {
+    color: '#09CAC7',
+    fontSize: 40,
+    fontWeight: '600'
+  },
+  orgName: {
+    fontSize: 30,
+    color: 'white',
+    textDecorationLine: 'underline',
+    textDecorationColor: 'white',
+    marginTop: 6
+  }
+})
