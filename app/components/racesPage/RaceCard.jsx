@@ -20,10 +20,12 @@ const RaceCard = ({ raceData }) => {
 
   return (
     <View style={styles.raceCardContainer}>
-      <Image style={styles.raceCardImage} source={{ uri: cardImage }}/>
+      <View style={styles.raceCardImageContainer}>
+        <Image style={styles.raceCardImage} source={{ uri: cardImage }}/>
+      </View>
       {raceData &&
         <>
-          <Text style={styles.raceTitle}>{raceData.raceTitle}</Text>
+          <Text style={styles.raceTitle}>{raceData.title}</Text>
           <Link style={styles.orgName} href={`/organizer/${raceData.creator}`}>{raceData.orgName}</Link>
         </>
       }
@@ -40,14 +42,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center'
   },
-  raceCardImage: {
+  raceCardImageContainer: {
     width: '100%',
     height: 250
+  },
+  raceCardImage: {
+    flex: 1
   },
   raceTitle: {
     color: '#09CAC7',
     fontSize: 40,
-    fontWeight: '600'
+    fontWeight: '600',
+    marginTop: 10
   },
   orgName: {
     fontSize: 30,
