@@ -128,8 +128,6 @@ const RacesMain = ({races}) => {
                 })
             }
 
-            console.log('newRaceArray: ', newRaceArray)
-
             //if theres a start and end date filter for races that fall within those dates
             if (startDate && endDate) {
                 newRaceArray = newRaceArray.filter(race => {
@@ -147,11 +145,17 @@ const RacesMain = ({races}) => {
             }
             
             console.log('newRaceArray: ', newRaceArray)
-            console.log(currentDate)
+            console.log(new Date(currentDate))
 
             //results vs ongoing results vs registration
             if (timeFilter === 'upcoming') {
-                newRaceArray = newRaceArray.filter(race => new Date(race.startDate) >= new Date(currentDate) && new Date(race.endDate) >= new Date(currentDate))
+                newRaceArray = newRaceArray.filter(race => {
+
+                    console.log('start date: ', new Date(race.startDate))
+                    console.log('end date: ', new Date(race.endDate))
+
+                    if (new Date(race.startDate) >= new Date(currentDate) && new Date(race.endDate) >= new Date(currentDate)) return race
+                })
             }
             else if (timeFilter === 'ongoing') {
                 newRaceArray = newRaceArray.filter(race => new Date(currentDate) >= new Date(race.startDate) && new Date(currentDate) <= new Date(race.endDate))
