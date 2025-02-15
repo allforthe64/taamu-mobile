@@ -11,7 +11,7 @@ import { getKey } from '../../firebase/firestore'
 import RaceList from './RaceList'
 
 //date-fns format import
-import { format, isBefore, isAfter } from 'date-fns'
+import { format, isBefore, isAfter, parse } from 'date-fns'
 
 const RacesMain = ({races}) => {
 
