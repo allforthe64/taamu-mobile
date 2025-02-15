@@ -83,8 +83,6 @@ const RacesMain = ({races}) => {
         if (decryptedRaces.length > 0) {
             let newRaceArray = decryptedRaces.filter(race => !race.draft)
 
-            console.log('newRaceArray: ', newRaceArray)
-
             //initially filter for races with a matching org name or race title
             if (query !== '') {
                 newRaceArray = newRaceArray.filter(race => {
@@ -94,21 +92,15 @@ const RacesMain = ({races}) => {
                 })
             }
 
-            console.log('newRaceArray: ', newRaceArray)
-
             //filter for races matching the race type
             if (raceTypeFilter !== 'All Race Types') {
                 newRaceArray = newRaceArray.filter(race => race.raceType === raceTypeFilter)
             } 
-            
-            console.log('newRaceArray: ', newRaceArray)
 
             //filter for races that include the selected boat type
             if (craftTypeFilter !== 'All Boats' && craftTypeFilter !== '') {
                 newRaceArray = newRaceArray.filter(race => race.craftCategories.includes(craftTypeFilter))
             }
-
-            console.log('newRaceArray: ', newRaceArray)
 
             //filter for races that include the selected distance
             if (distanceFilter.index !== '0') {
@@ -155,6 +147,7 @@ const RacesMain = ({races}) => {
             }
             
             console.log('newRaceArray: ', newRaceArray)
+            console.log(currentDate)
 
             //results vs ongoing results vs registration
             if (timeFilter === 'upcoming') {
