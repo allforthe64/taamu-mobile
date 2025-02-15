@@ -11,7 +11,7 @@ import { getKey } from '../../firebase/firestore'
 import RaceList from './RaceList'
 
 //date-fns format import
-import { format } from 'date-fns'
+import { parse, isBefore, isAfter, isWithinInterval } from 'date-fns'
 
 const RacesMain = ({races}) => {
 
@@ -77,7 +77,8 @@ const RacesMain = ({races}) => {
     )
 
     //create currentDate
-    const currentDate = format(new Date(), 'MM/dd/yyyy')
+    const parseDate = (dateStr) => parse(dateStr, "MM/dd/yyyy", new Date());
+    const today = new Date();
 
     useEffect(() => {
         if (decryptedRaces.length > 0) {
@@ -143,22 +144,24 @@ const RacesMain = ({races}) => {
             else if (endDate) {
                 newRaceArray = newRaceArray.filter(race => new Date(race.endDate) <= new Date(endDate))
             }
-            
-            console.log('newRaceArray: ', newRaceArray)
-            console.log(new Date(currentDate))
 
             //results vs ongoing results vs registration
-            if (timeFilter === 'upcoming') {
-                newRaceArray = newRaceArray.filter(race => {
-                    
-                    if (new Date(race.startDate) >= new Date(currentDate) && new Date(race.endDate) >= new Date(currentDate)) return race
-                })
-            }
-            else if (timeFilter === 'ongoing') {
-                newRaceArray = newRaceArray.filter(race => new Date(currentDate) >= new Date(race.startDate) && new Date(currentDate) <= new Date(race.endDate))
-            }
-            else if (timeFilter === 'results') {
-                newRaceArray = newRaceArray.filter(race => new Date(race.startDate) < new Date(currentDate) &&  new Date(race.endDate) <= new Date(currentDate))
+            if (timeFilter === "upcoming") {
+                newRaceArray = newRaceArray.filter(race => 
+                    isAfter(parseDate(race.startDate), today) &&
+                    isAfter(parseDate(race.endDate), today)
+                );
+            } 
+            else if (timeFilter === "ongoing") {
+                newRaceArray = newRaceArray.filter(race => 
+                    isWithinInterval(today, { start: parseDate(race.startDate), end: parseDate(race.endDate) })
+                );
+            } 
+            else if (timeFilter === "results") {
+                newRaceArray = newRaceArray.filter(race => 
+                    isBefore(parseDate(race.startDate), today) &&
+                    isBefore(parseDate(race.endDate), today)
+                );
             }
             
             console.log('newRaceArray: ', newRaceArray)
