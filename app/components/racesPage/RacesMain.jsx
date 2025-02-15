@@ -11,7 +11,7 @@ import { getKey } from '../../firebase/firestore'
 import RaceList from './RaceList'
 
 //date-fns format import
-import { format } from 'date-fns'
+import { format, isBefore, isAfter } from 'date-fns'
 
 const RacesMain = ({races}) => {
 
@@ -143,25 +143,34 @@ const RacesMain = ({races}) => {
             else if (endDate) {
                 newRaceArray = newRaceArray.filter(race => new Date(race.endDate) <= new Date(endDate))
             }
-            
-            console.log('newRaceArray: ', newRaceArray)
-            console.log(new Date(currentDate))
 
             //results vs ongoing results vs registration
             if (timeFilter === 'upcoming') {
                 newRaceArray = newRaceArray.filter(race => {
-
-                    console.log('start date: ', new Date(race.startDate))
-                    console.log('end date: ', new Date(race.endDate))
-
-                    if (new Date(race.startDate) >= new Date(currentDate) && new Date(race.endDate) >= new Date(currentDate)) return race
+                    const isUpcomingRace = isAfter(
+                        parse(race.startDate, format, new Date()), // Convert startDate to Date object
+                        new Date() // Current date
+                    );
+                    if (isUpcomingRace) return race
                 })
             }
             else if (timeFilter === 'ongoing') {
-                newRaceArray = newRaceArray.filter(race => new Date(currentDate) >= new Date(race.startDate) && new Date(currentDate) <= new Date(race.endDate))
+                newRaceArray = newRaceArray.filter(race => {
+                    const isRaceActive = isWithinInterval(new Date(currentDate), {
+                        start: parse(race.startDate, format, new Date()),
+                        end: parse(race.endDate, format, new Date()),
+                    });
+                    if (isRaceActive) return race
+                })
             }
             else if (timeFilter === 'results') {
-                newRaceArray = newRaceArray.filter(race => new Date(race.startDate) < new Date(currentDate) &&  new Date(race.endDate) <= new Date(currentDate))
+                newRaceArray = newRaceArray.filter(race => {
+                    const isPastRace = isBefore(
+                        parse(race.endDate, format, new Date()), // Convert endDate to Date object
+                        new Date() // Current date
+                    );
+                    if (isPastRace) return race
+                })
             }
             
             console.log('newRaceArray: ', newRaceArray)
