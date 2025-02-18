@@ -41,7 +41,7 @@ const RaceCard = ({ raceData }) => {
         <Image style={styles.raceCardImage} source={{ uri: cardImage }}/>
       </View>
       {raceData &&
-        <>
+        <View style={styles.raceDataContainer}>
           <Text style={styles.raceTitle}>{raceData.title}</Text>
           <Link style={styles.orgName} href={`/organizer/${raceData.creator}`}>{raceData.orgName}</Link>
           <Text style={styles.label}>Date: <Text style={styles.raceDataText}>{raceData.startDate} - {raceData.endDate}</Text></Text>
@@ -55,14 +55,15 @@ const RaceCard = ({ raceData }) => {
               )
             })}
           </View>
+          <Text style={styles.label}></Text>
           <View style={styles.distanceAndCategoryContainer}>
             {raceData.craftCategories.map((cat, i) => {
               return (
-                <Text key={i} style={styles.distanceAndCategoryText}>{isLastElement(raceData.craftCategories, cat) || raceData.craftCategories.length === 1 ? '' : ','}</Text>
+                <Text key={i} style={styles.distanceAndCategoryText}>{cat}{isLastElement(raceData.craftCategories, cat) || raceData.craftCategories.length === 1 ? '' : ','}</Text>
               )
             })}
           </View>
-        </>
+        </View>
       }
     </View>
   )
@@ -84,6 +85,14 @@ const styles = StyleSheet.create({
   },
   raceCardImage: {
     flex: 1
+  },
+  raceDataContainer: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    rowGap: 5,
+    paddingLeft: 10,
+    paddingRight: 10
   },
   raceTitle: {
     color: '#09CAC7',
