@@ -10,6 +10,9 @@ const RaceList = ({races, currentUser, racePageFilter}) => {
     mainContainer: {
       width: '100%',
       height: ScreenHeight,
+    },
+    scrollView: {
+      flex: 1,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'
@@ -18,7 +21,7 @@ const RaceList = ({races, currentUser, racePageFilter}) => {
 
   return (
     <View style={styles.mainContainer}>
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={styles.scrollView}>
         {races.map((race, i) => {
           return <RaceCard key={i} raceData={race} filter={null} currentUser={currentUser} racePageFilter={racePageFilter}/>
         })}
