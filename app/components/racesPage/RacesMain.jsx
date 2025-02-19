@@ -5,13 +5,16 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { useFocusEffect } from 'expo-router'
 
 //getKey data
-import { getKey } from '../../firebase/firestore'
+import { getKey, getUser } from '../../firebase/firestore'
 
 //component imports
 import RaceList from './RaceList'
 
 //date-fns format import
 import { parse, isBefore, isAfter, isWithinInterval } from 'date-fns'
+
+//import firebaseAuth object
+import { firebaseAuth } from '../../firebaseConfig'
 
 const RacesMain = ({races}) => {
 
@@ -27,6 +30,23 @@ const RacesMain = ({races}) => {
     const [dataCopy, setDataCopy] = useState()
     const [query, setQuery] = useState('')
     const [keyData, setKeyData] = useState()
+    const [currentUser, setCurrentUser] = useState()
+
+    useFocusEffect(
+        useCallback(() => {
+            if (firebaseAuth) {
+                if (firebaseAuth.currentUser) {
+                    const getCurrentUser = async () => {
+                        const userData = await getUser(firebaseAuth.currentUser)
+                        setCurrentUser(userData)
+                    }
+                    getCurrentUser()
+                } else {
+                    setCurrentUser(null)
+                }
+            }
+        }, [firebaseAuth])
+    )
 
     useFocusEffect(
         useCallback(() => {
@@ -170,7 +190,7 @@ const RacesMain = ({races}) => {
 
   return (
     <View>
-      <RaceList races={filteredRaces}/>
+      <RaceList races={filteredRaces} currentUser={currentUser} racePageFilter={timeFilter}/>
     </View>
   )
 }

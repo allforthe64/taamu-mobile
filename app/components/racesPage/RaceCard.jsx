@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
 //import getDownloadableURL function
@@ -9,7 +9,7 @@ import { Link } from 'expo-router'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
-const RaceCard = ({ raceData }) => {
+const RaceCard = ({ raceData, filter, currentUser, racePageFilter}) => {
 
   //initialize state
   const [cardImage, setCardImage] = useState('')
@@ -34,6 +34,33 @@ const RaceCard = ({ raceData }) => {
     // Compare the last element with the provided element
     return array[array.length - 1] === element;
   } 
+
+//create racer buttons based on incoming filter value 
+const racerButtonsArr = {
+    'upcoming' : (
+        <View style={styles.buttonContainer}>
+          <Link href={`/races/${raceData.id}`} asChild>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>View this race</Text>
+            </TouchableOpacity>
+          </Link>
+            {/* {window.location.pathname.split('/')[1] === 'racer' && window.location.pathname.split('/')[2] === currentUser?.uid &&
+                <button onClick={() => setCancelRegistration(true)} className='text-white bg-red-600 border-2 border-transparent text-base max-sm:text-sm dosis-heavy px-4 rounded-full hover:scale-110 transition duration-200 ease-in-out ml-[3%]'>
+                    <FontAwesomeIcon icon={faXmark} />
+                    <span className='ml-2'>{cardTranslations.cancelRegistration[language]}</span>
+                </button>
+            } */}
+        </View>
+    ),
+    'results' : (
+        <Link href={`/races/${raceData.id}`} asChild>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>View Race Results</Text>
+          </TouchableOpacity>
+        </Link>
+    )
+    
+}
 
   return (
     <View style={styles.raceCardContainer}>
@@ -65,6 +92,11 @@ const RaceCard = ({ raceData }) => {
           </View>
         </View>
       }
+      <View style={styles.buttonContainer}>
+        {
+          racerButtonsArr[filter === null ? racePageFilter : filter]
+        }
+      </View>
     </View>
   )
 }
@@ -77,7 +109,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: 40
+    marginTop: 40,
+    borderBottomWidth: 2,
+    borderBottomColor: 'white'
   },
   raceCardImageContainer: {
     width: '100%',
@@ -131,5 +165,27 @@ const styles = StyleSheet.create({
   distanceAndCategoryText: {
     color: 'white',
     fontSize: 14
-  }
+  },
+  buttonContainer: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 10
+  },
+  button: {
+    backgroundColor: '#09CAC7',
+    paddingTop: 7,
+    paddingLeft: 15,
+    paddingBottom: 7,
+    paddingRight: 15,
+    borderRadius: 100,
+    marginTop: 15
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    width: '100%',
+    textAlign: 'center',
+    fontWeight: '600'
+  },
 })

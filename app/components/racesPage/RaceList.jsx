@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native'
 import React from 'react'
 import RaceCard from './RaceCard'
 
-const RaceList = ({races}) => {
+const RaceList = ({races, currentUser, racePageFilter}) => {
 
   //get device height to be used in setting container dimension
   const ScreenHeight = Dimensions.get("window").height
@@ -20,7 +20,7 @@ const RaceList = ({races}) => {
     <View style={styles.mainContainer}>
       <ScrollView>
         {races.map((race, i) => {
-          return <RaceCard key={i} raceData={race}/>
+          return <RaceCard key={i} raceData={race} filter={null} currentUser={currentUser} racePageFilter={racePageFilter}/>
         })}
       </ScrollView>
     </View>
