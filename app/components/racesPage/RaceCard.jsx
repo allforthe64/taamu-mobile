@@ -82,7 +82,7 @@ const racerButtonsArr = {
               )
             })}
           </View>
-          <Text style={styles.label}></Text>
+          <Text style={styles.label}>Craft categories:</Text>
           <View style={styles.distanceAndCategoryContainer}>
             {raceData.craftCategories.map((cat, i) => {
               return (
@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 40,
     borderBottomWidth: 2,
-    borderBottomColor: 'white'
+    borderBottomColor: 'white',
+    paddingBottom: 5
   },
   raceCardImageContainer: {
     width: '100%',
