@@ -23,11 +23,11 @@ const RaceList = ({races, currentUser, racePageFilter}) => {
 
   return (
     <View style={styles.mainContainer}>
-      <ScrollView style={styles.scrollView}>
+      {/* <ScrollView style={styles.scrollView}> */}
         {races.map((race, i) => {
           return <RaceCard key={i} raceData={race} filter={null} currentUser={currentUser} racePageFilter={racePageFilter}/>
         })}
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
   )
 }
