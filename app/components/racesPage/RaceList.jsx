@@ -6,13 +6,15 @@ const RaceList = ({races, currentUser, racePageFilter}) => {
 
   //get device height to be used in setting container dimension
   const ScreenHeight = Dimensions.get("window").height
+  const ScreenWidth = Dimensions.get("window").width
   const styles = StyleSheet.create({
     mainContainer: {
-      width: '100%',
+      width: ScreenWidth,
       height: ScreenHeight,
     },
     scrollView: {
-      flex: 1,
+      height: '100%',
+      width: '100%',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'
