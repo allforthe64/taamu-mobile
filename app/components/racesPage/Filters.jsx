@@ -12,14 +12,14 @@ const Filters = ({setFiltersOpen, raceTypefilter}) => {
   return (
     <View style={styles.mainContainer}>
         <ScrollView style={{width: '100%'}}>
-            <View style={[...styles.topButtonContainer, {marginTop: 18}]}>
+            <View style={[styles.topButtonContainer, {marginTop: 18}]}>
                 <TouchableOpacity onPress={() => setFiltersOpen(false)}>
                     <Text style={styles.closeFiltersText}>Close filters <FontAwesomeIcon style={{marginLeft: 10}} icon={faChevronDown}/></Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topButtonContainer}>
-                <TouchableOpacity style={[...styles.button, {display: 'flex', flexDirection: 'row', alignItems: 'center'}]}>
-                    <Text style={[...styles.buttonText, {marginLeft: 10}]}><FontAwesomeIcon icon={faXmark} style={{fontSize: 18}}/>Clear filters</Text>
+                <TouchableOpacity style={[styles.button, {display: 'flex', flexDirection: 'row', alignItems: 'center'}]}>
+                    <Text style={[styles.buttonText, {marginLeft: 10}]}><FontAwesomeIcon icon={faXmark} style={{fontSize: 18}}/>Clear filters</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.filtersContainer}>
