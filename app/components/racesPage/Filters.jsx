@@ -11,9 +11,8 @@ import { craftCategories, raceDistances } from './categoriesAndDistances'
 //picker component import
 import {Picker} from '@react-native-picker/picker';
 
-const Filters = ({setFiltersOpen, raceTypefilter}) => {
+const Filters = ({setFiltersOpen, raceTypeFilter}) => {
 
-    alert(raceTypefilter)
   return (
     <View style={styles.mainContainer}>
         <ScrollView style={{width: '100%'}}>
@@ -60,7 +59,7 @@ const Filters = ({setFiltersOpen, raceTypefilter}) => {
                         style={styles.singleLineTextInputs}
                         >
                         {
-                            raceDistances[raceTypefilter].map((dist, i) => {
+                            raceDistances[raceTypeFilter].map((dist, i) => {
                                 if (i === 0) {
                                     return <Picker.Item key={i} label={'Any distance'} value={i} />
                                 } else {
