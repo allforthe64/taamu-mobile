@@ -8,13 +8,40 @@ import { faChevronDown, faXmark } from '@fortawesome/free-solid-svg-icons'
 //craft category and distance filter imports
 import { craftCategories, raceDistances } from './categoriesAndDistances'
 
-//picker component import
+//Picker component import
 import {Picker} from '@react-native-picker/picker';
+
+//DateTimePickerModal component import
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const Filters = ({setFiltersOpen, raceTypeFilter}) => {
 
+    //initialize state for date pickers
+    const [showStartDatePicker, setShowStartDatePicker] = useState(false)
+    const [showEndDatePicker, setShowEndDatePicker] = useState(false)
+
+    //initialize functions to control datePicker state
+    const showStartDatePickerFunction = () => setShowStartDatePicker(true)
+    const hideStartDatePickerFunction = () => setShowStartDatePicker(false)
+    const showEndDatePickerFunction = () => setShowEndDatePicker(true)
+    const hideEndDatePickerFunction = () => setShowEndDatePicker(false)
+
   return (
     <View style={styles.mainContainer}>
+        <DateTimePickerModal
+            isVisible={showStartDatePicker}
+            mode="date"
+            minimumDate={new Date()}
+            onConfirm={() => false}
+            onCancel={hideStartDatePickerFunction}
+        />
+        <DateTimePickerModal
+            isVisible={showEndDatePicker}
+            mode="date"
+            minimumDate={new Date()}
+            onConfirm={() => false}
+            onCancel={hideEndDatePickerFunction}
+        />
         <ScrollView style={{width: '100%'}}>
             <View style={[styles.topButtonContainer, {marginTop: 18}]}>
                 <TouchableOpacity onPress={() => setFiltersOpen(false)}>
@@ -23,7 +50,7 @@ const Filters = ({setFiltersOpen, raceTypeFilter}) => {
             </View>
             <View style={styles.topButtonContainer}>
                 <TouchableOpacity style={[styles.button, {display: 'flex', flexDirection: 'row', alignItems: 'center'}]}>
-                    <Text style={[styles.buttonText, {marginLeft: 10}]}><FontAwesomeIcon icon={faXmark} style={{fontSize: 18}}/>Clear filters</Text>
+                    <Text style={[styles.buttonText, {marginLeft: 10}]}><FontAwesomeIcon icon={faXmark} style={{fontSize: 18, color: 'white'}}/>Clear filters</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.filtersContainer}>
@@ -81,6 +108,19 @@ const Filters = ({setFiltersOpen, raceTypeFilter}) => {
                             <Picker.Item key={'results'} label={'Past Race Results'} value={'results'} />
                     </Picker>
                 </View>
+
+                <View style={styles.singleFilterContainer}>
+                    <Text style={styles.filterLabel}>By Date:</Text>
+                    <TouchableOpacity style={styles.dateContainer} onPress={showStartDatePickerFunction}>
+                        <Text style={{color: 'white', fontSize: 12}}>MM/DD/YYYY</Text>
+                    </TouchableOpacity>
+                </View>
+                <Text style={{width: '100%', textAlign: 'center', marginTop: 18, marginBottom: 18}}>To</Text>
+                <View style={styles.singleFilterContainer}>
+                    <TouchableOpacity style={styles.dateContainer} onPress={showEndDatePickerFunction}>
+                        <Text style={{color: 'white', fontSize: 12}}>MM/DD/YYYY</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </ScrollView>
     </View>
@@ -132,7 +172,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingLeft: '5%',
         paddingRight: '5%',
-        marginTop: 18
+        marginBottom: 30
     },
     singleFilterContainer: {
         width: '100%',
@@ -148,7 +188,7 @@ const styles = StyleSheet.create({
     singleLineTextInputs: {
         backgroundColor: 'white',
         color: '#808080',
-        width: '95%',
+        width: '100%',
         fontSize: 18,
         borderRadius: 15,
         paddingLeft: 10,
@@ -156,6 +196,16 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         borderWidth: 2
     },
+    dateContainer: {
+        width: '100%',
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 10,
+        paddingTop: 6,
+        paddingBottom: 6,
+        paddingLeft: 6,
+        paddingRight: 6
+    }
 })
 
 export default Filters
