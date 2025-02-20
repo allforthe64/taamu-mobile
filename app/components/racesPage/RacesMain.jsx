@@ -209,9 +209,10 @@ const RacesMain = ({races}) => {
             alignItems: 'center'
         },
         filterButtonCon: {
-            paddingLeft: 10,
+            paddingLeft: '5%',
             paddingTop: 10,
-            paddingBottom: 10
+            paddingBottom: 10,
+            width: '100%'
         },
         button: {
             backgroundColor: '#09CAC7',
@@ -241,8 +242,8 @@ const RacesMain = ({races}) => {
         <View style={styles.mainContainer}>
             <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainerStyle}>
                 <View style={styles.filterButtonCon}>
-                    <TouchableOpacity style={styles.button} onPress={() => setFiltersOpen(true)}>
-                        <Text style={styles.buttonText}>Filters <FontAwesomeIcon style={{marginLeft: 6}} icon={faBars}/></Text>
+                    <TouchableOpacity style={[...styles.button, {display: 'flex', flexDirection: 'row', alignItems: 'center'}]} onPress={() => setFiltersOpen(true)}>
+                        <Text style={styles.buttonText}>Filters <FontAwesomeIcon style={{marginLeft: 10}} color='white' icon={faBars}/></Text>
                     </TouchableOpacity>
                 </View>
                 <RaceList races={filteredRaces} currentUser={currentUser} racePageFilter={timeFilter}/>

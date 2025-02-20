@@ -12,7 +12,13 @@ export const craftCategories = [
     'SUP',
     'Surfski Single',
     'V6',
-    'V12'
+    'V12',
+    'War Canoe Single',
+    'War Canoe Double',
+    'War Canoe 6 Man',
+    'War Canoe 11 Man',
+    'Dragon Boat 20 Man',
+    'Dragon Boat 10 Man'
 ]
 
 //race distances array

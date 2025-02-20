@@ -31,14 +31,24 @@ const EditProfile = ({setOpenEditProfile, decipheredFName, decipheredLName, deci
 
     const craftCategoriesArr = [
         'V1',
+        'V1 - relay',
         'OC1',
+        'OC1 - relay',
+        'OC2',
+        'OC2 - relay',
+        'Surfski Double',
+        'Surfski Double - relay',
+        'Surfski Single - relay',
         'SUP',
         'Surfski Single',
-        'OC2',
         'V6',
-        'V3',
         'V12',
-        'Surfski Double'
+        'War Canoe Single',
+        'War Canoe Double',
+        'War Canoe 6 Man',
+        'War Canoe 11 Man',
+        'Dragon Boat 20 Man',
+        'Dragon Boat 10 Man'
     ]
 
     useFocusEffect(
