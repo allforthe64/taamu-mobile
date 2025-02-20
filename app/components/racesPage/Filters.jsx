@@ -12,6 +12,8 @@ import { craftCategories, raceDistances } from './categoriesAndDistances'
 import {Picker} from '@react-native-picker/picker';
 
 const Filters = ({setFiltersOpen, raceTypefilter}) => {
+
+    alert(raceTypefilter)
   return (
     <View style={styles.mainContainer}>
         <ScrollView style={{width: '100%'}}>
