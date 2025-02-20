@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions, ScrollView, TouchableOpacity, ScrollView, Modal } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, ScrollView, TouchableOpacity, Modal } from 'react-native'
 
 //react/react related imports
 import React, { useState, useCallback, useEffect } from 'react'
