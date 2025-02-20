@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 2,
     borderBottomColor: 'white',
-    paddingBottom: 5
+    paddingBottom: 5,
+    marginBottom: 40
   },
   raceCardImageContainer: {
     width: '100%',
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
   },
   raceTitle: {
     color: '#09CAC7',
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: '600',
     marginTop: 10,
     width: '100%',
@@ -170,6 +171,7 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'center',
     marginTop: 10
   },
   button: {

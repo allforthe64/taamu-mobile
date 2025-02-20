@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, ScrollView, TouchableOpacity, ScrollView, Modal } from 'react-native'
 
 //react/react related imports
 import React, { useState, useCallback, useEffect } from 'react'
@@ -9,12 +9,17 @@ import { getKey, getUser } from '../../firebase/firestore'
 
 //component imports
 import RaceList from './RaceList'
+import Filters from './Filters'
 
 //date-fns format import
 import { parse, isBefore, isAfter, isWithinInterval } from 'date-fns'
 
 //import firebaseAuth object
 import { firebaseAuth } from '../../firebaseConfig'
+
+//fontAwesome imports
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 const RacesMain = ({races}) => {
 
@@ -31,6 +36,7 @@ const RacesMain = ({races}) => {
     const [query, setQuery] = useState('')
     const [keyData, setKeyData] = useState()
     const [currentUser, setCurrentUser] = useState()
+    const [filtersOpen, setFiltersOpen] = useState(false)
 
     useFocusEffect(
         useCallback(() => {
@@ -187,11 +193,62 @@ const RacesMain = ({races}) => {
             setFilteredRaces(newRaceArray)
         }
     }, [decryptedRaces, raceTypeFilter, craftTypeFilter, distanceFilter, startDate, endDate, timeFilter, query])
+    
+    //get device height to be used in setting container dimension
+    const ScreenHeight = Dimensions.get("window").height
+    const ScreenWidth = Dimensions.get("window").width
+    const styles = StyleSheet.create({
+        mainContainer: {
+            width: ScreenWidth,
+            height: ScreenHeight,
+        },
+        scrollView: {
+            width: '100%'
+        },
+        contentContainerStyle: {
+            alignItems: 'center'
+        },
+        filterButtonCon: {
+            paddingLeft: 10,
+            paddingTop: 10,
+            paddingBottom: 10
+        },
+        button: {
+            backgroundColor: '#09CAC7',
+            paddingTop: 7,
+            paddingLeft: 15,
+            paddingBottom: 7,
+            paddingRight: 15,
+            borderRadius: 100,
+            marginTop: 15
+        },
+        buttonText: {
+            color: 'white',
+            fontSize: 18,
+            width: '100%',
+            textAlign: 'center',
+            fontWeight: '600'
+        },
+    })
 
   return (
-    <View>
-      <RaceList races={filteredRaces} currentUser={currentUser} racePageFilter={timeFilter}/>
-    </View>
+    <>
+        {filtersOpen &&
+            <Modal animationType='slide' presentationStyle='pageSheet'>
+                <Filters setFiltersOpen={setFiltersOpen}/>
+            </Modal>
+        }
+        <View style={styles.mainContainer}>
+            <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainerStyle}>
+                <View style={styles.filterButtonCon}>
+                    <TouchableOpacity style={styles.button} onPress={() => setFiltersOpen(true)}>
+                        <Text style={styles.buttonText}>Filters <FontAwesomeIcon style={{marginLeft: 6}} icon={faBars}/></Text>
+                    </TouchableOpacity>
+                </View>
+                <RaceList races={filteredRaces} currentUser={currentUser} racePageFilter={timeFilter}/>
+            </ScrollView>
+        </View>
+    </>
   )
 }
 
