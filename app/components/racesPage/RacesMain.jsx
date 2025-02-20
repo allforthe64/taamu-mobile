@@ -236,7 +236,7 @@ const RacesMain = ({races}) => {
     <>
         {filtersOpen &&
             <Modal animationType='slide' presentationStyle='pageSheet'>
-                <Filters setFiltersOpen={setFiltersOpen}/>
+                <Filters setFiltersOpen={setFiltersOpen} raceTypeFilter={raceTypeFilter}/>
             </Modal>
         }
         <View style={styles.mainContainer}>
