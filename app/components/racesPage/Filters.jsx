@@ -140,7 +140,18 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginBottom: 12,
         color: '#09CAC7'
-    }
+    },
+    singleLineTextInputs: {
+        backgroundColor: 'white',
+        color: '#808080',
+        width: '95%',
+        fontSize: 18,
+        borderRadius: 15,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderColor: 'white',
+        borderWidth: 2
+    },
 })
 
 export default Filters
