@@ -13,21 +13,21 @@ const RaceList = ({races, currentUser, racePageFilter}) => {
       height: ScreenHeight,
     },
     scrollView: {
-      height: '100%',
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
+      width: '100%'
+    },
+    contentContainerStyle: {
+      alignItems: 'center',
+      paddingVertical: 40
     }
   })
 
   return (
     <View style={styles.mainContainer}>
-      {/* <ScrollView style={styles.scrollView}> */}
+      <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainerStyle}>
         {races.map((race, i) => {
           return <RaceCard key={i} raceData={race} filter={null} currentUser={currentUser} racePageFilter={racePageFilter}/>
         })}
-      {/* </ScrollView> */}
+      </ScrollView>
     </View>
   )
 }

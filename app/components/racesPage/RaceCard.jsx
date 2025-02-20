@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: 40,
     borderBottomWidth: 2,
     borderBottomColor: 'white',
     paddingBottom: 5
