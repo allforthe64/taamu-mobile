@@ -8,6 +8,9 @@ import { faChevronDown, faXmark } from '@fortawesome/free-solid-svg-icons'
 //craft category and distance filter imports
 import { craftCategories, raceDistances } from './categoriesAndDistances'
 
+//picker component import
+import {Picker} from '@react-native-picker/picker';
+
 const Filters = ({setFiltersOpen, raceTypefilter}) => {
   return (
     <View style={styles.mainContainer}>

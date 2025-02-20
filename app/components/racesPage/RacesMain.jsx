@@ -216,6 +216,7 @@ const RacesMain = ({races}) => {
         },
         button: {
             backgroundColor: '#09CAC7',
+            width: '30%',
             paddingTop: 7,
             paddingLeft: 15,
             paddingBottom: 7,
