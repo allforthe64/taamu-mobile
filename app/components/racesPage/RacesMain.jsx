@@ -237,7 +237,7 @@ const RacesMain = ({races}) => {
     <>
         {filtersOpen &&
             <Modal animationType='slide' presentationStyle='pageSheet'>
-                <Filters setFiltersOpen={setFiltersOpen} raceTypeFilter={raceTypeFilter}/>
+                <Filters setFiltersOpen={setFiltersOpen} craftTypeFilter={craftTypeFilter} setCraftTypeFilter={setCraftTypeFilter} raceTypeFilter={raceTypeFilter} setRaceTypeFilter={setRaceTypeFilter} distanceFilter={distanceFilter} setDistanceFilter={setDistanceFilter} timeFilter={timeFilter} setTimeFilter={setTimeFilter} setQuery={setQuery}/>
             </Modal>
         }
         <View style={styles.mainContainer}>

@@ -14,7 +14,7 @@ import {Picker} from '@react-native-picker/picker';
 //DateTimePickerModal component import
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const Filters = ({setFiltersOpen, raceTypeFilter}) => {
+const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeFilter, setRaceTypeFilter, distanceFilter, setDistanceFilter, timeFilter, setTimeFilter, setQuery}) => {
 
     //initialize state for date pickers
     const [showStartDatePicker, setShowStartDatePicker] = useState(false)
@@ -25,6 +25,15 @@ const Filters = ({setFiltersOpen, raceTypeFilter}) => {
     const hideStartDatePickerFunction = () => setShowStartDatePicker(false)
     const showEndDatePickerFunction = () => setShowEndDatePicker(true)
     const hideEndDatePickerFunction = () => setShowEndDatePicker(false)
+
+    const clearFiltersFunction = () => {
+        setRaceTypeFilter('All Race Types')
+        setTimeFilter('upcoming')
+        setCraftTypeFilter('')
+        setDistanceFilter({value: {}, index: '0'})
+        setInvalid(false)
+        setQuery('')
+    }
 
   return (
     <View style={styles.mainContainer}>
@@ -45,12 +54,14 @@ const Filters = ({setFiltersOpen, raceTypeFilter}) => {
         <ScrollView style={{width: '100%'}}>
             <View style={[styles.topButtonContainer, {marginTop: 18}]}>
                 <TouchableOpacity onPress={() => setFiltersOpen(false)}>
-                    <Text style={styles.closeFiltersText}>Close filters <FontAwesomeIcon style={{marginLeft: 10}} icon={faChevronDown}/></Text>
+                    <Text style={styles.closeFiltersText}>Close filters</Text>
+                    <FontAwesomeIcon style={{marginLeft: 16, color: 'white'}} icon={faChevronDown}/>
                 </TouchableOpacity>
             </View>
             <View style={styles.topButtonContainer}>
-                <TouchableOpacity style={[styles.button, {display: 'flex', flexDirection: 'row', alignItems: 'center'}]}>
-                    <Text style={[styles.buttonText, {marginLeft: 10}]}><FontAwesomeIcon icon={faXmark} style={{fontSize: 18, color: 'white'}}/>Clear filters</Text>
+                <TouchableOpacity style={[styles.button, {display: 'flex', flexDirection: 'row', alignItems: 'center'}]} onPress={clearFiltersFunction}>
+                    <FontAwesomeIcon icon={faXmark} style={{fontSize: 18, color: 'white', marginRight: 16}}/>
+                    <Text style={styles.buttonText}>Clear filters</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.filtersContainer}>
@@ -60,6 +71,10 @@ const Filters = ({setFiltersOpen, raceTypeFilter}) => {
                     <Picker
                         mode='dropdown'
                         style={styles.singleLineTextInputs}
+                        selectedValue={craftTypeFilter}
+                        onValueChange={(itemValue, itemIndex) => {
+                            setCraftTypeFilter(itemValue)
+                        }}
                         >
                         {
                             craftCategories.map((category) => {
@@ -73,6 +88,11 @@ const Filters = ({setFiltersOpen, raceTypeFilter}) => {
                     <Picker
                         mode='dropdown'
                         style={styles.singleLineTextInputs}
+                        selectedValue={raceTypeFilter}
+                        onValueChange={(itemValue, itemIndex) => {
+                            setRaceTypeFilter(itemValue)
+                            setDistanceFilter({value: {}, index: '0'})
+                        }}
                         >
                             <Picker.Item key={'All Race Types'} label={'All Distances'} value={'All Race Types'} />
                             <Picker.Item key={'Sprints'} label={'Sprints'} value={'Sprints'} />
@@ -84,6 +104,13 @@ const Filters = ({setFiltersOpen, raceTypeFilter}) => {
                     <Picker
                         mode='dropdown'
                         style={styles.singleLineTextInputs}
+                        selectedValue={distanceFilter.index}
+                        onValueChange={(itemValue, itemIndex) => {
+                            if (itemValue !== '0') setDistanceFilter({value: raceDistances[raceTypeFilter][itemValue], index: itemValue}) 
+                                else {
+                                    setDistanceFilter({value: {}, index: '0'})
+                                }
+                        }}
                         >
                         {
                             raceDistances[raceTypeFilter].map((dist, i) => {
@@ -102,6 +129,10 @@ const Filters = ({setFiltersOpen, raceTypeFilter}) => {
                     <Picker
                         mode='dropdown'
                         style={styles.singleLineTextInputs}
+                        selectedValue={timeFilter}
+                        onValueChange={(itemValue, itemIndex) => {
+                            setTimeFilter(itemValue)
+                        }}
                         >
                             <Picker.Item key={'upcoming'} label={'Upcoming races'} value={'upcoming'} />
                             <Picker.Item key={'ongoing'} label={'Ongoing Race Results'} value={'ongoing'} />
@@ -112,13 +143,13 @@ const Filters = ({setFiltersOpen, raceTypeFilter}) => {
                 <View style={styles.singleFilterContainer}>
                     <Text style={styles.filterLabel}>By Date:</Text>
                     <TouchableOpacity style={styles.dateContainer} onPress={showStartDatePickerFunction}>
-                        <Text style={{color: 'white', fontSize: 12}}>MM/DD/YYYY</Text>
+                        <Text style={{color: 'white', fontSize: 18}}>MM/DD/YYYY</Text>
                     </TouchableOpacity>
                 </View>
-                <Text style={{width: '100%', textAlign: 'center', marginTop: 18, marginBottom: 18}}>To</Text>
+                <Text style={{width: '100%', textAlign: 'center', marginTop: 18, fontSize: 18, color: '#09CAC7'}}>To</Text>
                 <View style={styles.singleFilterContainer}>
                     <TouchableOpacity style={styles.dateContainer} onPress={showEndDatePickerFunction}>
-                        <Text style={{color: 'white', fontSize: 12}}>MM/DD/YYYY</Text>
+                        <Text style={{color: 'white', fontSize: 18}}>MM/DD/YYYY</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -172,12 +203,12 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingLeft: '5%',
         paddingRight: '5%',
-        marginBottom: 30
     },
     singleFilterContainer: {
         width: '100%',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        marginTop: 20
     },
     filterLabel: {
         fontSize: 18,
@@ -201,10 +232,10 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'white',
         borderRadius: 10,
-        paddingTop: 6,
-        paddingBottom: 6,
-        paddingLeft: 6,
-        paddingRight: 6
+        paddingTop: 18,
+        paddingBottom: 18,
+        paddingLeft: 12,
+        paddingRight: 12
     }
 })
 
