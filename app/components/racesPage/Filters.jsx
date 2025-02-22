@@ -14,7 +14,10 @@ import {Picker} from '@react-native-picker/picker';
 //DateTimePickerModal component import
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeFilter, setRaceTypeFilter, distanceFilter, setDistanceFilter, timeFilter, setTimeFilter, setQuery}) => {
+//date-fns format
+import { format } from 'date-fns'
+
+const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeFilter, setRaceTypeFilter, distanceFilter, setDistanceFilter, timeFilter, setTimeFilter, setQuery, setStartDate, setEndDate}) => {
 
     //initialize state for date pickers
     const [showStartDatePicker, setShowStartDatePicker] = useState(false)
@@ -32,6 +35,8 @@ const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeF
         setCraftTypeFilter('')
         setDistanceFilter({value: {}, index: '0'})
         setQuery('')
+        setStartDate(null)
+        setEndDate(null)
     }
 
   return (
@@ -40,14 +45,14 @@ const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeF
             isVisible={showStartDatePicker}
             mode="date"
             minimumDate={new Date()}
-            onConfirm={() => false}
+            onConfirm={(dateValue) => setStartDate(format(dateValue, 'MM/dd/yyyy'))}
             onCancel={hideStartDatePickerFunction}
         />
         <DateTimePickerModal
             isVisible={showEndDatePicker}
             mode="date"
             minimumDate={new Date()}
-            onConfirm={() => false}
+            onConfirm={(dateValue) => setEndDate(format(dateValue, 'MM/dd/yyyy'))}
             onCancel={hideEndDatePickerFunction}
         />
         <ScrollView style={{width: '100%'}}>
@@ -59,12 +64,12 @@ const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeF
             </View>
             <View style={styles.topButtonContainer}>
                 <TouchableOpacity style={[styles.button, {display: 'flex', flexDirection: 'row', alignItems: 'center'}]} onPress={clearFiltersFunction}>
-                    <FontAwesomeIcon icon={faXmark} style={{fontSize: 18, color: 'white', marginRight: 16}}/>
+                    <FontAwesomeIcon icon={faXmark} style={{fontSize: 22, color: 'white', marginRight: 16}}/>
                     <Text style={styles.buttonText}>Clear filters</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.filtersContainer}>
-                <Text style={{color: '#09CAC7', fontSize: 22, fontWeight: '600', marginTop: 12}}>Filter by:</Text>
+                <Text style={{color: '#09CAC7', fontSize: 32, fontWeight: '600', marginTop: 12}}>Filter by:</Text>
                 <View style={styles.singleFilterContainer}>
                     <Text style={styles.filterLabel}>Craft Type:</Text>
                     <Picker
@@ -83,7 +88,7 @@ const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeF
                     </Picker>
                 </View>
                 <View style={styles.singleFilterContainer}>
-                    <Text style={styles.filterLabel}>Craft Type:</Text>
+                    <Text style={styles.filterLabel}>Race Type:</Text>
                     <Picker
                         mode='dropdown'
                         style={styles.singleLineTextInputs}
@@ -160,7 +165,8 @@ const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeF
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: '#01354B'
+        backgroundColor: '#01354B',
+        paddingBottom: 30
     },
     topButtonContainer: {
         width: '100%',
@@ -210,7 +216,7 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     filterLabel: {
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: '600',
         marginBottom: 12,
         color: '#09CAC7'

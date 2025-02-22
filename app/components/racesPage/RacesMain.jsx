@@ -103,7 +103,7 @@ const RacesMain = ({races}) => {
     )
 
     //create currentDate
-    const parseDate = (dateStr) => parse(dateStr, "MM/dd/yyyy", new Date());
+    const parseDate = (dateStr) => parse(dateStr, "MM/DD/YYYY", new Date());
     const today = new Date();
 
     useEffect(() => {
@@ -157,18 +157,24 @@ const RacesMain = ({races}) => {
 
             //if theres a start and end date filter for races that fall within those dates
             if (startDate && endDate) {
-                newRaceArray = newRaceArray.filter(race => {
-                    if (new Date(race.startDate) >= new Date(startDate) && new Date(race.endDate) <= new Date(endDate))
-                    return race   
-                })
+                newRaceArray = newRaceArray.filter(race => 
+                    isWithinInterval(parse(race.startDate, "MM/dd/yyyy", new Date()), { 
+                        start: parse(startDate, "MM/dd/yyyy", new Date()), 
+                        end: parse(endDate, "MM/dd/yyyy", new Date()) 
+                    }) &&
+                    isWithinInterval(parse(race.endDate, "MM/dd/yyyy", new Date()), { 
+                        start: parse(startDate, "MM/dd/yyyy", new Date()), 
+                        end: parse(endDate, "MM/dd/yyyy", new Date()) 
+                    })
+                )
             } 
             //if theres only a startDate filter for races that occur after the selected startDate
             else if (startDate) {
-                newRaceArray = newRaceArray.filter(race => new Date(race.startDate) >= new Date(startDate))
+                newRaceArray = newRaceArray.filter(race => isAfter(race.startDate, startDate))
             } 
             //if theres only a endDate filter for races that occur before the selected startDate
             else if (endDate) {
-                newRaceArray = newRaceArray.filter(race => new Date(race.endDate) <= new Date(endDate))
+                newRaceArray = newRaceArray.filter(race => isBefore(race.endDate, endDate))
             }
 
             //results vs ongoing results vs registration
@@ -211,7 +217,7 @@ const RacesMain = ({races}) => {
         filterButtonCon: {
             paddingLeft: '5%',
             paddingTop: 10,
-            paddingBottom: 10,
+            paddingBottom: 30,
             width: '100%'
         },
         button: {
@@ -237,7 +243,7 @@ const RacesMain = ({races}) => {
     <>
         {filtersOpen &&
             <Modal animationType='slide' presentationStyle='pageSheet'>
-                <Filters setFiltersOpen={setFiltersOpen} craftTypeFilter={craftTypeFilter} setCraftTypeFilter={setCraftTypeFilter} raceTypeFilter={raceTypeFilter} setRaceTypeFilter={setRaceTypeFilter} distanceFilter={distanceFilter} setDistanceFilter={setDistanceFilter} timeFilter={timeFilter} setTimeFilter={setTimeFilter} setQuery={setQuery}/>
+                <Filters setFiltersOpen={setFiltersOpen} craftTypeFilter={craftTypeFilter} setCraftTypeFilter={setCraftTypeFilter} raceTypeFilter={raceTypeFilter} setRaceTypeFilter={setRaceTypeFilter} distanceFilter={distanceFilter} setDistanceFilter={setDistanceFilter} timeFilter={timeFilter} setTimeFilter={setTimeFilter} setQuery={setQuery} setStartDate={setStartDate} setEndDate={setEndDate}/>
             </Modal>
         }
         <View style={styles.mainContainer}>
