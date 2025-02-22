@@ -31,7 +31,6 @@ const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeF
         setTimeFilter('upcoming')
         setCraftTypeFilter('')
         setDistanceFilter({value: {}, index: '0'})
-        setInvalid(false)
         setQuery('')
     }
 
