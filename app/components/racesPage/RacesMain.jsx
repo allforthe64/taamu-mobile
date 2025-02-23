@@ -103,7 +103,7 @@ const RacesMain = ({races}) => {
     )
 
     //create currentDate
-    const parseDate = (dateStr) => parse(dateStr, "MM/dd/YYYY", new Date());
+    const parseDate = (dateStr) => parse(dateStr, "MM/dd/yyyy", new Date());
     const today = new Date();
 
     useEffect(() => {
