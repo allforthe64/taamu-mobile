@@ -170,12 +170,24 @@ const RacesMain = ({races}) => {
             } 
             //if theres only a startDate filter for races that occur after the selected startDate
             else if (startDate) {
-                newRaceArray = newRaceArray.filter(race => isAfter(race.startDate, startDate))
+                newRaceArray = newRaceArray.filter(race => {
+
+                    const raceDate = parse(race.startDate, "MM/dd/yyyy", new Date())
+                    const filterDate = parse(startDate, "MM/dd/yyyy", new Date())
+
+                    return isAfter(raceDate, filterDate) || isEqual(raceDate, filterDate)
+                })
             } 
             //if theres only a endDate filter for races that occur before the selected startDate
             else if (endDate) {
-                newRaceArray = newRaceArray.filter(race => isBefore(race.endDate, endDate))
+                newRaceArray = newRaceArray.filter(race => {
+                    const raceEndDate = parse(race.endDate, "MM/dd/yyyy", new Date())
+                    const filterEndDate = parse(endDate, "MM/dd/yyyy", new Date())
+                
+                    return isBefore(raceEndDate, filterEndDate) || isEqual(raceEndDate, filterEndDate)
+                })
             }
+            console.log(newRaceArray)
 
             //results vs ongoing results vs registration
             if (timeFilter === "upcoming") {
@@ -195,6 +207,7 @@ const RacesMain = ({races}) => {
                     isBefore(parseDate(race.endDate), today)
                 );
             }
+            console.log(newRaceArray)
 
             setFilteredRaces(newRaceArray)
         }
@@ -238,8 +251,6 @@ const RacesMain = ({races}) => {
             fontWeight: '600'
         },
     })
-
-    alert(startDate)
 
   return (
     <>

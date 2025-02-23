@@ -57,7 +57,7 @@ const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeF
         />
         <ScrollView style={{width: '100%'}}>
             <View style={[styles.topButtonContainer, {marginTop: 18}]}>
-                <TouchableOpacity onPress={() => setFiltersOpen(false)}>
+                <TouchableOpacity onPress={() => setFiltersOpen(false)} style={{display: 'flex', flexDirection: 'row'}}>
                     <Text style={styles.closeFiltersText}>Close filters</Text>
                     <FontAwesomeIcon style={{marginLeft: 16, color: 'white'}} icon={faChevronDown}/>
                 </TouchableOpacity>
