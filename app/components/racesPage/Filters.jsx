@@ -17,7 +17,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 //date-fns format
 import { format } from 'date-fns'
 
-const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeFilter, setRaceTypeFilter, distanceFilter, setDistanceFilter, timeFilter, setTimeFilter, setQuery, setStartDate, setEndDate}) => {
+const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeFilter, setRaceTypeFilter, distanceFilter, setDistanceFilter, timeFilter, setTimeFilter, setQuery, setStartDate, setEndDate, startDate, endDate}) => {
 
     //initialize state for date pickers
     const [showStartDatePicker, setShowStartDatePicker] = useState(false)
@@ -147,13 +147,21 @@ const Filters = ({setFiltersOpen, craftTypeFilter, setCraftTypeFilter, raceTypeF
                 <View style={styles.singleFilterContainer}>
                     <Text style={styles.filterLabel}>By Date:</Text>
                     <TouchableOpacity style={styles.dateContainer} onPress={showStartDatePickerFunction}>
-                        <Text style={{color: 'white', fontSize: 18}}>MM/DD/YYYY</Text>
+                        {startDate ?
+                            <Text style={{color: 'white', fontSize: 18}}>{startDate}</Text>
+                        :
+                            <Text style={{color: 'white', fontSize: 18}}>MM/DD/YYYY</Text>   
+                        }
                     </TouchableOpacity>
                 </View>
                 <Text style={{width: '100%', textAlign: 'center', marginTop: 18, fontSize: 18, color: '#09CAC7'}}>To</Text>
                 <View style={styles.singleFilterContainer}>
                     <TouchableOpacity style={styles.dateContainer} onPress={showEndDatePickerFunction}>
-                        <Text style={{color: 'white', fontSize: 18}}>MM/DD/YYYY</Text>
+                        {endDate ?
+                            <Text style={{color: 'white', fontSize: 18}}>{endDate}</Text>
+                        :
+                            <Text style={{color: 'white', fontSize: 18}}>MM/DD/YYYY</Text>   
+                        }
                     </TouchableOpacity>
                 </View>
             </View>

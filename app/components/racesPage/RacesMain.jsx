@@ -239,11 +239,13 @@ const RacesMain = ({races}) => {
         },
     })
 
+    alert(startDate)
+
   return (
     <>
         {filtersOpen &&
             <Modal animationType='slide' presentationStyle='pageSheet'>
-                <Filters setFiltersOpen={setFiltersOpen} craftTypeFilter={craftTypeFilter} setCraftTypeFilter={setCraftTypeFilter} raceTypeFilter={raceTypeFilter} setRaceTypeFilter={setRaceTypeFilter} distanceFilter={distanceFilter} setDistanceFilter={setDistanceFilter} timeFilter={timeFilter} setTimeFilter={setTimeFilter} setQuery={setQuery} setStartDate={setStartDate} setEndDate={setEndDate}/>
+                <Filters setFiltersOpen={setFiltersOpen} craftTypeFilter={craftTypeFilter} setCraftTypeFilter={setCraftTypeFilter} raceTypeFilter={raceTypeFilter} setRaceTypeFilter={setRaceTypeFilter} distanceFilter={distanceFilter} setDistanceFilter={setDistanceFilter} timeFilter={timeFilter} setTimeFilter={setTimeFilter} setQuery={setQuery} setStartDate={setStartDate} setEndDate={setEndDate} startDate={startDate} endDate={endDate}/>
             </Modal>
         }
         <View style={styles.mainContainer}>
