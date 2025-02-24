@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, StyleSheet, Image } from 'react-native'
+import { View, Text, Dimensions, StyleSheet, Image, TextInput } from 'react-native'
 import React, { useState } from 'react'
 
 const RacesHero = ({query, setQuery}) => {
