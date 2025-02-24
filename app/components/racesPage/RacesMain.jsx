@@ -12,7 +12,7 @@ import RaceList from './RaceList'
 import Filters from './Filters'
 
 //date-fns format import
-import { parse, isBefore, isAfter, isWithinInterval } from 'date-fns'
+import { parse, isBefore, isAfter, isWithinInterval, isEqual } from 'date-fns'
 
 //import firebaseAuth object
 import { firebaseAuth } from '../../firebaseConfig'
