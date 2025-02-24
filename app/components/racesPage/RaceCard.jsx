@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 2,
     borderBottomColor: 'white',
-    paddingBottom: 5,
+    paddingBottom: 15,
     marginBottom: 40
   },
   raceCardImageContainer: {

@@ -19,7 +19,10 @@ const RacesHero = ({query, setQuery}) => {
             objectFit: 'cover'
         },
         absoluteContainer: {
-            flex: 1,
+            width: screenWidth,
+            height: screenHeight,
+            borderWidth: 5,
+            borderColor: 'red',
             position: 'absolute',
             top: 0,
             display: 'flex',
@@ -43,7 +46,7 @@ const RacesHero = ({query, setQuery}) => {
         singleLineTextInputs: {
             backgroundColor: 'white',
             color: '#808080',
-            width: '95%',
+            width: '85%',
             fontSize: 18,
             borderRadius: 15,
             paddingLeft: 10,
@@ -54,7 +57,7 @@ const RacesHero = ({query, setQuery}) => {
         focusedSingleLineTextInputs: {
             backgroundColor: 'white',
             color: '#808080',
-            width: '95%',
+            width: '85%',
             fontSize: 18,
             borderRadius: 15,
             paddingLeft: 10,
