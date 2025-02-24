@@ -20,9 +20,7 @@ const RacesHero = ({query, setQuery}) => {
         },
         absoluteContainer: {
             width: screenWidth,
-            height: screenHeight,
-            borderWidth: 5,
-            borderColor: 'red',
+            height: (screenHeight / 4) * 3,
             position: 'absolute',
             top: 0,
             display: 'flex',
