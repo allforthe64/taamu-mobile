@@ -20,6 +20,7 @@ import { firebaseAuth } from '../../firebaseConfig'
 //fontAwesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import RacesHero from './RacesHero'
 
 const RacesMain = ({races}) => {
 
@@ -261,6 +262,7 @@ const RacesMain = ({races}) => {
         }
         <View style={styles.mainContainer}>
             <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainerStyle}>
+                <RacesHero query={query} setQuery={setQuery}/>
                 <View style={styles.filterButtonCon}>
                     <TouchableOpacity style={[styles.button, {display: 'flex', flexDirection: 'row', alignItems: 'center'}]} onPress={() => setFiltersOpen(true)}>
                         <Text style={styles.buttonText}>Filters <FontAwesomeIcon style={{marginLeft: 10}} color='white' icon={faBars}/></Text>
