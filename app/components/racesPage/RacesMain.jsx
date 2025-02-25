@@ -221,7 +221,7 @@ const RacesMain = ({races}) => {
         mainContainer: {
             width: ScreenWidth,
             height: ScreenHeight,
-            paddingBottom: 40
+            paddingBottom: 70
         },
         scrollView: {
             width: '100%'

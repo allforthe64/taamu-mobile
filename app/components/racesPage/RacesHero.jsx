@@ -35,7 +35,7 @@ const RacesHero = ({query, setQuery}) => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'rgba(0, 0, 0, .5)'
+            backgroundColor: 'rgba(0, 0, 0, .75)'
         },
         header: {
             color: 'white',

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 
 //localSearchParams import
@@ -12,7 +12,7 @@ import { getDoc, doc } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 import { firebaseAuth } from '../firebaseConfig'
 
-import { singleUserListener } from '../firebase/firestore'
+import { getRace, singleUserListener } from '../firebase/firestore'
 
 //
 /* import { getUser } from '../firebase/firestore' */
@@ -47,6 +47,7 @@ const RacerPage = () => {
      craftCategories: [ 'V6', 'OC1', 'V1' ] }) */
 
     const [racerData, setRacerData] = useState()
+    const [racerRaces, setRacerRaces] = useState([])
 
     //grab racer data
     useFocusEffect(
@@ -64,11 +65,25 @@ const RacerPage = () => {
       }, [firebaseAuth.currentUser.uid])
     )
 
+    useEffect(() => {
+      if (racerData) {
+        const getRacerRaces = async () => {
+          const currentUserRaces = await Promise.all(racerData.registeredFor.map(async raceId => {
+            const raceData = await getRace(raceId)
+            return raceData
+          }))
+          setRacerRaces(currentUserRaces)
+        }
+        getRacerRaces()
+      }
+    }, [racerData])
+
   return (
     <View style={styles.mainContainer}>
       {racerData &&
         <ScrollView>
           <Hero racerData={racerData}/>
+          <MyRaces races={racerRaces}/>
         </ScrollView>
       }
     </View>
