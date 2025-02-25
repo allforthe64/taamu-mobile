@@ -7,6 +7,7 @@ import { useLocalSearchParams } from 'expo-router'
 
 //component imports
 import Hero from '../components/racerPage/Hero'
+import MyRaces from '../components/racerPage/MyRaces'
 
 import { getDoc, doc } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
