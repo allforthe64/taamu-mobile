@@ -25,13 +25,15 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: '600',
         textDecorationLine: 'underline',
-        textDecorationColor: 'white'
+        textDecorationColor: 'white',
+        marginBottom: 18
     },
     highlightedTextButton: {
         color: '#09CAC7',
         fontSize: 30,
         fontWeight: '600',
         textDecorationLine: 'underline',
-        textDecorationColor: 'white'
+        textDecorationColor: 'white',
+        marginBottom: 18
     }
 })

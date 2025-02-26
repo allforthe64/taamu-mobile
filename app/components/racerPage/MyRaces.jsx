@@ -77,26 +77,26 @@ const MyRaces = ({races}) => {
 
             //filter for upcoming races
             if (mode === 'upcoming') {
-                setRacesToShow(decryptedRaces.filter(race => {
-                    isAfter(parse(race.startDate, "MM/dd/yyyy", new Date()), parse(currentDate, "MM/dd/yyyy", new Date()))
-                }))
+                setRacesToShow(decryptedRaces.filter(race => isAfter(parse(race.startDate, "MM/dd/yyyy", new Date()), parse(currentDate, "MM/dd/yyyy", new Date()))
+                ))
             }
 
             //filter for ongoing races
             if (mode === 'ongoing') {
-                setRacesToShow(decryptedRaces.filter(race => {
+                setRacesToShow(decryptedRaces.filter(race => 
                     isBefore(parse(race.startDate, "MM/dd/yyyy", new Date()), parse(currentDate, "MM/dd/yyyy", new Date())) &&
                     isAfter(parse(race.endDate, "MM/dd/yyyy", new Date()), parse(currentDate, "MM/dd/yyyy", new Date()))
-                }))
+                ))
             }
 
             if (mode === 'results') {
-                setRacesToShow(decryptedRaces.filter(race => {
-                    isBefore(parse(race.endDate, "MM/dd/yyyy", new Date()), parse(currentDate, "MM/dd/yyyy", new Date()))
-                }))
+                setRacesToShow(decryptedRaces.filter(race => isBefore(parse(race.endDate, "MM/dd/yyyy", new Date()), parse(currentDate, "MM/dd/yyyy", new Date()))
+                ))
             }
         }
     }, [decryptedRaces, mode])
+
+    console.log(racesToShow)
 
   return (
     <View style={styles.mainContainer}>
