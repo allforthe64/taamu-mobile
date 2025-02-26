@@ -1,16 +1,18 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 import React, {useState, useCallback} from 'react'
 
 import { useFocusEffect } from 'expo-router'
 
 import { getKey } from '../../firebase/firestore'
+import RacerRaceButtons from './RacerRaceButtons'
 
 const MyRaces = ({races}) => {
 
     //initialize state
     const [decryptedRaces, setDecryptedRaces] = useState([])
     const [keyData, setKeyData] = useState()
+    const [mode, setMode] = useState('upcoming')
 
     useFocusEffect(
         useCallback(() => {
@@ -62,10 +64,31 @@ const MyRaces = ({races}) => {
     console.log(decryptedRaces)
 
   return (
-    <View>
-      <Text>MyRaces</Text>
+    <View style={styles.mainContainer}>
+        <View style={modeButtonContainer}>
+            <RacerRaceButtons mode={mode} setMode={setMode}/>
+        </View>
+        <Text>MyRaces</Text>
     </View>
   )
 }
 
 export default MyRaces
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        marginTop: 50,
+        marginBottom: 50,
+        width: '100%',
+        backgroundColor: 'rgba(0, 0, 0, .75)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+    modeButtonContainer: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    }
+})
