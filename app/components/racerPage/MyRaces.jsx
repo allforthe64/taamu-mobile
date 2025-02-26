@@ -11,7 +11,7 @@ import RacerRaceButtons from './RacerRaceButtons'
 import RacerRaceCard from './RacerRaceCard'
 
 //date-fns imports
-import { isBefore, isAfter, parse } from 'date-fns'
+import { isBefore, isAfter, parse, format } from 'date-fns'
 
 const MyRaces = ({races}) => {
 
