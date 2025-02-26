@@ -1,16 +1,23 @@
 import { View, Text, StyleSheet } from 'react-native'
 
-import React, {useState, useCallback} from 'react'
+import React, {useState, useCallback, useEffect} from 'react'
 
 import { useFocusEffect } from 'expo-router'
 
 import { getKey } from '../../firebase/firestore'
+
+//component imports
 import RacerRaceButtons from './RacerRaceButtons'
+import RacerRaceCard from './RacerRaceCard'
+
+//date-fns imports
+import { isBefore, isAfter, parse } from 'date-fns'
 
 const MyRaces = ({races}) => {
 
     //initialize state
     const [decryptedRaces, setDecryptedRaces] = useState([])
+    const [racesToShow, setRacesToShow] = useState([])
     const [keyData, setKeyData] = useState()
     const [mode, setMode] = useState('upcoming')
 
@@ -61,14 +68,46 @@ const MyRaces = ({races}) => {
             }
         }, [races, keyData])
     )
-    console.log(decryptedRaces)
+
+    //filter races
+    useEffect(() => {
+        if (decryptedRaces) {
+
+            const currentDate = format(new Date(), 'MM/dd/yyyy')
+
+            //filter for upcoming races
+            if (mode === 'upcoming') {
+                setRacesToShow(decryptedRaces.filter(race => {
+                    isAfter(parse(race.startDate, "MM/dd/yyyy", new Date()), parse(currentDate, "MM/dd/yyyy", new Date()))
+                }))
+            }
+
+            //filter for ongoing races
+            if (mode === 'ongoing') {
+                setRacesToShow(decryptedRaces.filter(race => {
+                    isBefore(parse(race.startDate, "MM/dd/yyyy", new Date()), parse(currentDate, "MM/dd/yyyy", new Date())) &&
+                    isAfter(parse(race.endDate, "MM/dd/yyyy", new Date()), parse(currentDate, "MM/dd/yyyy", new Date()))
+                }))
+            }
+
+            if (mode === 'results') {
+                setRacesToShow(decryptedRaces.filter(race => {
+                    isBefore(parse(race.endDate, "MM/dd/yyyy", new Date()), parse(currentDate, "MM/dd/yyyy", new Date()))
+                }))
+            }
+        }
+    }, [decryptedRaces, mode])
 
   return (
     <View style={styles.mainContainer}>
-        <View style={modeButtonContainer}>
+        <View style={styles.modeButtonContainer}>
             <RacerRaceButtons mode={mode} setMode={setMode}/>
         </View>
-        <Text>MyRaces</Text>
+        <View style={[styles.modeButtonContainer, {marginTop: 30}]}>
+            {racesToShow.map(race => {
+                return <RacerRaceCard raceData={race} filter={mode}/>
+            })}
+        </View>
     </View>
   )
 }
@@ -83,7 +122,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, .75)',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: 20,
+        paddingBottom: 20
     },
     modeButtonContainer: {
         width: '100%',

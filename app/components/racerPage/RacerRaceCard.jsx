@@ -9,7 +9,7 @@ import { Link } from 'expo-router'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
-const RaceCard = ({ raceData, filter, racePageFilter}) => {
+const RacerRaceCard = ({ raceData, filter}) => {
 
   //initialize state
   const [cardImage, setCardImage] = useState('')
@@ -50,6 +50,15 @@ const racerButtonsArr = {
                     <span className='ml-2'>{cardTranslations.cancelRegistration[language]}</span>
                 </button>
             } */}
+        </View>
+    ),
+    'ongoing' : (
+        <View style={styles.buttonContainer}>
+          <Link href={`/races/${raceData.id}`} asChild>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>View current results</Text>
+            </TouchableOpacity>
+          </Link>
         </View>
     ),
     'results' : (
@@ -94,14 +103,14 @@ const racerButtonsArr = {
       }
       <View style={styles.buttonContainer}>
         {
-          racerButtonsArr[filter === null ? racePageFilter : filter]
+          racerButtonsArr[filter]
         }
       </View>
     </View>
   )
 }
 
-export default RaceCard
+export default RacerRaceCard
 
 const styles = StyleSheet.create({
   raceCardContainer: {
