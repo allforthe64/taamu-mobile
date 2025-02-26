@@ -104,9 +104,17 @@ const MyRaces = ({races}) => {
             <RacerRaceButtons mode={mode} setMode={setMode}/>
         </View>
         <View style={[styles.modeButtonContainer, {marginTop: 30}]}>
-            {racesToShow.map(race => {
-                return <RacerRaceCard raceData={race} filter={mode}/>
-            })}
+            {racesToShow.length > 0 ?
+                <>
+                    {racesToShow.map(race => {
+                        return <RacerRaceCard raceData={race} filter={mode}/>
+                    })}
+                </>
+            :
+                <View style={styles.noRacesContainer}>
+                    <Text style={{color: '#09CAC7', fontSize: 22, fontWeight: '600'}}>No races match your selection, try adjusting your filters :(</Text>
+                </View>
+            }
         </View>
     </View>
   )
@@ -130,6 +138,14 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center'
+    },
+    noRacesContainer: {
+        width: '100%',
+        height: 200,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
         alignItems: 'center'
     }
 })

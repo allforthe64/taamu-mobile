@@ -14,6 +14,8 @@ import { db } from '../firebaseConfig'
 import { firebaseAuth } from '../firebaseConfig'
 
 import { getRace, singleUserListener } from '../firebase/firestore'
+import { getDownloadableURL } from '../firebase/storage'
+import PhotoGallery from '../components/racerPage/PhotoGallery'
 
 //
 /* import { getUser } from '../firebase/firestore' */
@@ -49,6 +51,7 @@ const RacerPage = () => {
 
     const [racerData, setRacerData] = useState()
     const [racerRaces, setRacerRaces] = useState([])
+    const [galleryURLs, setGalleryURLs] = useState([])
 
     //grab racer data
     useFocusEffect(
@@ -76,15 +79,25 @@ const RacerPage = () => {
           setRacerRaces(currentUserRaces)
         }
         getRacerRaces()
+
+        //get urls for photo gallery
+        const getPhotoGalleryURLs = async () => {
+          
+          //map over urls and return the downloadable url
+          const galleryDownloadLinks = await Promise.all(racerData.photos.map(async (url) => {return await getDownloadableURL(url)}))
+          setGalleryURLs(galleryDownloadLinks) 
+        }
+        getPhotoGalleryURLs()
       }
     }, [racerData])
 
   return (
     <View style={styles.mainContainer}>
-      {racerData &&
+      {racerData && firebaseAuth &&
         <ScrollView>
           <Hero racerData={racerData}/>
           <MyRaces races={racerRaces}/>
+          <PhotoGallery currentUser={firebaseAuth.currentUser} galleryURLs={galleryURLs} racerId={racerData.uid}/>
         </ScrollView>
       }
     </View>
