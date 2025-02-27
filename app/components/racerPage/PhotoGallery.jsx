@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Touchable, Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -16,7 +16,7 @@ const PhotoGallery = ({ currentUser, galleryURLs, racerId }) => {
         mainHeading: {
             fontSize: 30,
             fontWeight: '600',
-            color: '#09CAC&'
+            color: '#09CAC7'
         },
         galleryButtonCon: {
             width: '100%',
@@ -93,16 +93,16 @@ const PhotoGallery = ({ currentUser, galleryURLs, racerId }) => {
                                     <FontAwesomeIcon style={{fontSize: 18, color: '#09CAC7'}} icon={faXmark}/>
                                 </TouchableOpacity>
                             </View>
-                            <Touchable style={styles.photoContainer}>
+                            <TouchableOpacity style={styles.photoContainer}>
                                 <Image source={{ uri: galleryURL }} style={styles.photo}/>
-                            </Touchable>
+                            </TouchableOpacity>
                         </View>
                     )
                 } else {
                     return (
-                        <Touchable style={styles.photoContainer}>
+                        <TouchableOpacity style={styles.photoContainer}>
                             <Image source={{ uri: galleryURL }} style={styles.photo}/>
-                        </Touchable>
+                        </TouchableOpacity>
                     )
                 }
             })}
