@@ -10,12 +10,10 @@ import Hero from '../components/racerPage/Hero'
 import MyRaces from '../components/racerPage/MyRaces'
 import PhotoGallery from '../components/racerPage/PhotoGallery'
 
-import { getDoc, doc } from 'firebase/firestore'
-import { db } from '../firebaseConfig'
+//firebase imports
+import { getRace, singleUserListener, updateUser } from '../firebase/firestore'
+import { getDownloadableURL, deleteFile } from '../firebase/storage'
 import { firebaseAuth } from '../firebaseConfig'
-
-import { getRace, singleUserListener } from '../firebase/firestore'
-import { getDownloadableURL } from '../firebase/storage'
 
 //
 /* import { getUser } from '../firebase/firestore' */
@@ -91,13 +89,38 @@ const RacerPage = () => {
       }
     }, [racerData])
 
+    //remove a photo from org gallery
+    const removeFromGallery = async (input) => {
+
+      //get the index of the photo gallery url/find the actual path url in orgData photos
+      const photoIndex = galleryURLs.indexOf(input)
+      const rawURL = racerData.photos[photoIndex]
+      
+      //delete the photo from storage
+      deleteFile(racerData.photos[photoIndex])
+
+      //create the new orgData photos array
+      const newGalleryArray = racerData.photos.filter(url => url !== rawURL)
+
+      //filter out the galleryUrls
+      setGalleryURLs(url => url !== input)
+
+      //update org data
+      const newRacerData = {
+          ...racerData,
+          photos: newGalleryArray,
+          uid: racerData.uid
+      }
+      await updateUser(newRacerData)
+  }
+
   return (
     <View style={styles.mainContainer}>
       {racerData && firebaseAuth &&
         <ScrollView>
           <Hero racerData={racerData}/>
           <MyRaces races={racerRaces}/>
-          <PhotoGallery currentUser={firebaseAuth.currentUser} galleryURLs={galleryURLs} racerId={racerData.uid}/>
+          <PhotoGallery currentUser={firebaseAuth.currentUser} galleryURLs={galleryURLs} racerId={racerData.uid} removeFromGallery={removeFromGallery}/>
         </ScrollView>
       }
     </View>

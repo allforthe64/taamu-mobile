@@ -3,7 +3,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
-const PhotoGallery = ({ currentUser, galleryURLs, racerId }) => {
+const PhotoGallery = ({ currentUser, galleryURLs, racerId, removeFromGallery }) => {
 
     //get device height to be used in setting container dimension
     const ScreenHeight = Dimensions.get("window").height
@@ -16,7 +16,9 @@ const PhotoGallery = ({ currentUser, galleryURLs, racerId }) => {
         mainHeading: {
             fontSize: 30,
             fontWeight: '600',
-            color: '#09CAC7'
+            color: '#09CAC7',
+            width: '100%',
+            textAlign: 'center'
         },
         galleryButtonCon: {
             width: '100%',
@@ -74,7 +76,7 @@ const PhotoGallery = ({ currentUser, galleryURLs, racerId }) => {
 
   return (
     <View style={styles.mainContainer}>
-        <Text style={styles.mainHeading}>Photos</Text>
+        <Text style={styles.mainHeading}>Photos:</Text>
         {currentUser.uid === racerId &&
             <View style={styles.galleryButtonCon}>
                 <Text style={styles.addPhotosHeading}>Add photos to your gallery:</Text>
@@ -84,13 +86,13 @@ const PhotoGallery = ({ currentUser, galleryURLs, racerId }) => {
             </View>
         }
         <View style={styles.galleryContainer}>
-            {galleryURLs.map((galleryURL) => {
+            {galleryURLs.map((galleryURL, i) => {
                 if (currentUser && currentUser.uid === racerId) {
                     return (
-                        <View style={{ width: '100%', marginTop: 15 }}>
+                        <View style={{ width: '100%', marginTop: 15 }} key={i}>
                             <View style={styles.xMarkContainer}>
-                                <TouchableOpacity>
-                                    <FontAwesomeIcon style={{fontSize: 18, color: '#09CAC7'}} icon={faXmark}/>
+                                <TouchableOpacity onPress={() => removeFromGallery(galleryURL)}>
+                                    <FontAwesomeIcon style={{fontSize: 26, color: '#09CAC7'}} icon={faXmark}/>
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity style={styles.photoContainer}>
@@ -100,7 +102,7 @@ const PhotoGallery = ({ currentUser, galleryURLs, racerId }) => {
                     )
                 } else {
                     return (
-                        <TouchableOpacity style={styles.photoContainer}>
+                        <TouchableOpacity style={styles.photoContainer} key={i}>
                             <Image source={{ uri: galleryURL }} style={styles.photo}/>
                         </TouchableOpacity>
                     )
