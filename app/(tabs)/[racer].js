@@ -14,6 +14,7 @@ import PhotoGallery from '../components/racerPage/PhotoGallery'
 import { getRace, singleUserListener, updateUser } from '../firebase/firestore'
 import { getDownloadableURL, deleteFile } from '../firebase/storage'
 import { firebaseAuth } from '../firebaseConfig'
+import ManageCrews from '../components/racerPage/ManageCrews'
 
 //
 /* import { getUser } from '../firebase/firestore' */
@@ -126,6 +127,7 @@ const RacerPage = () => {
       {racerData && firebaseAuth &&
         <ScrollView>
           <Hero racerData={racerData}/>
+          <ManageCrews crews={racerData.crews}/>
           <MyRaces races={racerRaces}/>
           <PhotoGallery currentUser={firebaseAuth.currentUser} galleryURLs={galleryURLs} racerId={racerData.uid} removeFromGallery={removeFromGallery} racerData={racerData}/>
         </ScrollView>
