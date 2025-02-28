@@ -1,9 +1,49 @@
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, Modal, ActivityIndicator } from 'react-native'
+import React, { useState } from 'react'
+
+//FontAwesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
-const PhotoGallery = ({ currentUser, galleryURLs, racerId, removeFromGallery }) => {
+//expo image picker import
+import * as ImagePicker from 'expo-image-picker'
+
+//firebase imports
+import { uploadImage } from '../../firebase/storage'
+import { updateUser } from '../../firebase/firestore'
+
+const PhotoGallery = ({ currentUser, galleryURLs, racerId, removeFromGallery, racerData }) => {
+
+    //initialize state for loading
+    const [isLoading, setIsLoading] = useState(false)
+
+    //handle selecting new images from the gallery
+    const pickImages = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ['images'],
+            quality: 1
+        })
+
+        //upload the images into the user's photo gallery
+        if (!result.canceled) {
+
+            setIsLoading(true)
+
+            const newImageURLs = await Promise.all(result.assets.map(async asset => {
+                const result = await uploadImage(asset, currentUser.uid)
+                return `gs://${result.metadata.bucket}/${result.metadata.fullPath}`
+            }))
+
+            const newUserObject = {
+                ...racerData,
+                photos: [...racerData.photos, ...newImageURLs],
+                uid: racerId
+            }
+            await updateUser(newUserObject)
+
+            setIsLoading(false)
+        }
+    }
 
     //get device height to be used in setting container dimension
     const ScreenHeight = Dimensions.get("window").height
@@ -71,16 +111,36 @@ const PhotoGallery = ({ currentUser, galleryURLs, racerId, removeFromGallery }) 
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'flex-end'
+        },
+        loadingContainer: {
+            width: '100%',
+            height: ScreenHeight,
+            backgroundColor: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        loadingText: {
+            fontSize: 30,
+            color: '#09CAC7',
+            fontWeight: '600',
+            marginLeft: 20
         }
     })
 
   return (
     <View style={styles.mainContainer}>
+        <Modal animationType='slide' visible={isLoading} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator color={'#09CAC7'}/>
+                <Text style={styles.loadingText}>Loading</Text>
+            </View>
+        </Modal>
         <Text style={styles.mainHeading}>Photos:</Text>
         {currentUser.uid === racerId &&
             <View style={styles.galleryButtonCon}>
                 <Text style={styles.addPhotosHeading}>Add photos to your gallery:</Text>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={pickImages}>
                     <Text style={styles.buttonText}>Select Photos</Text>
                 </TouchableOpacity>
             </View>

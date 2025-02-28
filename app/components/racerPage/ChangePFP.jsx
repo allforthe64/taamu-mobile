@@ -20,8 +20,6 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ['images'],
-            allowsEditing: true,
-            aspect: [4, 3],
             quality: 1
         })
 
@@ -76,8 +74,6 @@ const ChangePFP = ({setOpenPFP, racerData}) => {
         }
         
     }
-
-    //foo
 
   return (
     <View style={styles.mainContainer}>
