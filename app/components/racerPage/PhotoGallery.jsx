@@ -153,7 +153,7 @@ const PhotoGallery = ({ currentUser, galleryURLs, racerId, removeFromGallery, ra
                         <View style={{ width: '100%', marginTop: 15 }} key={i}>
                             <View style={styles.xMarkContainer}>
                                 <TouchableOpacity onPress={() => removeFromGallery(galleryURL)}>
-                                    <FontAwesomeIcon style={{ color: '#09CAC7'}} size={18} icon={faXmark}/>
+                                    <FontAwesomeIcon style={{ color: '#09CAC7'}} size={30} icon={faXmark}/>
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity style={styles.photoContainer}>
