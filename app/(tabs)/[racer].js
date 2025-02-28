@@ -92,26 +92,33 @@ const RacerPage = () => {
     //remove a photo from org gallery
     const removeFromGallery = async (input) => {
 
-      //get the index of the photo gallery url/find the actual path url in orgData photos
-      const photoIndex = galleryURLs.indexOf(input)
-      const rawURL = racerData.photos[photoIndex]
-      
-      //delete the photo from storage
-      deleteFile(racerData.photos[photoIndex])
+      try {
+        //get the index of the photo gallery url/find the actual path url in orgData photos
+        const photoIndex = galleryURLs.indexOf(input)
+        const rawURL = racerData.photos[photoIndex]
+        
+        console.log('photoIndex: ', photoIndex)
+        console.log('rawURL: ', rawURL)
 
-      //create the new orgData photos array
-      const newGalleryArray = racerData.photos.filter(url => url !== rawURL)
+        //delete the photo from storage
+        deleteFile(racerData.photos[photoIndex])
 
-      //filter out the galleryUrls
-      setGalleryURLs(url => url !== input)
+        //create the new orgData photos array
+        const newGalleryArray = racerData.photos.filter(url => url !== rawURL)
 
-      //update org data
-      const newRacerData = {
-          ...racerData,
-          photos: newGalleryArray,
-          uid: racerData.uid
+        //filter out the galleryUrls
+        setGalleryURLs(prev => prev.filter(url => url !== input))
+
+        //update org data
+        const newRacerData = {
+            ...racerData,
+            photos: newGalleryArray,
+            uid: racerData.uid
+        }
+        await updateUser(newRacerData)
+      } catch (err) {
+        console.log('error: ', err)
       }
-      await updateUser(newRacerData)
   }
 
   return (

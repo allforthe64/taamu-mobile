@@ -21,6 +21,7 @@ const PhotoGallery = ({ currentUser, galleryURLs, racerId, removeFromGallery, ra
     const pickImages = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ['images'],
+            allowsMultipleSelection: true,
             quality: 1
         })
 
@@ -152,7 +153,7 @@ const PhotoGallery = ({ currentUser, galleryURLs, racerId, removeFromGallery, ra
                         <View style={{ width: '100%', marginTop: 15 }} key={i}>
                             <View style={styles.xMarkContainer}>
                                 <TouchableOpacity onPress={() => removeFromGallery(galleryURL)}>
-                                    <FontAwesomeIcon style={{fontSize: 26, color: '#09CAC7'}} icon={faXmark}/>
+                                    <FontAwesomeIcon style={{ color: '#09CAC7'}} size={18} icon={faXmark}/>
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity style={styles.photoContainer}>
