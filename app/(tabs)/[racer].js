@@ -119,7 +119,7 @@ const RacerPage = () => {
           // Check if the response was successful
           if (response.ok) {
               const data = await response.json();
-
+              console.log('data: ', data)
               //set the deciphered display name
               setRacerCrews(data.data)
           } else {
