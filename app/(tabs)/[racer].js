@@ -13,7 +13,7 @@ import ManageCrews from '../components/racerPage/ManageCrews'
 
 
 //firebase imports
-import { getRace, singleUserListener, updateUser, getKey } from '../firebase/firestore'
+import { getRace, singleUserListener, updateUser, getKey, getAllCrews } from '../firebase/firestore'
 import { getDownloadableURL, deleteFile } from '../firebase/storage'
 import { firebaseAuth } from '../firebaseConfig'
 
@@ -103,6 +103,9 @@ const RacerPage = () => {
       getPhotoGalleryURLs()
 
       const operationSigaba = async () => {
+
+        const allCrews = await getAllCrews()
+
         const url = 'https://tuarolife.com/api/NSC4dp2m8SgzjOhrIybA'
         const payload = racerData.crews
         const key = keyData.key
@@ -114,7 +117,7 @@ const RacerPage = () => {
           headers: {
               'Content-Type': 'application/json', // Sets the request body as JSON
           },
-          body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
+          body: JSON.stringify({payload: payload, crews: allCrews, key: key, iv: iv}), // Converts the payload to JSON string
           });
 
           // Check if the response was successful
