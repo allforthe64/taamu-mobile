@@ -32,7 +32,9 @@ const ManageCrews = ({crews}) => {
             >
                 {
                     crews.map((crew) => {
-                       <Picker.Item key={crew} label={crew} value={crew} />
+                        return (
+                            <Picker.Item key={crew} label={crew} value={crew} />
+                        )
                     })
                 }
             </Picker>

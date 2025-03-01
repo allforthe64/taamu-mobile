@@ -48,50 +48,93 @@ const RacerPage = () => {
         'gs://areregsoft.appspot.com/xhX6FwzcSCMkGak0nnPTbapS0ik2/Screenshot (71).png.2024-11-15T13:19:00' ],
      craftCategories: [ 'V6', 'OC1', 'V1' ] }) */
 
-    const [racerData, setRacerData] = useState()
-    const [racerRaces, setRacerRaces] = useState([])
-    const [galleryURLs, setGalleryURLs] = useState([])
+  const [racerData, setRacerData] = useState()
+  const [racerRaces, setRacerRaces] = useState([])
+  const [galleryURLs, setGalleryURLs] = useState([])
+  const [racerCrews, setRacerCrews] = useState([])
+  const [keyData, setKeyData] = useState()
 
-    //grab racer data
-    useFocusEffect(
-      useCallback(() => {
-        if (firebaseAuth.currentUser.uid) {
-          //activate single user listener based on the id passed through the url params
-          const getRacerData = async () => {
-            const unsubscribe = await singleUserListener(firebaseAuth.currentUser.uid, setRacerData)
+  //grab racer data
+  useFocusEffect(
+    useCallback(() => {
+      if (firebaseAuth.currentUser.uid) {
+        //activate single user listener based on the id passed through the url params
+        const getRacerData = async () => {
+          const unsubscribe = await singleUserListener(firebaseAuth.currentUser.uid, setRacerData)
 
-            return () => unsubscribe()
-          }
-          getRacerData()
+          return () => unsubscribe()
         }
-
-      }, [firebaseAuth.currentUser.uid])
-    )
-
-    useEffect(() => {
-      if (racerData) {
-        const getRacerRaces = async () => {
-          const currentUserRaces = await Promise.all(racerData.registeredFor.map(async raceId => {
-            const raceData = await getRace(raceId)
-            return raceData
-          }))
-          setRacerRaces(currentUserRaces)
-        }
-        getRacerRaces()
-
-        //get urls for photo gallery
-        const getPhotoGalleryURLs = async () => {
-          
-          //map over urls and return the downloadable url
-          const galleryDownloadLinks = await Promise.all(racerData.photos.map(async (url) => {return await getDownloadableURL(url)}))
-          setGalleryURLs(galleryDownloadLinks) 
-        }
-        getPhotoGalleryURLs()
+        getRacerData()
       }
-    }, [racerData])
 
-    //remove a photo from org gallery
-    const removeFromGallery = async (input) => {
+    }, [firebaseAuth.currentUser.uid])
+  )
+
+  useFocusEffect(
+      useCallback(() => {
+          const getKeyData = async () => {
+              const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
+              setKeyData(keyDataObj)
+          }
+          getKeyData()
+      }, [])
+  )
+  
+
+  useEffect(() => {
+    if (racerData && keyData) {
+      const getRacerRaces = async () => {
+        const currentUserRaces = await Promise.all(racerData.registeredFor.map(async raceId => {
+          const raceData = await getRace(raceId)
+          return raceData
+        }))
+        setRacerRaces(currentUserRaces)
+      }
+      getRacerRaces()
+
+      //get urls for photo gallery
+      const getPhotoGalleryURLs = async () => {
+        
+        //map over urls and return the downloadable url
+        const galleryDownloadLinks = await Promise.all(racerData.photos.map(async (url) => {return await getDownloadableURL(url)}))
+        setGalleryURLs(galleryDownloadLinks) 
+      }
+      getPhotoGalleryURLs()
+
+      const operationSigaba = async () => {
+        const url = 'https://tuarolife.com/api/NSC4dp2m8SgzjOhrIybA'
+        const payload = racerData.crews
+        const key = keyData.key
+        const iv = keyData.iv
+
+        try {
+          const response = await fetch(url, {
+          method: 'POST', // Specifies the request method
+          headers: {
+              'Content-Type': 'application/json', // Sets the request body as JSON
+          },
+          body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
+          });
+
+          // Check if the response was successful
+          if (response.ok) {
+              const data = await response.json();
+
+              //set the deciphered display name
+              setRacerCrews(data.data)
+          } else {
+            console.error('Failed to send data:', response.status);
+          }
+        } catch (error) {
+            console.error('Error sending POST request:', error);
+        }
+      }
+      operationSigaba()
+    }
+  }, [racerData, keyData])
+
+  //remove a photo from org gallery
+  const removeFromGallery = async (input) => {
 
       try {
         //get the index of the photo gallery url/find the actual path url in orgData photos
@@ -122,11 +165,13 @@ const RacerPage = () => {
       }
   }
 
+  console.log(racerCrews)
+
   return (
     <View style={styles.mainContainer}>
       {racerData && firebaseAuth &&
         <ScrollView>
-          <Hero racerData={racerData}/>
+          <Hero racerData={racerData} keyData={keyData}/>
           <ManageCrews crews={racerData.crews}/>
           <MyRaces races={racerRaces}/>
           <PhotoGallery currentUser={firebaseAuth.currentUser} galleryURLs={galleryURLs} racerId={racerData.uid} removeFromGallery={removeFromGallery} racerData={racerData}/>

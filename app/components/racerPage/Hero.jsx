@@ -13,10 +13,10 @@ import { Link } from 'expo-router'
 import EditProfile from './EditProfile';
 import ChangePFP from './ChangePFP'
 
-const Hero = ({racerData}) => {
+const Hero = ({racerData, keyData}) => {
     
     //general state
-    const [keyData, setKeyData] = useState()
+    /* const [keyData, setKeyData] = useState() */
     const [openPFP, setOpenPFP] = useState(false)
     const [openEditProfile, setOpenEditProfile] = useState(false)
 
@@ -45,7 +45,7 @@ const Hero = ({racerData}) => {
         }, [racerData])
     )
 
-    useFocusEffect(
+    /* useFocusEffect(
         useCallback(() => {
             const getKeyData = async () => {
                 const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
@@ -54,13 +54,13 @@ const Hero = ({racerData}) => {
             getKeyData()
         }, [])
     )
-
+ */
     useFocusEffect(
         useCallback(() => {
             if (racerData.fName && keyData) {
                 try {
                     const operationDetachment = async () => {
-                        const url = 'https://tuarolife.com/api/cU5hF0mLrS7wyiRIIJ58';
+                        const url = 'https://tuarolife.com/api/cU5hF0mLrS7wyiRIIJ58'
                         const payload = [racerData.fName, racerData.lName, racerData.gender, racerData.email, racerData.phone.split(' ')[1]]
                         const key = keyData.key
                         const iv = keyData.iv
