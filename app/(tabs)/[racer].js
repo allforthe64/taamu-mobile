@@ -65,21 +65,16 @@ const RacerPage = () => {
           return () => unsubscribe()
         }
         getRacerData()
+
+        const getKeyData = async () => {
+          const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
+          setKeyData(keyDataObj)
+        }
+        getKeyData()
       }
 
     }, [firebaseAuth.currentUser.uid])
   )
-
-  useFocusEffect(
-      useCallback(() => {
-          const getKeyData = async () => {
-              const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
-              setKeyData(keyDataObj)
-          }
-          getKeyData()
-      }, [])
-  )
-  
 
   useEffect(() => {
     if (racerData && keyData) {
