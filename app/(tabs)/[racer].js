@@ -79,7 +79,7 @@ const RacerPage = () => {
         setKeyData(keyDataObj)
       }
       getKeyData()
-    })
+    }, [])
   )
 
   useEffect(() => {
