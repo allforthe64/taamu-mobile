@@ -9,12 +9,13 @@ import { useLocalSearchParams } from 'expo-router'
 import Hero from '../components/racerPage/Hero'
 import MyRaces from '../components/racerPage/MyRaces'
 import PhotoGallery from '../components/racerPage/PhotoGallery'
+import ManageCrews from '../components/racerPage/ManageCrews'
+
 
 //firebase imports
-import { getRace, singleUserListener, updateUser } from '../firebase/firestore'
+import { getRace, singleUserListener, updateUser, getKey } from '../firebase/firestore'
 import { getDownloadableURL, deleteFile } from '../firebase/storage'
 import { firebaseAuth } from '../firebaseConfig'
-import ManageCrews from '../components/racerPage/ManageCrews'
 
 //
 /* import { getUser } from '../firebase/firestore' */
@@ -66,14 +67,19 @@ const RacerPage = () => {
         }
         getRacerData()
 
-        const getKeyData = async () => {
-          const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
-          setKeyData(keyDataObj)
-        }
-        getKeyData()
       }
 
     }, [firebaseAuth.currentUser.uid])
+  )
+
+  useFocusEffect(
+    useCallback(() => {
+      const getKeyData = async () => {
+        const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
+        setKeyData(keyDataObj)
+      }
+      getKeyData()
+    })
   )
 
   useEffect(() => {
@@ -161,6 +167,7 @@ const RacerPage = () => {
   }
 
   console.log(racerCrews)
+  console.log(keyData)
 
   return (
     <View style={styles.mainContainer}>
