@@ -117,7 +117,7 @@ const RacerPage = () => {
           headers: {
               'Content-Type': 'application/json', // Sets the request body as JSON
           },
-          body: JSON.stringify({payload: payload, crews: allCrews, key: key, iv: iv}), // Converts the payload to JSON string
+          body: JSON.stringify({payload: payload, allCrews: allCrews, key: key, iv: iv}), // Converts the payload to JSON string
           });
 
           // Check if the response was successful
