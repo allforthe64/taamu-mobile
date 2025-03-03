@@ -34,22 +34,24 @@ const ManageCrews = ({racerCrews}) => {
                 fontWeight: '500',
                 color: 'white'
             }}>Viewing<Text style={styles.subHeading}> crew:</Text></Text>
-            <Picker
-                mode='dropdown'
-                style={styles.singleLineTextInputs}
-                selectedValue={selectedCrew.id}
-                onValueChange={(itemValue, itemIndex) =>
-                    setSelectedCrew(racerCrews.filter(crew => crew.id === itemValue))
-                }
-            >
-                {
-                    racerCrews.map((crew) => {
-                        return (
-                            <Picker.Item key={crew.id} label={crew.crewName} value={crew.id} />
-                        )
-                    })
-                }
-            </Picker>
+            {selectedCrew &&
+                <Picker
+                    mode='dropdown'
+                    style={styles.singleLineTextInputs}
+                    selectedValue={selectedCrew.id}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setSelectedCrew(racerCrews.filter(crew => crew.id === itemValue))
+                    }
+                >
+                    {
+                        racerCrews.map((crew) => {
+                            return (
+                                <Picker.Item key={crew.id} label={crew.crewName} value={crew.id} />
+                            )
+                        })
+                    }
+                </Picker>
+            }
             <View style={{width: '70%', height: 2, borderRadius: 100, backgroundColor: 'white', borderWidth: 1, borderColor: 'white', marginTop: 10}}></View>
       </View>
     </View>
