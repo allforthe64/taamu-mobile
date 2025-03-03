@@ -9,7 +9,7 @@ import { useLocalSearchParams } from 'expo-router'
 import Hero from '../components/racerPage/Hero'
 import MyRaces from '../components/racerPage/MyRaces'
 import PhotoGallery from '../components/racerPage/PhotoGallery'
-import ManageCrews from '../components/racerPage/ManageCrews'
+import ManageCrews from '../components/racerPage/manageCrewComps/ManageCrews'
 
 
 //firebase imports
