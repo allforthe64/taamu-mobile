@@ -1,10 +1,22 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useCallback } from 'react'
 
 //picker component import
 import {Picker} from '@react-native-picker/picker';
+import { useFocusEffect } from 'expo-router';
 
-const ManageCrews = ({crews}) => {
+const ManageCrews = ({racerCrews}) => {
+
+    const [selectedCrew, setSelectedCrew] = useState()
+
+    useFocusEffect(
+        useCallback(() => {
+            if (racerCrews) setSelectedCrew(racerCrews[0])
+        }, [racerCrews])
+    )
+
+    console.log(selectedCrew)
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.mainHeading}>Manage your crews</Text>
@@ -25,15 +37,15 @@ const ManageCrews = ({crews}) => {
             <Picker
                 mode='dropdown'
                 style={styles.singleLineTextInputs}
-                /* selectedValue={selectedCraftCategory}
+                selectedValue={selectedCrew.id}
                 onValueChange={(itemValue, itemIndex) =>
-                    setSelectedCraftCategory(itemValue)
-                } */
+                    setSelectedCrew(racerCrews.filter(crew => crew.id === itemValue))
+                }
             >
                 {
-                    crews.map((crew) => {
+                    racerCrews.map((crew) => {
                         return (
-                            <Picker.Item key={crew} label={crew} value={crew} />
+                            <Picker.Item key={crew.id} label={crew.crewName} value={crew.id} />
                         )
                     })
                 }

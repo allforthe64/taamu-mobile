@@ -96,8 +96,6 @@ const MyRaces = ({races}) => {
         }
     }, [decryptedRaces, mode])
 
-    console.log(racesToShow)
-
   return (
     <View style={styles.mainContainer}>
         <View style={styles.modeButtonContainer}>

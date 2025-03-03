@@ -188,7 +188,6 @@ const RacesMain = ({races}) => {
                     return isBefore(raceEndDate, filterEndDate) || isEqual(raceEndDate, filterEndDate)
                 })
             }
-            console.log(newRaceArray)
 
             //results vs ongoing results vs registration
             if (timeFilter === "upcoming") {
@@ -208,7 +207,6 @@ const RacesMain = ({races}) => {
                     isBefore(parseDate(race.endDate), today)
                 );
             }
-            console.log(newRaceArray)
 
             setFilteredRaces(newRaceArray)
         }

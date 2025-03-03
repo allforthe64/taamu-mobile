@@ -169,15 +169,12 @@ const RacerPage = () => {
       }
   }
 
-  console.log(racerCrews)
-  console.log(keyData)
-
   return (
     <View style={styles.mainContainer}>
       {racerData && firebaseAuth &&
         <ScrollView>
           <Hero racerData={racerData} keyData={keyData}/>
-          <ManageCrews crews={racerData.crews}/>
+          <ManageCrews crews={racerCrews}/>
           <MyRaces races={racerRaces}/>
           <PhotoGallery currentUser={firebaseAuth.currentUser} galleryURLs={galleryURLs} racerId={racerData.uid} removeFromGallery={removeFromGallery} racerData={racerData}/>
         </ScrollView>
