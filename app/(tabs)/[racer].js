@@ -174,7 +174,7 @@ const RacerPage = () => {
       {racerData && firebaseAuth &&
         <ScrollView>
           <Hero racerData={racerData} keyData={keyData}/>
-          <ManageCrews crews={racerCrews}/>
+          <ManageCrews racerCrews={racerCrews}/>
           <MyRaces races={racerRaces}/>
           <PhotoGallery currentUser={firebaseAuth.currentUser} galleryURLs={galleryURLs} racerId={racerData.uid} removeFromGallery={removeFromGallery} racerData={racerData}/>
         </ScrollView>
