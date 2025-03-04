@@ -3,12 +3,21 @@ import React from 'react'
 
 //component imports
 import GenCrewData from './crewCardComponents/GenCrewData'
+import CrewMemberData from './crewCardComponents/CrewMemberData'
 
 const SelectedCrew = ({selectedCrew}) => {
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.crewName}>Crew name: <Text style={[styles.crewName, {color: '#09CAC7'}]}>{selectedCrew.crewName}</Text></Text>
       <GenCrewData craftType={selectedCrew.craftType} ageCategory={selectedCrew.ageCategory} gender={selectedCrew.gender} maxCrewMembers={selectedCrew.maxCrewMembers}/>
+      <Text style={styles.crewMembers}>Crew members:</Text>
+      <View style={styles.crewMemberContainer}>
+        {selectedCrew.crewMembers.map((crewMember, i) => {
+            return (
+                <CrewMemberData key={i} crewMember={crewMember}/>
+            )
+        })}
+      </View>
     </View>
   )
 }
@@ -26,5 +35,17 @@ const styles = StyleSheet.create({
         fontSize: 28,
         color: 'white',
         fontWeight: '600'
+    },
+    crewMembers: {
+        marginTop: 20,
+        color: '#09CAC7',
+        fontSize: 22,
+        fontWeight: '500'
+    },
+    crewMemberContainer: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
     }
 })
