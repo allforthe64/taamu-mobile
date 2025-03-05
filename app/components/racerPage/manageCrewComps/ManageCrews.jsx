@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native'
 import React, { useCallback, useState } from 'react'
 
 //picker component import
@@ -7,11 +7,13 @@ import { useFocusEffect } from 'expo-router';
 
 //SelectedCrew and ManageCrewButtons component imports
 import SelectedCrew from './SelectedCrew';
-import ManageCrewButtons from './crewCardComponents/ManageCrewButtons';
+import ManageCrewButtons from './ManageCrewButtons';
 
 const ManageCrews = ({racerCrews}) => {
 
+    //initialize state
     const [selectedCrew, setSelectedCrew] = useState()
+    const [openAddCrew, setOpenAddCrew] = useState(false)
 
     useFocusEffect(
         useCallback(() => {
@@ -22,14 +24,17 @@ const ManageCrews = ({racerCrews}) => {
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.mainHeading}>Manage your crews</Text>
-      <View style={styles.addCrewButtonContainer}>
+        <Modal animationType='slide' visible={openAddCrew} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
+            
+        </Modal>
+        <Text style={styles.mainHeading}>Manage your crews</Text>
+        <View style={styles.addCrewButtonContainer}>
         <Text style={styles.subHeading}>Add a new crew:</Text>
         <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Add crew</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.selectCrewWidgetContainer}>
+        </View>
+        <View style={styles.selectCrewWidgetContainer}>
             <Text style={{
                 width: '100%',
                 textAlign: 'center',
@@ -56,12 +61,12 @@ const ManageCrews = ({racerCrews}) => {
                 </Picker>
             }
             <View style={{width: '70%', height: 2, borderRadius: 100, backgroundColor: 'white', borderWidth: 1, borderColor: 'white', marginTop: 25}}></View>
-      </View>
-      { selectedCrew &&
+        </View>
+        { selectedCrew &&
         <SelectedCrew selectedCrew={selectedCrew}/>
-      }
-      <View style={{width: '75%', marginTop: 25, height: 2, borderRadius: 100, backgroundColor: '#09CAC7', borderWidth: 1, borderColor: '#09CAC7'}}></View>
-      <ManageCrewButtons />
+        }
+        <View style={{width: '75%', marginTop: 25, height: 2, borderRadius: 100, backgroundColor: '#09CAC7', borderWidth: 1, borderColor: '#09CAC7'}}></View>
+        <ManageCrewButtons />
     </View>
   )
 }

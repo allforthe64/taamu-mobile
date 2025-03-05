@@ -1,16 +1,21 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 
 const CrewMemberData = ({crewMember}) => {
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.dataRow}>First name: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.fName}</Text></Text>
-      <Text style={styles.dataRow}>Last name: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.lName}</Text></Text>
-      <Text style={styles.dataRow}>Age category: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.ageCategory}</Text></Text>
-      <Text style={styles.dataRow}>Gender: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.gender}</Text></Text>
-      <Text style={styles.dataRow}>Email: </Text>
-      <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.email}</Text>
-      <Text style={styles.dataRow}>Phone: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.phone}</Text></Text>
+      <Text style={[styles.dataRow, { marginTop: 10 }]}>Last name: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.lName}</Text></Text>
+      <Text style={[styles.dataRow, { marginTop: 10 }]}>Age category: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.ageCategory}</Text></Text>
+      <Text style={[styles.dataRow, { marginTop: 10 }]}>Gender: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.gender}</Text></Text>
+      <Text style={[styles.dataRow, { marginTop: 10 }]}>Email: </Text>
+      <Text style={[styles.dataRow, {color: 'white', marginTop: 10}]}>{crewMember.email}</Text>
+      <Text style={[styles.dataRow, { marginTop: 10 }]}>Phone: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.phone}</Text></Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Remove crew member</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -26,5 +31,24 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '600',
         color: '#09CAC7'
-    }
+    },
+    buttonContainer: {
+      marginTop: 15
+    },
+    button: {
+      backgroundColor: '#09CAC7',
+      paddingTop: 4,
+      paddingLeft: 8,
+      paddingBottom: 4,
+      paddingRight: 8,
+      borderRadius: 100,
+      marginTop: 15
+  },
+  buttonText: {
+      color: 'white',
+      fontSize: 12,
+      width: '100%',
+      textAlign: 'center',
+      fontWeight: '600'
+  }
 })
