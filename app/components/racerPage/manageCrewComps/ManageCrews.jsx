@@ -5,8 +5,9 @@ import React, { useCallback, useState } from 'react'
 import {Picker} from '@react-native-picker/picker';
 import { useFocusEffect } from 'expo-router';
 
-//SelectedCrew component import
+//SelectedCrew and ManageCrewButtons component imports
 import SelectedCrew from './SelectedCrew';
+import ManageCrewButtons from './crewCardComponents/ManageCrewButtons';
 
 const ManageCrews = ({racerCrews}) => {
 
@@ -59,6 +60,8 @@ const ManageCrews = ({racerCrews}) => {
       { selectedCrew &&
         <SelectedCrew selectedCrew={selectedCrew}/>
       }
+      <View style={{width: '75%', marginTop: 25, height: 2, borderRadius: 100, backgroundColor: '#09CAC7', borderWidth: 1, borderColor: '#09CAC7'}}></View>
+      <ManageCrewButtons />
     </View>
   )
 }
