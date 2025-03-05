@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 
 //fontAwesome imports
@@ -16,6 +16,7 @@ const AddCrew = () => {
     const [craftCategory, setCraftCategory] = useState('')
     const [maximumNoCrewMembers, setMaximumNoCrewMembers] = useState(0)
     const [ageCategory, setAgeCategory] = useState('')
+    const [gender, setGender] = useState('')
 
   return (
     <View style={styles.mainContainer}>
@@ -114,6 +115,28 @@ const AddCrew = () => {
                 <Picker.Item key={'Masters 75+'} label={'Masters 75+'} value={'Masters 75+'} />
             </Picker>
         </View>
+        <View style={styles.inputContainer}>
+            <Text style={styles.inputHeading}>Select crew <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>age category:</Text></Text>
+            <Picker 
+                mode='dropdown'
+                style={focused === 'ageCategory' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]}
+                selectedValue={ageCategory}
+                onValueChange={(itemValue, itemIndex) => {
+                    if (itemValue !== '') setAgeCategory(itemValue)
+                }}
+                onFocus={() => setFocused('ageCategory')}
+            >
+                <Picker.Item key={''} label={'Choose one...'} value={''} />
+                <Picker.Item key={'m'} label={'Male'} value={'m'} />
+                <Picker.Item key={'f'} label={'Female'} value={'f'} />
+                <Picker.Item key={'mixed'} label={'Mixed'} value={'mixed'} />
+            </Picker>
+        </View>
+        <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Save crew</Text>
+            </TouchableOpacity>
+        </View>
     </View>
   )
 }
@@ -123,7 +146,8 @@ export default AddCrew
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: '#01354B'
+        backgroundColor: '#01354B',
+        paddingBottom: 25
     },
     xMarkContainer: {
         width: 'full',
@@ -172,4 +196,37 @@ const styles = StyleSheet.create({
         borderColor: '#09CAC7',
         borderWidth: 2
     },
+    buttonContainer: {
+        paddingTop: '8%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    button: {
+        backgroundColor: '#09CAC7',
+        paddingTop: 7,
+        paddingLeft: 15,
+        paddingBottom: 7,
+        paddingRight: 15,
+        borderRadius: 100,
+        marginTop: 15
+    },
+    buttonDisabled: {
+        backgroundColor: '#09CAC7',
+        paddingTop: 7,
+        paddingLeft: 15,
+        paddingBottom: 7,
+        paddingRight: 15,
+        borderRadius: 100,
+        marginTop: 15,
+        opacity: .5
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 18,
+        width: '100%',
+        textAlign: 'center',
+        fontWeight: '600'
+    }
 })
