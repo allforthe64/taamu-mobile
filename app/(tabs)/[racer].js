@@ -123,7 +123,6 @@ const RacerPage = () => {
           // Check if the response was successful
           if (response.ok) {
               const data = await response.json();
-              console.log('data: ', data)
               //set the deciphered display name
               setRacerCrews(data.data)
           } else {
@@ -144,9 +143,6 @@ const RacerPage = () => {
         //get the index of the photo gallery url/find the actual path url in orgData photos
         const photoIndex = galleryURLs.indexOf(input)
         const rawURL = racerData.photos[photoIndex]
-        
-        console.log('photoIndex: ', photoIndex)
-        console.log('rawURL: ', rawURL)
 
         //delete the photo from storage
         deleteFile(racerData.photos[photoIndex])

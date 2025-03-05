@@ -42,7 +42,7 @@ const ManageCrews = ({racerCrews}) => {
                     style={styles.singleLineTextInputs}
                     selectedValue={selectedCrew.id}
                     onValueChange={(itemValue, itemIndex) =>
-                        setSelectedCrew(racerCrews.filter(crew => crew.id === itemValue))
+                        setSelectedCrew(racerCrews.filter(crew => crew.id === itemValue)[0])
                     }
                 >
                     {
