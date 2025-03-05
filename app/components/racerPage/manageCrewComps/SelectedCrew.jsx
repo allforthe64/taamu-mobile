@@ -6,17 +6,25 @@ import GenCrewData from './crewCardComponents/GenCrewData'
 import CrewMemberData from './crewCardComponents/CrewMemberData'
 
 const SelectedCrew = ({selectedCrew}) => {
+
+    console.log('selected crew: ', selectedCrew)
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.crewName}>Crew name: <Text style={[styles.crewName, {color: '#09CAC7'}]}>{selectedCrew.crewName}</Text></Text>
       <GenCrewData craftType={selectedCrew.craftType} ageCategory={selectedCrew.ageCategory} gender={selectedCrew.gender} maxCrewMembers={selectedCrew.maxCrewMembers}/>
       <Text style={styles.crewMembers}>Crew members:</Text>
       <View style={styles.crewMemberContainer}>
-        {selectedCrew.crewMembers.map((crewMember, i) => {
-            return (
-                <CrewMemberData key={i} crewMember={crewMember}/>
-            )
-        })}
+        {selectedCrew.crewMembers.length > 0 ?
+            <>
+                {selectedCrew.crewMembers.map((crewMember, i) => {
+                    return (
+                        <CrewMemberData key={i} crewMember={crewMember}/>
+                    )
+                })}   
+            </>
+        :
+            <Text style={{marginTop: 20, color: 'white', fontSize: 22, width: '100%', textAlign: 'center'}}>Crew is empty...</Text>
+        }
       </View>
     </View>
   )
