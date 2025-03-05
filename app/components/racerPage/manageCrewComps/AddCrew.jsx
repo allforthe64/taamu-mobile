@@ -8,7 +8,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 //picker component import
 import {Picker} from '@react-native-picker/picker';
 
-const AddCrew = () => {
+const AddCrew = ({setOpenAddCrew}) => {
 
     //initialize state
     const [focused, setFocused] = useState()
@@ -21,7 +21,7 @@ const AddCrew = () => {
   return (
     <View style={styles.mainContainer}>
         <View style={styles.xMarkContainer}>
-            <TouchableOpacity onPress={() => setOpenPFP(false)}>
+            <TouchableOpacity onPress={() => setOpenAddCrew(false)}>
                 <FontAwesomeIcon icon={faXmark} color='white' size={40}/>
             </TouchableOpacity>
         </View>
@@ -116,15 +116,15 @@ const AddCrew = () => {
             </Picker>
         </View>
         <View style={styles.inputContainer}>
-            <Text style={styles.inputHeading}>Select crew <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>age category:</Text></Text>
+            <Text style={styles.inputHeading}>Select crew <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>gender:</Text></Text>
             <Picker 
                 mode='dropdown'
-                style={focused === 'ageCategory' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]}
-                selectedValue={ageCategory}
+                style={focused === 'gender' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]}
+                selectedValue={gender}
                 onValueChange={(itemValue, itemIndex) => {
-                    if (itemValue !== '') setAgeCategory(itemValue)
+                    if (itemValue !== '') setGender(itemValue)
                 }}
-                onFocus={() => setFocused('ageCategory')}
+                onFocus={() => setFocused('gender')}
             >
                 <Picker.Item key={''} label={'Choose one...'} value={''} />
                 <Picker.Item key={'m'} label={'Male'} value={'m'} />

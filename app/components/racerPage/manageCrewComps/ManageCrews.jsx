@@ -5,9 +5,10 @@ import React, { useCallback, useState } from 'react'
 import {Picker} from '@react-native-picker/picker';
 import { useFocusEffect } from 'expo-router';
 
-//SelectedCrew and ManageCrewButtons component imports
+//component imports
 import SelectedCrew from './SelectedCrew';
 import ManageCrewButtons from './ManageCrewButtons';
+import AddCrew from './AddCrew';
 
 const ManageCrews = ({racerCrews}) => {
 
@@ -25,12 +26,12 @@ const ManageCrews = ({racerCrews}) => {
   return (
     <View style={styles.mainContainer}>
         <Modal animationType='slide' visible={openAddCrew} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
-            
+            <AddCrew setOpenAddCrew={setOpenAddCrew}/>
         </Modal>
         <Text style={styles.mainHeading}>Manage your crews</Text>
         <View style={styles.addCrewButtonContainer}>
         <Text style={styles.subHeading}>Add a new crew:</Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => setOpenAddCrew(true)}>
             <Text style={styles.buttonText}>Add crew</Text>
         </TouchableOpacity>
         </View>
