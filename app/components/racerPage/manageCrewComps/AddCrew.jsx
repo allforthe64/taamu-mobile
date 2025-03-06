@@ -13,7 +13,7 @@ const AddCrew = ({setOpenAddCrew}) => {
     //initialize state
     const [focused, setFocused] = useState()
     const [teamName, setTeamName] = useState('')
-    const [craftCategory, setCraftCategory] = useState('')
+    const [craftType, setCraftType] = useState('')
     const [maximumNoCrewMembers, setMaximumNoCrewMembers] = useState(0)
     const [ageCategory, setAgeCategory] = useState('')
     const [gender, setGender] = useState('')
@@ -34,11 +34,11 @@ const AddCrew = ({setOpenAddCrew}) => {
             <Text style={styles.inputHeading}>Select a <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>craft type:</Text></Text>
             <Picker
                 mode='dropdown'
-                style={focused === 'craftCategory' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]}
-                selectedValue={craftCategory}
+                style={focused === 'craftType' ? [styles.focusedSingleLineTextInputs, {marginTop: '10%'}] : [styles.singleLineTextInputs, {marginTop: '10%'}]}
+                selectedValue={craftType}
                 onValueChange={(itemValue, itemIndex) => {
                     if (itemValue !== '') {
-                        setCraftCategory(itemValue)
+                        setCraftType(itemValue)
                         if (e.target.value === 'OC2 - relay' || e.target.value === 'OC1 - relay' || e.target.value === 'V1 - relay') {
                             setMaximumNoCrewMembers(2)
                         } else {
@@ -46,7 +46,7 @@ const AddCrew = ({setOpenAddCrew}) => {
                         }
                 }
                 }}
-                onFocus={() => setFocused('craftCategory')}
+                onFocus={() => setFocused('craftType')}
                 >
                     <Picker.Item key={''} label={'Choose one...'} value={''} />
                     <Picker.Item key={'OC2'} label={'OC2 - non relay crew'} value={'OC2'} />
