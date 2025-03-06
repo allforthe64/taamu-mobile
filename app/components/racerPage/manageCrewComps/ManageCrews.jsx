@@ -10,7 +10,7 @@ import SelectedCrew from './SelectedCrew';
 import ManageCrewButtons from './ManageCrewButtons';
 import AddCrew from './AddCrew';
 
-const ManageCrews = ({racerCrews}) => {
+const ManageCrews = ({racerCrews, keyData, racerData}) => {
 
     //initialize state
     const [selectedCrew, setSelectedCrew] = useState()
@@ -26,7 +26,7 @@ const ManageCrews = ({racerCrews}) => {
   return (
     <View style={styles.mainContainer}>
         <Modal animationType='slide' visible={openAddCrew} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
-            <AddCrew setOpenAddCrew={setOpenAddCrew}/>
+            <AddCrew setOpenAddCrew={setOpenAddCrew} keyData={keyData} racerData={racerData}/>
         </Modal>
         <Text style={styles.mainHeading}>Manage your crews</Text>
         <View style={styles.addCrewButtonContainer}>
