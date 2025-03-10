@@ -7,7 +7,6 @@ import CrewMemberData from './crewCardComponents/CrewMemberData'
 
 const SelectedCrew = ({selectedCrew}) => {
 
-    console.log('selected crew: ', selectedCrew)
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.crewName}>Crew name: <Text style={[styles.crewName, {color: '#09CAC7'}]}>{selectedCrew.crewName}</Text></Text>
