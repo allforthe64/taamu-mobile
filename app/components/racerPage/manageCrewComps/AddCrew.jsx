@@ -123,9 +123,9 @@ const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
                     >
                         <Picker.Item key={''} label={'Choose one...'} value={''} />
                         <Picker.Item key={'OC2'} label={'OC2 - non relay crew'} value={'OC2'} />
-                        <Picker.Item key={'OC2 - relay'} label={'OC2 - relay'} value={'OC2 - relay crew'} />
-                        <Picker.Item key={'OC1 - relay'} label={'OC1 - relay'} value={'OC1 - relay crew'} />
-                        <Picker.Item key={'V1 - relay'} label={'V1 - relay'} value={'V1 - relay crew'} />
+                        <Picker.Item key={'OC2 - relay'} label={'OC2 - relay'} value={'OC2 - relay'} />
+                        <Picker.Item key={'OC1 - relay'} label={'OC1 - relay'} value={'OC1 - relay'} />
+                        <Picker.Item key={'V1 - relay'} label={'V1 - relay'} value={'V1 - relay'} />
                         <Picker.Item key={'V6'} label={'V6'} value={'V6'} />
                         <Picker.Item key={'V3'} label={'V3'} value={'V3'} />
                         <Picker.Item key={'V12'} label={'V12'} value={'V12'} />
