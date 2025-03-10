@@ -30,13 +30,13 @@ const DeleteCrew = ({ setOpenDeleteCrew, selectedCrew, racerData }) => {
   return (
     <View style={styles.mainContainer}>
         <View style={styles.xMarkContainer}>
-            <TouchableOpacity onPress={() => setOpenAddCrew(false)}>
+            <TouchableOpacity onPress={() => setOpenDeleteCrew(false)}>
                 <FontAwesomeIcon icon={faXmark} color='white' size={40}/>
             </TouchableOpacity>
         </View>
         <View style={styles.contentContainer}>
             <Text style={styles.mainHeading}>Are you sure you want to delete the crew:</Text>
-            <Text style={styles.subHeading}>{ selectedCrew.crewName }</Text>
+            <Text style={styles.subHeading}>{ selectedCrew?.crewName }</Text>
         </View>
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={handleDelete}>
