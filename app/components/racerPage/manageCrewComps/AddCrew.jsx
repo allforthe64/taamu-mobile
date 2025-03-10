@@ -65,7 +65,7 @@ const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
             //create new crew data object
             const crewObj = {
                 id: `${crewId}`,
-                coach: coachId,
+                coach: racerData.uid,
                 crewName: result[0],
                 craftType: craftType,
                 ageCategory: ageCategory,
