@@ -51,35 +51,43 @@ const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
 
     //create a new crew data obj
     const handleAddCrew = async () => {
+        alert('running')
 
-        //storm da beaches
-        const result = await operationCleanslate()
+        try {
+            //storm da beaches
+            const result = await operationCleanslate()
 
-        //generate new crewId
-        const crewId = Math.random().toString(20).toString().split('.')[1] + Math.random().toString(20).toString().split('.')[1]
+            console.log(result)
 
-        //create new crew data object
-        const crewObj = {
-            id: `${crewId}`,
-            coach: coachId,
-            crewName: result[0],
-            craftType: craftType,
-            ageCategory: ageCategory,
-            gender: result[1],
-            maxCrewMembers: craftType === 'V6' ||craftType === 'OC2 - relay' ||craftType === 'OC1 - relay' || craftType === 'V1 - relay' || craftType === 'Surfski Double - relay' || craftType === 'Surfski Single - relay' ? Number(maximumNoCrewMembers) : craftType === 'OC2' || craftType === 'War Canoe Double' || craftType === 'Surfski Double' ? 2 : craftType === 'V3' ? 3 : craftType === 'War Canoe 6 Man' ? 6 : craftType === 'War Canoe 11 Man' ? 11 : craftType === 'Dragon Boat 20 Man' ? 22 : craftType === 'Dragon Boat 10 Man' ? 12 : 12,
-            crewMembers: []
+            //generate new crewId
+            const crewId = Math.random().toString(20).toString().split('.')[1] + Math.random().toString(20).toString().split('.')[1]
+
+            //create new crew data object
+            const crewObj = {
+                id: `${crewId}`,
+                coach: coachId,
+                crewName: result[0],
+                craftType: craftType,
+                ageCategory: ageCategory,
+                gender: result[1],
+                maxCrewMembers: craftType === 'V6' ||craftType === 'OC2 - relay' ||craftType === 'OC1 - relay' || craftType === 'V1 - relay' || craftType === 'Surfski Double - relay' || craftType === 'Surfski Single - relay' ? Number(maximumNoCrewMembers) : craftType === 'OC2' || craftType === 'War Canoe Double' || craftType === 'Surfski Double' ? 2 : craftType === 'V3' ? 3 : craftType === 'War Canoe 6 Man' ? 6 : craftType === 'War Canoe 11 Man' ? 11 : craftType === 'Dragon Boat 20 Man' ? 22 : craftType === 'Dragon Boat 10 Man' ? 12 : 12,
+                crewMembers: []
+            }
+    
+            //create a new coach data object with the crewId appended to the coach's crew list
+            const newCoachObj = {
+                ...racerData,
+                crews: [...racerData.crews, crewId]
+            }
+        
+            //create new crew data object and update the user profile associated with the coach
+            await addCrew(crewObj)
+            await updateUser(newCoachObj)
+            setOpenAddCrew(false)
+        } catch (err) {
+            alert('Error')
+            console.log('error: ', err)
         }
-  
-      //create a new coach data object with the crewId appended to the coach's crew list
-      const newCoachObj = {
-        ...racerData,
-        crews: [...racerData.crews, crewId]
-      }
-  
-      //create new crew data object and update the user profile associated with the coach
-      await addCrew(crewObj)
-      await updateUser(newCoachObj)
-      setOpenAddCrew(false)
     }
 
   return (
