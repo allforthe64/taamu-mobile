@@ -104,7 +104,7 @@ const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
                     onValueChange={(itemValue, itemIndex) => {
                         if (itemValue !== '') {
                             setCraftType(itemValue)
-                            if (e.target.value === 'OC2 - relay' || e.target.value === 'OC1 - relay' || e.target.value === 'V1 - relay') {
+                            if (itemValue === 'OC2 - relay' || itemValue === 'OC1 - relay' || itemValue === 'V1 - relay') {
                                 setMaximumNoCrewMembers(2)
                             } else {
                                 setMaximumNoCrewMembers(0)
