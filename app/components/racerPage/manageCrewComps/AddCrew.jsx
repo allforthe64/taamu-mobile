@@ -137,7 +137,7 @@ const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
                     {craftType === 'OC2 - relay' || craftType === 'OC1 - relay' || craftType === 'V1 - relay' || craftType === 'Surfski Double - relay' || craftType === 'Surfski Single - relay' ?
                         <TextInput inputMode="numeric"
                         onChangeText={(e) => setMaximumNoCrewMembers(e)}
-                        placeholder="Enter a number" style={focused === 'maxCrewMembers' ? styles.focusedSingleLineTextInputs : styles.singleLineTextInputs} onFocus={() => setFocused('maxCrewMembers')} value={maximumNoCrewMembers} onChange={(e) => setMaximumNoCrewMembers(e.target.value)} type='number' min={2}/>
+                        placeholder="Enter a number" style={focused === 'maxCrewMembers' ? styles.focusedSingleLineTextInputs : styles.singleLineTextInputs} onFocus={() => setFocused('maxCrewMembers')} value={maximumNoCrewMembers} onChange={(e) => setMaximumNoCrewMembers(e)} type='number' min={2}/>
                     :
                         <Picker 
                             mode='dropdown'
