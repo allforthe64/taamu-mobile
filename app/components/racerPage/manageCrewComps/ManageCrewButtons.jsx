@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const ManageCrewButtons = ({ setOpenDeleteCrew }) => {
+const ManageCrewButtons = ({ setOpenDeleteCrew, setOpenEditCrew }) => {
   return (
     <View style={styles.mainContainer}>
         <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Add a crew member</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, {marginTop: 15}]}>
+        <TouchableOpacity style={[styles.button, {marginTop: 15}]} onPress={() => setOpenEditCrew(true)}>
             <Text style={styles.buttonText}>Edit this crew</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, {marginTop: 15}]} onPress={() => setOpenDeleteCrew(true)}>

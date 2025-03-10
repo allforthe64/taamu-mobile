@@ -17,6 +17,7 @@ const ManageCrews = ({racerCrews, keyData, racerData}) => {
     const [selectedCrew, setSelectedCrew] = useState()
     const [openAddCrew, setOpenAddCrew] = useState(false)
     const [openDeleteCrew, setOpenDeleteCrew] = useState(false)
+    const [openEditCrew, setOpenEditCrew] = useState(false)
 
     useFocusEffect(
         useCallback(() => {
@@ -32,6 +33,9 @@ const ManageCrews = ({racerCrews, keyData, racerData}) => {
         </Modal>
         <Modal animationType='slide' visible={openDeleteCrew} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
             <DeleteCrew setOpenDeleteCrew={setOpenDeleteCrew} selectedCrew={selectedCrew} racerData={racerData}/>
+        </Modal>
+        <Modal animationType='slide' visible={openEditCrew} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
+            <AddCrew setOpenAddCrew={setOpenAddCrew} keyData={keyData} racerData={racerData}/>
         </Modal>
         <Text style={styles.mainHeading}>Manage your crews</Text>
         <View style={styles.addCrewButtonContainer}>
@@ -72,7 +76,7 @@ const ManageCrews = ({racerCrews, keyData, racerData}) => {
             <SelectedCrew selectedCrew={selectedCrew}/>
         }
         <View style={{width: '75%', marginTop: 25, height: 2, borderRadius: 100, backgroundColor: '#09CAC7', borderWidth: 1, borderColor: '#09CAC7'}}></View>
-        <ManageCrewButtons setOpenDeleteCrew={setOpenDeleteCrew}/>
+        <ManageCrewButtons setOpenDeleteCrew={setOpenDeleteCrew} setOpenEditCrew={setOpenEditCrew}/>
     </View>
   )
 }

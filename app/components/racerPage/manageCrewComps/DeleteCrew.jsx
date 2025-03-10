@@ -25,6 +25,8 @@ const DeleteCrew = ({ setOpenDeleteCrew, selectedCrew, racerData }) => {
 
         //update racer data object
         await updateUser(newRacerData)
+
+        setOpenDeleteCrew(false)
     }
 
   return (
@@ -107,7 +109,8 @@ const styles = StyleSheet.create({
         paddingBottom: 7,
         paddingRight: 15,
         borderRadius: 100,
-        marginTop: 15
+        marginTop: 15,
+        width: '60%'
     },
     buttonText: {
         color: 'white',
