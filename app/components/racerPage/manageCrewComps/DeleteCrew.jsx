@@ -37,14 +37,14 @@ const DeleteCrew = ({ setOpenDeleteCrew, selectedCrew, racerData }) => {
         <View style={styles.contentContainer}>
             <Text style={styles.mainHeading}>Are you sure you want to delete the crew:</Text>
             <Text style={styles.subHeading}>{ selectedCrew?.crewName }</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={handleDelete}>
-                <Text style={styles.buttonText}>Delete crew</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => setOpenDeleteCrew(false)}>
-                <Text style={styles.buttonText}>Cancel</Text>
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.button} onPress={handleDelete}>
+                    <Text style={styles.buttonText}>Delete crew</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => setOpenDeleteCrew(false)}>
+                    <Text style={styles.buttonText}>Cancel</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     </View>
   )
