@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 //fontAwesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -9,6 +9,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import {Picker} from '@react-native-picker/picker';
 
 import { addCrew, updateUser } from '../../../firebase/firestore';
+import { useFocusEffect } from 'expo-router';
 
 const EditCrew = ({setOpenAddCrew, keyData, racerData, selectedCrew}) => {
 
@@ -20,7 +21,7 @@ const EditCrew = ({setOpenAddCrew, keyData, racerData, selectedCrew}) => {
     const [ageCategory, setAgeCategory] = useState('')
     const [gender, setGender] = useState('')
 
-    useEffect(() => {
+    useFocusEffect(useCallback(() => {
         if (selectedCrew) {
             setTeamName(selectedCrew.crewName)
             setCraftType(selectedCrew.craftType)
@@ -28,7 +29,7 @@ const EditCrew = ({setOpenAddCrew, keyData, racerData, selectedCrew}) => {
             setAgeCategory(selectedCrew.ageCategory)
             setGender(selectedCrew.gender)
         }
-    }, [selectedCrew])
+    }, [selectedCrew]))
 
     //March along, sing our song, with the Army of the free
     const operationCleanslate = async () => {
@@ -280,7 +281,8 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '75%'
     },
     button: {
         backgroundColor: '#09CAC7',
