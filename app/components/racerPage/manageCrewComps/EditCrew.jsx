@@ -8,10 +8,10 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 //picker component import
 import {Picker} from '@react-native-picker/picker';
 
-import { addCrew, updateUser } from '../../../firebase/firestore';
+import { updateCrew } from '../../../firebase/firestore';
 import { useFocusEffect } from 'expo-router';
 
-const EditCrew = ({setOpenAddCrew, keyData, racerData, selectedCrew}) => {
+const EditCrew = ({setOpenEditCrew, keyData, selectedCrew}) => {
 
     //initialize state
     const [focused, setFocused] = useState()
@@ -76,17 +76,10 @@ const EditCrew = ({setOpenAddCrew, keyData, racerData, selectedCrew}) => {
                 gender: result[1],
                 maxCrewMembers: craftType === 'V6' ||craftType === 'OC2 - relay' ||craftType === 'OC1 - relay' || craftType === 'V1 - relay' || craftType === 'Surfski Double - relay' || craftType === 'Surfski Single - relay' ? Number(maximumNoCrewMembers) : craftType === 'OC2' || craftType === 'War Canoe Double' || craftType === 'Surfski Double' ? 2 : craftType === 'V3' ? 3 : craftType === 'War Canoe 6 Man' ? 6 : craftType === 'War Canoe 11 Man' ? 11 : craftType === 'Dragon Boat 20 Man' ? 22 : craftType === 'Dragon Boat 10 Man' ? 12 : 12,
             }
-    
-            //create a new coach data object with the crewId appended to the coach's crew list
-            const newCoachObj = {
-                ...racerData,
-                crews: [...racerData.crews, crewId]
-            }
         
             //create new crew data object and update the user profile associated with the coach
-            await addCrew(crewObj)
-            await updateUser(newCoachObj)
-            setOpenAddCrew(false)
+            await updateCrew(crewObj)
+            setOpenEditCrew(false)
         } catch (err) {
             alert('Error')
             console.log('error: ', err)
@@ -97,7 +90,7 @@ const EditCrew = ({setOpenAddCrew, keyData, racerData, selectedCrew}) => {
     <View style={styles.mainContainer}>
         <ScrollView>
             <View style={styles.xMarkContainer}>
-                <TouchableOpacity onPress={() => setOpenAddCrew(false)}>
+                <TouchableOpacity onPress={() => setOpenEditCrew(false)}>
                     <FontAwesomeIcon icon={faXmark} color='white' size={40}/>
                 </TouchableOpacity>
             </View>
@@ -281,8 +274,7 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
-        width: '75%'
+        justifyContent: 'center'
     },
     button: {
         backgroundColor: '#09CAC7',
@@ -291,7 +283,8 @@ const styles = StyleSheet.create({
         paddingBottom: 7,
         paddingRight: 15,
         borderRadius: 100,
-        marginTop: 15
+        marginTop: 15,
+         width: '75%'
     },
     buttonDisabled: {
         backgroundColor: '#09CAC7',

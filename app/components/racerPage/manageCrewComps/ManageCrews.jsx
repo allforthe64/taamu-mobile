@@ -38,7 +38,7 @@ const ManageCrews = ({racerCrews, keyData, racerData}) => {
             <DeleteCrew setOpenDeleteCrew={setOpenDeleteCrew} selectedCrew={selectedCrew} racerData={racerData}/>
         </Modal>
         <Modal animationType='slide' visible={openEditCrew} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
-            <EditCrew setOpenAddCrew={setOpenAddCrew} keyData={keyData} racerData={racerData} selectedCrew={selectedCrew}/>
+            <EditCrew setOpenEditCrew={setOpenEditCrew} keyData={keyData} racerData={racerData} selectedCrew={selectedCrew}/>
         </Modal>
         <Modal animationType='slide' visible={openAddCrewMember} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
             <AddCrewMember racerData={racerData} setOpenAddCrewMember={setOpenAddCrewMember} selectedCrew={selectedCrew} keyData={keyData}/>
@@ -82,7 +82,7 @@ const ManageCrews = ({racerCrews, keyData, racerData}) => {
             <SelectedCrew selectedCrew={selectedCrew}/>
         }
         <View style={{width: '75%', marginTop: 25, height: 2, borderRadius: 100, backgroundColor: '#09CAC7', borderWidth: 1, borderColor: '#09CAC7'}}></View>
-        <ManageCrewButtons setOpenDeleteCrew={setOpenDeleteCrew} setOpenEditCrew={setOpenEditCrew}/>
+        <ManageCrewButtons setOpenDeleteCrew={setOpenDeleteCrew} setOpenEditCrew={setOpenEditCrew} setOpenAddCrewMember={setOpenAddCrewMember}/>
     </View>
   )
 }
