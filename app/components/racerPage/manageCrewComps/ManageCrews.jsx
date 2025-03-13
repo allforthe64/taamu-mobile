@@ -10,6 +10,7 @@ import SelectedCrew from './SelectedCrew';
 import ManageCrewButtons from './ManageCrewButtons';
 import AddCrew from './AddCrew';
 import DeleteCrew from './DeleteCrew';
+import EditCrew from './EditCrew';
 
 const ManageCrews = ({racerCrews, keyData, racerData}) => {
 
@@ -22,7 +23,7 @@ const ManageCrews = ({racerCrews, keyData, racerData}) => {
     useFocusEffect(
         useCallback(() => {
             if (racerCrews) setSelectedCrew(racerCrews[0])
-        }, [racerCrews])
+        }, [racerCrews, openAddCrew])
     )
 
 
@@ -35,7 +36,7 @@ const ManageCrews = ({racerCrews, keyData, racerData}) => {
             <DeleteCrew setOpenDeleteCrew={setOpenDeleteCrew} selectedCrew={selectedCrew} racerData={racerData}/>
         </Modal>
         <Modal animationType='slide' visible={openEditCrew} presentationStyle='pageSheet' supportedOrientations={['portrait']}>
-            <AddCrew setOpenAddCrew={setOpenAddCrew} keyData={keyData} racerData={racerData}/>
+            <EditCrew setOpenAddCrew={setOpenAddCrew} keyData={keyData} racerData={racerData} selectedCrew={selectedCrew}/>
         </Modal>
         <Text style={styles.mainHeading}>Manage your crews</Text>
         <View style={styles.addCrewButtonContainer}>

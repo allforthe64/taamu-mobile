@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 //fontAwesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -10,7 +10,7 @@ import {Picker} from '@react-native-picker/picker';
 
 import { addCrew, updateUser } from '../../../firebase/firestore';
 
-const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
+const EditCrew = ({setOpenAddCrew, keyData, racerData, selectedCrew}) => {
 
     //initialize state
     const [focused, setFocused] = useState()
@@ -19,6 +19,16 @@ const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
     const [maximumNoCrewMembers, setMaximumNoCrewMembers] = useState(0)
     const [ageCategory, setAgeCategory] = useState('')
     const [gender, setGender] = useState('')
+
+    useEffect(() => {
+        if (selectedCrew) {
+            setTeamName(selectedCrew.crewName)
+            setCraftType(selectedCrew.craftType)
+            setMaximumNoCrewMembers(selectedCrew.maxCrewMembers)
+            setAgeCategory(selectedCrew.ageCategory)
+            setGender(selectedCrew.gender)
+        }
+    }, [selectedCrew])
 
     //March along, sing our song, with the Army of the free
     const operationCleanslate = async () => {
@@ -50,27 +60,20 @@ const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
     }
 
     //create a new crew data obj
-    const handleAddCrew = async () => {
+    const handleUpdateCrew = async () => {
 
         try {
             //storm da beaches
             const result = await operationCleanslate()
 
-            console.log(result)
-
-            //generate new crewId
-            const crewId = Math.random().toString(20).toString().split('.')[1] + Math.random().toString(20).toString().split('.')[1]
-
             //create new crew data object
             const crewObj = {
-                id: `${crewId}`,
-                coach: racerData.uid,
+                ...selectedCrew,
                 crewName: result[0],
                 craftType: craftType,
                 ageCategory: ageCategory,
                 gender: result[1],
                 maxCrewMembers: craftType === 'V6' ||craftType === 'OC2 - relay' ||craftType === 'OC1 - relay' || craftType === 'V1 - relay' || craftType === 'Surfski Double - relay' || craftType === 'Surfski Single - relay' ? Number(maximumNoCrewMembers) : craftType === 'OC2' || craftType === 'War Canoe Double' || craftType === 'Surfski Double' ? 2 : craftType === 'V3' ? 3 : craftType === 'War Canoe 6 Man' ? 6 : craftType === 'War Canoe 11 Man' ? 11 : craftType === 'Dragon Boat 20 Man' ? 22 : craftType === 'Dragon Boat 10 Man' ? 12 : 12,
-                crewMembers: []
             }
     
             //create a new coach data object with the crewId appended to the coach's crew list
@@ -97,7 +100,7 @@ const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
                     <FontAwesomeIcon icon={faXmark} color='white' size={40}/>
                 </TouchableOpacity>
             </View>
-            <Text style={styles.mainHeading}>Add a new crew:</Text>
+            <Text style={styles.mainHeading}>Update crew:</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputHeading}>Enter a <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>team name:</Text></Text>
                 <TextInput style={focused === 'teamName' ? styles.focusedSingleLineTextInputs : styles.singleLineTextInputs} onFocus={() => setFocused('teamName')} value={teamName} inputMode='text' placeholder='Enter a team name' onChangeText={(e) => setTeamName(e)}/>
@@ -205,7 +208,7 @@ const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
                 </Picker>
             </View>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button} onPress={handleAddCrew}>
+                <TouchableOpacity style={styles.button} onPress={handleUpdateCrew}>
                     <Text style={styles.buttonText}>Save crew</Text>
                 </TouchableOpacity>
             </View>
@@ -214,7 +217,7 @@ const AddCrew = ({setOpenAddCrew, keyData, racerData}) => {
   )
 }
 
-export default AddCrew
+export default EditCrew
 
 const styles = StyleSheet.create({
     mainContainer: {
