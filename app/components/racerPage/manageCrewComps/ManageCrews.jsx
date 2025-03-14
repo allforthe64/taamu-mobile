@@ -24,7 +24,7 @@ const ManageCrews = ({racerCrews, keyData, racerData}) => {
 
     useFocusEffect(
         useCallback(() => {
-            if (racerCrews) setSelectedCrew(racerCrews[0])
+            if (racerCrews) setSelectedCrew(racerCrews[racerCrews.length - 1])
         }, [racerCrews, openAddCrew])
     )
 

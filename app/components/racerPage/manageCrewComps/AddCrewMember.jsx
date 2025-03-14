@@ -10,6 +10,10 @@ import { useFocusEffect } from 'expo-router'
 //define email testing regex
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
+//fontAwesome imports
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
+
 const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData }) => {
 
     //initialize state
