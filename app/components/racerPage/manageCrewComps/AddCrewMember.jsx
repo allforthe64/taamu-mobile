@@ -18,6 +18,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
 
     //initialize state
     const [email, setEmail] = useState('')
+    const [message, setMessage] = useState('')
     const [focused, setFocused] = useState('')
     const [decipheredFName, setDecipheredFName] = useState('')
     const [decipheredLName, setDecipheredLName] = useState('')
@@ -85,7 +86,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
             /* if (language === 'fr') {
                 setErrorMessage('Email invalide saisi!')
             } else { */
-                setErrorMessage('Invalid email entered')
+                alert('Invalid email entered')
             /* } */
             return
         } 
@@ -93,7 +94,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
             /* if (language === 'fr') {
                 setErrorMessage("Vous avez déjà le nombre maximum de membres d'équipage!")
             } else { */
-                setErrorMessage('You already have the maximum number of crew members!')
+                alert('You already have the maximum number of crew members!')
             /* } */
             return
         }
@@ -144,8 +145,8 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                     </View>
                     <View style={styles.inputContainer}>
                         <Text style={styles.inputHeading}>Add <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>{"message (optional)"}</Text></Text>
-                        <TextInput onChangeText={(e) => setBody(e)}
-                            value={body}
+                        <TextInput onChangeText={(e) => setMessage(e)}
+                            value={message}
                             placeholder={'Type here...'}
                             style={focused === 'message' ? [styles.focusedSingleLineTextInputs, {height: '65%'}] : [styles.singleLineTextInputs, {height: '65%'}]}
                             onFocus={() => setFocused('message')}
