@@ -141,7 +141,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                 <View style={styles.contentContainer}>
                     <View style={styles.inputContainer}>
                         <Text style={styles.inputHeading}>Add a <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>crew member:</Text></Text>
-                        <TextInput style={focused === 'email' ? styles.focusedSingleLineTextInputs : styles.singleLineTextInputs} value={email} onChangeText={() => setEmail(e)} onFocus={() => setFocused('email')} placeholder='Email'/>
+                        <TextInput style={focused === 'email' ? styles.focusedSingleLineTextInputs : styles.singleLineTextInputs} value={email} onChangeText={(e) => setEmail(e)} onFocus={() => setFocused('email')} placeholder='Email'/>
                     </View>
                     <View style={styles.inputContainer}>
                         <Text style={styles.inputHeading}>Add <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>{"message (optional)"}</Text></Text>
@@ -152,7 +152,6 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                             onFocus={() => setFocused('message')}
                             multiline
                             numberOfLines={2}
-                            autoFocus
                         />
                     </View>
                     <View style={styles.buttonContainer}>
