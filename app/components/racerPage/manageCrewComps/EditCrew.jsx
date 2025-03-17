@@ -67,6 +67,8 @@ const EditCrew = ({setOpenEditCrew, keyData, selectedCrew}) => {
             //storm da beaches
             const result = await operationCleanslate()
 
+            console.log('result of op cleanslate: ', result)
+
             //create new crew data object
             const crewObj = {
                 ...selectedCrew,
@@ -78,8 +80,8 @@ const EditCrew = ({setOpenEditCrew, keyData, selectedCrew}) => {
             }
         
             //create new crew data object and update the user profile associated with the coach
-            await updateCrew(crewObj)
-            setOpenEditCrew(false)
+            /* await updateCrew(crewObj)
+            setOpenEditCrew(false) */
         } catch (err) {
             alert('Error')
             console.log('error: ', err)

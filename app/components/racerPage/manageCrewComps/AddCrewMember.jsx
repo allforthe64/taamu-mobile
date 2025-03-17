@@ -136,7 +136,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                 </View>
             </>
         :
-            <View style={{ flex: 1 }}>
+            <>
                 <View style={styles.xMarkContainer}>
                     <TouchableOpacity onPress={() => setOpenAddCrewMember(false)}>
                         <FontAwesomeIcon icon={faXmark} color='white' size={40}/>
@@ -170,7 +170,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </>
         }
     </View>
   )
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     buttonContainer: {
-        paddingTop: '8%',
+        paddingTop: 15,
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
