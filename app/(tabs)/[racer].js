@@ -55,6 +55,12 @@ const RacerPage = () => {
   const [racerCrews, setRacerCrews] = useState([])
   const [keyData, setKeyData] = useState()
 
+  //state for controlling crew components
+  const [openAddCrew, setOpenAddCrew] = useState(false)
+  const [openDeleteCrew, setOpenDeleteCrew] = useState(false)
+  const [openEditCrew, setOpenEditCrew] = useState(false)
+  const [openAddCrewMember, setOpenAddCrewMember] = useState(false)
+
   //grab racer data
   useFocusEffect(
     useCallback(() => {
@@ -134,7 +140,7 @@ const RacerPage = () => {
       }
       operationSigaba()
     }
-  }, [racerData, keyData])
+  }, [racerData, keyData, openAddCrew, openDeleteCrew, openEditCrew, openAddCrewMember])
 
   //remove a photo from org gallery
   const removeFromGallery = async (input) => {
@@ -170,7 +176,7 @@ const RacerPage = () => {
       {racerData && firebaseAuth &&
         <ScrollView>
           <Hero racerData={racerData} keyData={keyData}/>
-          <ManageCrews racerCrews={racerCrews} keyData={keyData} racerData={racerData}/>
+          <ManageCrews racerCrews={racerCrews} keyData={keyData} racerData={racerData} openAddCrew={openAddCrew} setOpenAddCrew={setOpenAddCrew} openDeleteCrew={openDeleteCrew} setOpenDeleteCrew={setOpenDeleteCrew} openEditCrew={openEditCrew} setOpenEditCrew={setOpenEditCrew} openAddCrewMember={openAddCrewMember} setOpenAddCrewMember={setOpenAddCrewMember}/>
           <MyRaces races={racerRaces}/>
           <PhotoGallery currentUser={firebaseAuth.currentUser} galleryURLs={galleryURLs} racerId={racerData.uid} removeFromGallery={removeFromGallery} racerData={racerData}/>
         </ScrollView>

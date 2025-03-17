@@ -1,7 +1,20 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const CrewMemberData = ({crewMember}) => {
+//import updateCrew function
+import { updateCrew } from '../../../../firebase/firestore'
+
+const CrewMemberData = ({crewMembers, crewMember, selectedCrew}) => {
+
+  const removeCrewMember = async (member) => {
+    const newMembersData = crewMembers.filter(existingMember => existingMember.email !== member.email)
+    const newCrewData = {
+        ...selectedCrew,
+        crewMembers: newMembersData
+    }
+    await updateCrew(newCrewData)
+}
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.dataRow}>First name: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.fName}</Text></Text>
@@ -12,7 +25,7 @@ const CrewMemberData = ({crewMember}) => {
       <Text style={[styles.dataRow, {color: 'white', marginTop: 10}]}>{crewMember.email}</Text>
       <Text style={[styles.dataRow, { marginTop: 10 }]}>Phone: <Text style={[styles.dataRow, {color: 'white'}]}>{crewMember.phone}</Text></Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => removeCrewMember(crewMember)}>
           <Text style={styles.buttonText}>Remove crew member</Text>
         </TouchableOpacity>
       </View>

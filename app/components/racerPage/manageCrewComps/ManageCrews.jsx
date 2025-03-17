@@ -13,14 +13,10 @@ import DeleteCrew from './DeleteCrew';
 import EditCrew from './EditCrew';
 import AddCrewMember from './AddCrewMember';
 
-const ManageCrews = ({racerCrews, keyData, racerData}) => {
+const ManageCrews = ({racerCrews, keyData, racerData, openAddCrew, setOpenAddCrew, openDeleteCrew, setOpenDeleteCrew, openEditCrew, setOpenEditCrew, openAddCrewMember, setOpenAddCrewMember}) => {
 
     //initialize state
     const [selectedCrew, setSelectedCrew] = useState()
-    const [openAddCrew, setOpenAddCrew] = useState(false)
-    const [openDeleteCrew, setOpenDeleteCrew] = useState(false)
-    const [openEditCrew, setOpenEditCrew] = useState(false)
-    const [openAddCrewMember, setOpenAddCrewMember] = useState(false)
 
     useFocusEffect(
         useCallback(() => {

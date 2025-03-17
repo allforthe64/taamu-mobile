@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useCallback } from 'react'
 
 //component imports
 import GenCrewData from './crewCardComponents/GenCrewData'
 import CrewMemberData from './crewCardComponents/CrewMemberData'
+import { useFocusEffect } from 'expo-router'
 
 const SelectedCrew = ({selectedCrew}) => {
 
@@ -17,7 +18,7 @@ const SelectedCrew = ({selectedCrew}) => {
             <>
                 {selectedCrew.crewMembers.map((crewMember, i) => {
                     return (
-                        <CrewMemberData key={i} crewMember={crewMember}/>
+                        <CrewMemberData key={i} crewMembers={selectedCrew.crewMembers} crewMember={crewMember} selectedCrew={selectedCrew}/>
                     )
                 })}   
             </>

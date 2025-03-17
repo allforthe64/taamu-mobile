@@ -141,14 +141,14 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                 <View style={styles.contentContainer}>
                     <View style={styles.inputContainer}>
                         <Text style={styles.inputHeading}>Add a <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>crew member:</Text></Text>
-                        <TextInput style={focused === 'email' ? styles.focusedSingleLineTextInputs : styles.singleLineTextInputs} value={email} onChange={() => setEmail(e)} onFocus={() => setFocused('email')} placeholder='Email'/>
+                        <TextInput style={focused === 'email' ? styles.focusedSingleLineTextInputs : styles.singleLineTextInputs} value={email} onChangeText={() => setEmail(e)} onFocus={() => setFocused('email')} placeholder='Email'/>
                     </View>
                     <View style={styles.inputContainer}>
                         <Text style={styles.inputHeading}>Add <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>{"message (optional)"}</Text></Text>
                         <TextInput onChangeText={(e) => setMessage(e)}
                             value={message}
                             placeholder={'Type here...'}
-                            style={focused === 'message' ? [styles.focusedSingleLineTextInputs, {height: '65%'}] : [styles.singleLineTextInputs, {height: '65%'}]}
+                            style={focused === 'message' ? [styles.focusedSingleLineTextInputs, {height: '65%', textAlignVertical: 'top'}] : [styles.singleLineTextInputs, {height: '65%', textAlignVertical: 'top'}]}
                             onFocus={() => setFocused('message')}
                             multiline
                             numberOfLines={2}
