@@ -132,41 +132,43 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                 </View>
             </>
         :
-            <ScrollView>
-                <View style={styles.xMarkContainer}>
-                    <TouchableOpacity onPress={() => setOpenAddCrewMember(false)}>
-                        <FontAwesomeIcon icon={faXmark} color='white' size={40}/>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.contentContainer}>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.inputHeading}>Add a <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>crew member:</Text></Text>
-                        <TextInput style={focused === 'email' ? styles.focusedSingleLineTextInputs : styles.singleLineTextInputs} value={email} onChangeText={(e) => setEmail(e)} onFocus={() => setFocused('email')} placeholder='Email'/>
-                    </View>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.inputHeading}>Add <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>{"message (optional)"}</Text></Text>
-                        <TextInput onChangeText={(e) => setMessage(e)}
-                            value={message}
-                            placeholder={'Type here...'}
-                            style={focused === 'message' ? [styles.focusedSingleLineTextInputs, {height: '65%', textAlignVertical: 'top'}] : [styles.singleLineTextInputs, {height: '65%', textAlignVertical: 'top'}]}
-                            onFocus={() => setFocused('message')}
-                            multiline
-                            numberOfLines={2}
-                        />
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.button} onPress={sendEmailInvite}>
-                            <Text style={styles.buttonText}>Send invite</Text>
+            <View style={{ flex: 1 }}>
+                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                    <View style={styles.xMarkContainer}>
+                        <TouchableOpacity onPress={() => setOpenAddCrewMember(false)}>
+                            <FontAwesomeIcon icon={faXmark} color='white' size={40}/>
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.or}>Or</Text>
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.button} onPress={copyText}>
-                            <Text style={styles.buttonText}>Copy invite link</Text>
-                        </TouchableOpacity>
+                    <View style={styles.contentContainer}>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.inputHeading}>Invite by <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>email:</Text></Text>
+                            <TextInput style={focused === 'email' ? styles.focusedSingleLineTextInputs : styles.singleLineTextInputs} value={email} onChangeText={(e) => setEmail(e)} onFocus={() => setFocused('email')} placeholder='Email'/>
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.inputHeading}>Add <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>{"message (optional)"}</Text></Text>
+                            <TextInput onChangeText={(e) => setMessage(e)}
+                                value={message}
+                                placeholder={'Type here...'}
+                                style={focused === 'message' ? [styles.focusedSingleLineTextInputs, {height: '45%', textAlignVertical: 'top'}] : [styles.singleLineTextInputs, {height: '45%', textAlignVertical: 'top'}]}
+                                onFocus={() => setFocused('message')}
+                                multiline
+                                numberOfLines={2}
+                            />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity style={styles.button} onPress={sendEmailInvite}>
+                                <Text style={styles.buttonText}>Send invite</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={styles.or}>Or</Text>
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity style={styles.button} onPress={copyText}>
+                                <Text style={styles.buttonText}>Copy invite link</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </View>
         }
     </View>
   )
