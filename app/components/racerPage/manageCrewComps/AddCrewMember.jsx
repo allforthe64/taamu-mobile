@@ -51,7 +51,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                         setDecipheredEmail(data[2])
 
                     } else {
-                    console.error('Failed to send data:', response.status);
+                    console.error('Failed to send data from useFocuse callback:', response.status);
                     }
                 } catch (error) {
                     console.error('Error sending POST request:', error);
@@ -99,17 +99,21 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
             return
         }
         else {
-            const response = await fetch("/api/coach-invite", {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json",
-                },
-                body: JSON.stringify(emailParams)
-            });
-
-            setEmail('')
-            setMessage('')
-            setSuccess(true)
+            try {
+                const response = await fetch("/api/coach-invite", {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(emailParams)
+                });
+    
+                setEmail('')
+                setMessage('')
+                setSuccess(true)
+            } catch (err) {
+                console.log('err from email function: ', err)
+            }
         }
     }
 
