@@ -70,6 +70,8 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
     //send the invite link
     const sendEmailInvite = async () => {
 
+        alert('running')
+
         const emailParams = {
             from_name: `${decipheredFName}  ${decipheredLName}`,
             link: `${window.location.origin}/coach-invite/${id}`,
