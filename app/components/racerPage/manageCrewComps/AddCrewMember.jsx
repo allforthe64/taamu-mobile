@@ -51,7 +51,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                         setDecipheredEmail(data[2])
 
                     } else {
-                    console.error('Failed to send data from useFocuse callback:', response.status);
+                    console.error('Failed to send data from useFocus callback:', response.status);
                     }
                 } catch (error) {
                     console.error('Error sending POST request:', error);
@@ -63,7 +63,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
 
     //copy link to clipboard
     const copyText = async () => {
-        await Clipboard.setStringAsync(`https://tuarolife.com/coach-invite/${selectedCrew.crewId}`)
+        await Clipboard.setStringAsync(`https://tuarolife.com/coach-invite/${selectedCrew.id}`)
         alert('Text copied to clipboard!')
     }
 
@@ -72,7 +72,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
 
         const emailParams = {
             from_name: `${decipheredFName}  ${decipheredLName}`,
-            link: `${window.location.origin}/coach-invite/${crewId}`,
+            link: `${window.location.origin}/coach-invite/${id}`,
             to_email: email,
             decipheredFName: decipheredFName,
             decipheredLName: decipheredLName,
@@ -81,6 +81,8 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
             decipheredEmail: decipheredEmail,
             language: 'en'
         }
+
+        console.log('emailParams: ', emailParams )
 
         if (email.length === 0 || !EMAIL_REGEX.test(email)) {
             /* if (language === 'fr') {
@@ -100,6 +102,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
         }
         else {
             try {
+                alert('sending email request')
                 const response = await fetch("/api/coach-invite", {
                     method: "POST",
                     headers: {
