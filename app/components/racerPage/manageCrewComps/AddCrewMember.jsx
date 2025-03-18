@@ -51,7 +51,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                         setDecipheredEmail(data[2])
 
                     } else {
-                    console.error('Failed to send data from useFocus callback:', response.status);
+                    console.error('Failed to send data from useEffect callback:', response.status);
                     }
                 } catch (error) {
                     console.error('Error sending POST request:', error);
@@ -60,6 +60,11 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
             operationCyclone()
         }
     }, [racerData, keyData])
+
+    console.log('decipheredFName: ', decipheredFName)
+    console.log('decipheredLName: ', decipheredLName)
+    console.log('decipheredEmail: ', decipheredEmail)
+
 
     //copy link to clipboard
     const copyText = async () => {
@@ -157,7 +162,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                         <TextInput onChangeText={(e) => setMessage(e)}
                             value={message}
                             placeholder={'Type here...'}
-                            style={focused === 'message' ? [styles.focusedSingleLineTextInputs, {height: '45%', textAlignVertical: 'top'}] : [styles.singleLineTextInputs, {height: '45%', textAlignVertical: 'top'}]}
+                            style={focused === 'message' ? [styles.focusedSingleLineTextInputs, {height: 100, textAlignVertical: 'top'}] : [styles.singleLineTextInputs, {height: 100, textAlignVertical: 'top'}]}
                             onFocus={() => setFocused('message')}
                             multiline
                             numberOfLines={2}
