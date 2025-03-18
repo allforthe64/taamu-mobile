@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity } from 'react-native'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 //expo-clipboard functions import
 import * as Clipboard from 'expo-clipboard'
@@ -25,7 +25,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
     const [decipheredEmail, setDecipheredEmail] = useState('')
     const [success, setSuccess] = useState(false)
 
-    useFocusEffect(useCallback(() => {
+    useEffect(() => {
         if (racerData && keyData) {
             const operationCyclone = async () => {
                 const url = 'https://tuarolife.com/api/cU5hF0mLrS7wyiRIIJ58'
@@ -59,7 +59,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
             }
             operationCyclone()
         }
-    }, [racerData, keyData]))
+    }, [racerData, keyData])
 
     //copy link to clipboard
     const copyText = async () => {
@@ -150,7 +150,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                         <Text style={styles.inputHeading}>Invite by <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>email:</Text></Text>
                         <TextInput style={focused === 'email' ? styles.focusedSingleLineTextInputs : styles.singleLineTextInputs} value={email} onChangeText={(e) => setEmail(e)} onFocus={() => setFocused('email')} placeholder='Email'/>
                     </View>
-                    <View style={styles.inputContainer}>
+                    <View style={[styles.inputContainer, { borderWidth: 2, borderColor: 'white' }]}>
                         <Text style={styles.inputHeading}>Add <Text style={[styles.inputHeading, { color: '#09CAC7' }]}>{"message (optional)"}</Text></Text>
                         <TextInput onChangeText={(e) => setMessage(e)}
                             value={message}
@@ -162,7 +162,10 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                         />
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.button} onPress={sendEmailInvite}>
+                        <TouchableOpacity style={styles.button} onPress={() => {
+                            alert('running')
+                            sendEmailInvite()
+                        }}>
                             <Text style={styles.buttonText}>Send invite</Text>
                         </TouchableOpacity>
                     </View>
@@ -185,7 +188,6 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: '#01354B',
-        paddingBottom: 25,
         width: '100%',
         paddingBottom: 20,
         paddingTop: 20
@@ -268,7 +270,6 @@ const styles = StyleSheet.create({
         paddingBottom: 7,
         paddingRight: 15,
         borderRadius: 100,
-        marginTop: 15,
         width: '75%'
     },
     buttonText: {
