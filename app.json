@@ -2,7 +2,7 @@
   "expo": {
     "name": "taamu-mobile",
     "scheme": "taamu-mobile",
-    "slug": "taamu-mobile",
+    "slug": "tuarolife-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,7 +24,10 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.taamudev.taamumobile",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -47,8 +50,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "16d556ac-7e8e-4712-8408-46250324028d"
+        "projectId": "62e7d31f-71e6-44cd-8b95-2fe19e41f729"
       }
-    }
+    },
+    "owner": "bisforbilliam"
   }
 }
