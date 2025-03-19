@@ -79,7 +79,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
 
         const emailParams = {
             from_name: `${decipheredFName}  ${decipheredLName}`,
-            link: `${window.location.origin}/coach-invite/${id}`,
+            link: `https://tuarolife.com/coach-invite/${id}`,
             to_email: email,
             decipheredFName: decipheredFName,
             decipheredLName: decipheredLName,
