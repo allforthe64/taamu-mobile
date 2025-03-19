@@ -75,7 +75,6 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
     //send the invite link
     const sendEmailInvite = async () => {
 
-        alert('running')
         try {
             const emailParams = {
                 from_name: `${decipheredFName}  ${decipheredLName}`,
@@ -108,7 +107,6 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                 return
             }
             else {
-                alert('sending email request')
                 const response = await fetch("/api/coach-invite", {
                     method: "POST",
                     headers: {
@@ -116,6 +114,8 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                     },
                     body: JSON.stringify(emailParams)
                 });
+
+                console.log('response: ', response)
     
                 setEmail('')
                 setMessage('')
@@ -169,7 +169,6 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                     </View>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.button} onPress={() => {
-                            alert('running')
                             sendEmailInvite()
                         }}>
                             <Text style={styles.buttonText}>Send invite</Text>
