@@ -76,39 +76,38 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
     const sendEmailInvite = async () => {
 
         alert('running')
-
-        const emailParams = {
-            from_name: `${decipheredFName}  ${decipheredLName}`,
-            link: `https://tuarolife.com/coach-invite/${id}`,
-            to_email: email,
-            decipheredFName: decipheredFName,
-            decipheredLName: decipheredLName,
-            decipheredTeamName: selectedCrew.crewName,
-            message: message,
-            decipheredEmail: decipheredEmail,
-            language: 'en'
-        }
-
-        console.log('emailParams: ', emailParams )
-
-        if (email.length === 0 || !EMAIL_REGEX.test(email)) {
-            /* if (language === 'fr') {
-                setErrorMessage('Email invalide saisi!')
-            } else { */
-                alert('Invalid email entered')
-            /* } */
-            return
-        } 
-        else if (selectedCrew.crewMembers.length === selectedCrew.maxCrewMembers) {
-            /* if (language === 'fr') {
-                setErrorMessage("Vous avez déjà le nombre maximum de membres d'équipage!")
-            } else { */
-                alert('You already have the maximum number of crew members!')
-            /* } */
-            return
-        }
-        else {
-            try {
+        try {
+            const emailParams = {
+                from_name: `${decipheredFName}  ${decipheredLName}`,
+                link: `https://tuarolife.com/coach-invite/${selectedCrew.id}`,
+                to_email: email,
+                decipheredFName: decipheredFName,
+                decipheredLName: decipheredLName,
+                decipheredTeamName: selectedCrew.crewName,
+                message: message,
+                decipheredEmail: decipheredEmail,
+                language: 'en'
+            }
+    
+            console.log('emailParams: ', emailParams )
+    
+            if (email.length === 0 || !EMAIL_REGEX.test(email)) {
+                /* if (language === 'fr') {
+                    setErrorMessage('Email invalide saisi!')
+                } else { */
+                    alert('Invalid email entered')
+                /* } */
+                return
+            } 
+            else if (selectedCrew.crewMembers.length === selectedCrew.maxCrewMembers) {
+                /* if (language === 'fr') {
+                    setErrorMessage("Vous avez déjà le nombre maximum de membres d'équipage!")
+                } else { */
+                    alert('You already have the maximum number of crew members!')
+                /* } */
+                return
+            }
+            else {
                 alert('sending email request')
                 const response = await fetch("/api/coach-invite", {
                     method: "POST",
@@ -121,9 +120,9 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                 setEmail('')
                 setMessage('')
                 setSuccess(true)
-            } catch (err) {
-                console.log('err from email function: ', err)
             }
+        } catch (err) {
+            console.log('error from sendEmailInvite function: ', err)
         }
     }
 
