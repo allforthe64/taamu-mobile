@@ -35,23 +35,23 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
 
                 try {
                     const response = await fetch(url, {
-                    method: 'POST', // Specifies the request method
-                    headers: {
-                        'Content-Type': 'application/json', // Sets the request body as JSON
-                    },
-                    body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
-                    });
+                        method: 'POST', // Specifies the request method
+                            headers: {
+                                'Content-Type': 'application/json', // Sets the request body as JSON
+                            },
+                            body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
+                        });
 
-                    // Check if the response was successful
-                    if (response.ok) {
-                        const data = await response.json();
+                        // Check if the response was successful
+                        if (response.ok) {
+                            const data = await response.json();
 
-                        setDecipheredFName(data[0])
-                        setDecipheredLName(data[1])
-                        setDecipheredEmail(data[2])
+                            setDecipheredFName(data.data[0])
+                            setDecipheredLName(data.data[1])
+                            setDecipheredEmail(data.data[2])
 
-                    } else {
-                    console.error('Failed to send data from useEffect callback:', response.status);
+                        } else {
+                        console.error('Failed to send data from useEffect callback:', response.status);
                     }
                 } catch (error) {
                     console.error('Error sending POST request:', error);
