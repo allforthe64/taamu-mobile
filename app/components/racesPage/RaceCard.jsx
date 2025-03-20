@@ -9,6 +9,9 @@ import { Link } from 'expo-router'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
+//userRouter hook import
+import { useRouter } from 'expo-router'
+
 const RaceCard = ({ raceData, filter, racePageFilter}) => {
 
   //initialize state
@@ -23,6 +26,9 @@ const RaceCard = ({ raceData, filter, racePageFilter}) => {
       getRaceCardImage()
     }
   }, [raceData])
+
+  //instantiate router object
+  const router = useRouter()
 
   //define isLastElement function to determine whether or not to add a comma to a craft cat/distance tag
   const isLastElement = (array, element) => {
@@ -40,7 +46,7 @@ const racerButtonsArr = {
     'upcoming' : (
         <View style={styles.buttonContainer}>
           <Link href={`/races/${raceData.id}`} asChild>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => router.push(`/race/${raceData.id}`)}>
               <Text style={styles.buttonText}>View this race</Text>
             </TouchableOpacity>
           </Link>
