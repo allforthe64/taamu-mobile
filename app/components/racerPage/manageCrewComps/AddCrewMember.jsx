@@ -107,7 +107,7 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                 return
             }
             else {
-                const response = await fetch("/api/coach-invite", {
+                const response = await fetch("https://tuarolife.com/api/coach-invite", {
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",
