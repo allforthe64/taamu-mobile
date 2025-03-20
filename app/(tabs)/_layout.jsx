@@ -14,6 +14,14 @@ export default function TabLayout() {
     return (
         <AuthContextProvider>
             <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
+                <Tabs.Screen 
+                    name="race/[raceId]"
+                    options={{
+                        title: 'race/[raceId]',
+                        href: null,
+                        headerShown: false
+                    }}
+                />
                 <Tabs.Screen
                     name="index"
                     options={{
