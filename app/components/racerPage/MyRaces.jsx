@@ -15,8 +15,6 @@ import { isBefore, isAfter, parse, format } from 'date-fns'
 
 const MyRaces = ({races}) => {
 
-    console.log('races: ', races)
-
     //initialize state
     const [decryptedRaces, setDecryptedRaces] = useState([])
     const [racesToShow, setRacesToShow] = useState([])
@@ -40,13 +38,17 @@ const MyRaces = ({races}) => {
                     const key = keyData.key
                     const iv = keyData.iv
 
+                    console.log('key: ', key)
+                    console.log('iv: ', iv)
+                    console.log('payload: ', payload)
+
                     try {
                         const response = await fetch(url, {
-                        method: 'POST', // Specifies the request method
-                        headers: {
-                            'Content-Type': 'application/json', // Sets the request body as JSON
-                        },
-                        body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
+                            method: 'POST', // Specifies the request method
+                            headers: {
+                                'Content-Type': 'application/json', // Sets the request body as JSON
+                            },
+                            body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
                         });
     
                         // Check if the response was successful

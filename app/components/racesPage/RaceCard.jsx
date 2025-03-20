@@ -7,7 +7,7 @@ import { getDownloadableURL } from '../../firebase/storage'
 //import Link component from expo-router
 import { Link } from 'expo-router'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import { faLocationDot, faPerson } from '@fortawesome/free-solid-svg-icons'
 
 //userRouter hook import
 import { useRouter } from 'expo-router'
@@ -96,6 +96,7 @@ const racerButtonsArr = {
               )
             })}
           </View>
+          <Text style={styles.label}>Craft categories: <FontAwesomeIcon icon={faPerson} color='white'/> <Text style={styles.raceDataText}>{raceData.participants.length}</Text></Text>
         </View>
       }
       <View style={styles.buttonContainer}>
