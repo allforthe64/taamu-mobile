@@ -114,8 +114,6 @@ const AddCrewMember = ({ racerData, setOpenAddCrewMember, selectedCrew, keyData 
                     },
                     body: JSON.stringify(emailParams)
                 });
-
-                console.log('response: ', response)
     
                 setEmail('')
                 setMessage('')

@@ -15,6 +15,8 @@ import { isBefore, isAfter, parse, format } from 'date-fns'
 
 const MyRaces = ({races}) => {
 
+    console.log('races: ', races)
+
     //initialize state
     const [decryptedRaces, setDecryptedRaces] = useState([])
     const [racesToShow, setRacesToShow] = useState([])
