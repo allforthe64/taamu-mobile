@@ -30,7 +30,7 @@ const MyRaces = ({races}) => {
     }, [])
 
     useEffect(() => {
-        if (races && keyData) {
+        if (races && races?.length > 0 && keyData) {
             try {
                 const operationFish = async () => {
                     const url = 'https://tuarolife.com/api/X8pQ3Lz7B1vW9KYa5MdN';
