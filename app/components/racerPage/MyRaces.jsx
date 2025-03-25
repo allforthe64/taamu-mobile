@@ -56,7 +56,7 @@ const MyRaces = ({races}) => {
                             const data = await response.json();
                             setDecryptedRaces(data.data)
                         } else {
-                            console.error('Failed to send data:', response.status);
+                            console.error('Failed to send data:', response);
                         }
                     } catch (error) {
                         console.error('Error sending POST request:', error);
