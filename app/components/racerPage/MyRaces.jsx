@@ -34,13 +34,8 @@ const MyRaces = ({races}) => {
             try {
                 const operationFish = async () => {
                     const url = 'https://tuarolife.com/api/X8pQ3Lz7B1vW9KYa5MdN';
-                    const payload = [...races]
                     const key = keyData.key
                     const iv = keyData.iv
-
-                    console.log('key: ', key)
-                    console.log('iv: ', iv)
-                    console.log('payload: ', payload)
 
                     try {
                         const response = await fetch(url, {
@@ -48,16 +43,18 @@ const MyRaces = ({races}) => {
                             headers: {
                                 'Content-Type': 'application/json', // Sets the request body as JSON
                             },
-                            body: JSON.stringify({payload: payload, key: key, iv: iv}), // Converts the payload to JSON string
+                            body: JSON.stringify({payload: races, key: key, iv: iv}), // Converts the payload to JSON string
                         });
+
+                        const responseText = await response.text(); // Log the raw response
+                        console.log("Raw Response:", responseText);
     
                         // Check if the response was successful
                         if (response.ok) {
                             const data = await response.json();
                             setDecryptedRaces(data.data)
                         } else {
-                            const data = await response.json()
-                            console.error('Failed to send data:', data.error);
+                            console.error('Failed to send data:', response);
                         }
                     } catch (error) {
                         console.error('Error sending POST request:', error);
