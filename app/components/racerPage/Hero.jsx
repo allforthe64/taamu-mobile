@@ -16,7 +16,6 @@ import ChangePFP from './ChangePFP'
 const Hero = ({racerData, keyData}) => {
     
     //general state
-    /* const [keyData, setKeyData] = useState() */
     const [openPFP, setOpenPFP] = useState(false)
     const [openEditProfile, setOpenEditProfile] = useState(false)
 
@@ -45,16 +44,6 @@ const Hero = ({racerData, keyData}) => {
         }, [racerData])
     )
 
-    /* useFocusEffect(
-        useCallback(() => {
-            const getKeyData = async () => {
-                const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
-                setKeyData(keyDataObj)
-            }
-            getKeyData()
-        }, [])
-    )
- */
     useFocusEffect(
         useCallback(() => {
             if (racerData.fName && keyData) {

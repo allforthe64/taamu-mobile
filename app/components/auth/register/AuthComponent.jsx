@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View, TextInput, Platform, TouchableOpacity, Pressable, Keyboard } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { firebaseAuth } from '../../../firebaseConfig'
@@ -10,6 +10,9 @@ import { useRouter } from 'expo-router'
 //email regex
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
+//import authContext stuff
+import { AuthContext } from '../../../firebase/authContext'
+
 const AuthComponent = () => {
 
     //initialize state
@@ -17,6 +20,9 @@ const AuthComponent = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [validEmail, setValidEmail] = useState(false)
+
+    //consume auth context
+    const { setAuthUser } = useContext(AuthContext)
 
     //instantiate firebase auth object
     const auth = firebaseAuth
@@ -51,6 +57,9 @@ const AuthComponent = () => {
         try {
             response = await signInWithEmailAndPassword(auth, email, password)
             userUID = response.user.uid
+
+            setAuthUser({ uid: userUID })
+
             setEmail('')
             setPassword('')
             router.push(`/${userUID}`)

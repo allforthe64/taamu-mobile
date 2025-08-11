@@ -1,12 +1,124 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useCallback, useContext } from 'react'
+
+import { useFocusEffect, useRouter } from 'expo-router'
 
 //import useLocalSearchParams hook
 import { useLocalSearchParams } from 'expo-router'
 
+import { AuthContext } from '../../firebase/authContext'
+
+import { getUser, resultsTableListener, singleRaceListener } from '../../firebase/firestore'
+import { getDownloadableURL } from '../../firebase/storage'
+
 const RacePage = () => {
 
-    const { raceId } = useLocalSearchParams()
+  //initialize state
+  const [race, setRace] = useState()
+  const [thumbnail, setThumbnail] = useState()
+  const [photoGalleryURLs, setPhotoGalleryURLs] = useState([])
+  const [organizer, setOrganizer] = useState()
+  const [registrationWindowOpen, setRegistrationWindowOpen] = useState(false)
+  const [currentUser, setCurrentUser] = useState()
+  const [results, setResults] = useState()
+  const [viewParticipants, setViewParticipants] = useState(false)
+  const [redirecting, setRedirecting] = useState(false)
+  const [keyData, setKeyData] = useState()
+
+  //get raceId
+  const { raceId } = useLocalSearchParams()
+
+  //const authUser context
+  const { authUser } = useContext(AuthContext)
+
+  //instantiate router object
+  const router = useRouter()
+
+  //call docSnap listener to pull data for the race (id passed through url params)
+  //call docSnap listener to pull results data for this race
+  useFocusEffect(
+    useCallback(() => {
+      const getRaceData = async () => {
+        const unsubscribe = await singleRaceListener(raceId, setRace)
+        return () => unsubscribe()
+      }
+      getRaceData()
+
+      const getResultsData = async () => {
+        const unsubscribe = await resultsTableListener(raceId, setResults, true)
+        return () => unsubscribe()
+      }
+      getResultsData()
+    }, [])
+  )
+
+  //grab downloadable urls for the thumbnail and photo gallery/pull organizer data
+  useFocusEffect(
+    useCallback(() => {
+      if (race) {
+        if (race === 'does not exist') {
+          setRedirecting(true)
+          setTimeout(() => {
+            router.push('/races')
+          }, 2000)
+        } else {
+          //get the thumbnail url
+          const getThumbnailURL = async () => {
+            const thumbnailURL = await getDownloadableURL(race.thumbnail)
+            setThumbnail(thumbnailURL)
+          }
+
+          //map over photo gallery urls and get the downloadable url from each
+          const getPhotoGalleryURLs = async () => {
+            const galleryURLs = await Promise.all(race.photos.map(async url => {
+              const photoURL = await getDownloadableURL(url)
+              return photoURL
+            }))
+            setPhotoGalleryURLs(galleryURLs)
+          }
+
+          //use getUser function to pull race organizer data
+          const getOrganizer = async () => {
+            const organizerData = await getUser({uid: race.creator})
+            setOrganizer(organizerData)
+          }
+
+          //call functions
+          getThumbnailURL()
+          getPhotoGalleryURLs()
+          getOrganizer()
+        }
+      }
+    }, [race])
+  )
+
+  //get the current user from firebase
+  useFocusEffect(
+    useCallback(() => {
+      if (authUser) {
+
+        //call getUser with the authUser object
+        const getUserData = async () => {
+          const userData = await getUser(authUser)
+          setCurrentUser(userData)
+        }
+
+        //call function
+        getUserData()
+      }
+    }, [ authUser ])
+  )
+
+  //grab keyData
+  useFocusEffect(
+      useCallback(() => {
+          const getKeyData = async () => {
+              const keyDataObj = await getKey('2L5AoMJxKYqiPuSERhul7wFBO')
+              setKeyData(keyDataObj)
+          }
+          getKeyData()
+      }, [])
+  )
 
   return (
     <View>
