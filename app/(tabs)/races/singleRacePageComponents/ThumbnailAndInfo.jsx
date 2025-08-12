@@ -9,7 +9,6 @@ import { faPerson } from '@fortawesome/free-solid-svg-icons'
 const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrationWindowOpen, currentUser, raceId, setViewParticipants, keyData }) => {
 
     //initialize state
-    const [keyData, setKeyData] = useState()
     const [decipheredOrgName, setDecipheredOrgName] = useState('')
 
     //instantiate router object
