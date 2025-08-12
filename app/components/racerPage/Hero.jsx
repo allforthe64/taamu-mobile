@@ -79,7 +79,7 @@ const Hero = ({racerData, keyData}) => {
                                 //set the deciphered phone
                                 setDecipheredPhone(data.data[4])
                             } else {
-                            console.error('Failed to send data:', response.status);
+                                console.error('Failed to send data:', response.status);
                             }
                         } catch (error) {
                             console.error('Error sending POST request:', error);

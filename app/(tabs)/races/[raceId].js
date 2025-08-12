@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React, { useCallback, useContext } from 'react'
 
 import { useFocusEffect, useRouter } from 'expo-router'
@@ -10,6 +10,7 @@ import { AuthContext } from '../../firebase/authContext'
 
 import { getUser, resultsTableListener, singleRaceListener } from '../../firebase/firestore'
 import { getDownloadableURL } from '../../firebase/storage'
+import ThumbnailAndInfo from './singleRacePageComponents/ThumbnailAndInfo'
 
 const RacePage = () => {
 
@@ -121,10 +122,18 @@ const RacePage = () => {
   )
 
   return (
-    <View>
-      <Text>{raceId}</Text>
+    <View style={styles.mainContainer}>
+      <ThumbnailAndInfo thumbnailURL={thumbnail} raceData={race} organizerData={organizer} setRegistrationWindowOpen={setRegistrationWindowOpen} currentUser={currentUser} raceId={raceId} setViewParticipants={setViewParticipants} keyData={keyData}/>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    width: '100%',
+    backgroundColor: '#01354B',
+    flex: 1
+  }
+})
 
 export default RacePage
