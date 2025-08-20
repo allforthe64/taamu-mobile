@@ -1,8 +1,7 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
-import { Link, useFocusEffect, useRouter } from 'expo-router'
+import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Link, useRouter } from 'expo-router'
 import { format } from 'date-fns'
-import { getKey } from '../../../firebase/firestore'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPerson } from '@fortawesome/free-solid-svg-icons'
 
@@ -23,7 +22,7 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
         if (organizerData && keyData) {
             //decipher orgName
             try {
-                const url = ''
+                const url = 'https://tuarolife.com/api/cU5hF0mLrS7wyiRIIJ58'
                 const payload = [organizerData.orgName]
                 const key = keyData.key
                 const iv = keyData.iv
@@ -203,7 +202,7 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
                     <Text style={styles.buttonText}>View participants</Text>
                 </TouchableOpacity>
             </View>
-            {new Date(raceData.currentDate) < new Date(raceData.closeDate) &&
+            {new Date(currentDate) < new Date(raceData.closeDate) &&
                 <View style={styles.buttonContainer2}>
                     <TouchableOpacity style={styles.button}>
                         <Text style={styles.buttonTextLarge}>Register for this race</Text>
