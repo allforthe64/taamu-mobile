@@ -166,52 +166,56 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
     })
 
   return (
-    <View style={styles.mainContainer}>
-      
-        <View style={styles.thumbnailContainer}>
-            <Image style={styles.thumbnail} source={{ uri: thumbnailURL }}/>
-        </View>
-
-        <View style={styles.raceDataContainer}>
-            <Text style={styles.raceTitle}>{raceData.title}</Text>
-            <Link href={`/organizer/${raceData.creator}`} style={styles.organizerLink}>{decipheredOrgName}</Link>
-            <Text style={styles.label}>Dates: <Text style={styles.raceDataTextNoMargin}>{raceData.startDate} - {raceData.endDate}</Text></Text>
-            <Text style={styles.label}>Location: <Text style={styles.raceDataTextNoMargin}>{raceData.location}</Text></Text>
-            <Text style={styles.label}>Race type: <Text style={styles.raceDataTextNoMargin}>{raceData.raceType}</Text></Text>
-            <Text style={styles.label}>Distances:</Text>
-            <View style={styles.categoriesAndDistancesContainer}>
-                {raceData.raceEvents.map((ev, i) => {
-                    //map over events to display distances (if element is last in list, don't display comma)
-                    return (
-                        <Text style={styles.categoryText} key={i}>{ev.distance}{ev.distanceMetric}{raceData.raceEvents.indexOf(ev) !== raceData.raceEvents.length - 1 ? ',' : ''}</Text>
-                    )
-                })}
-            </View>
-            <Text style={styles.label}>Craft categories:</Text>
-            <View style={styles.categoriesAndDistancesContainer}>
-                {raceData.craftCategories.map((cat, i) => {
-                    //map over craft categories and display (if element is last in list don't show comma)
-                    return (
-                        <Text style={styles.categoryText} key={i}>{cat}{raceData.craftCategories.indexOf(cat) !== raceData.craftCategories.length - 1 ? ',' : ''}</Text>
-                    )
-                })}
-            </View>
-            <Text style={styles.label}>Participants: <Text style={styles.raceDataTextNoMargin}>{raceData.participants.length} <FontAwesomeIcon icon={faPerson} /></Text></Text>
-            <View style={styles.buttonContainer1}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>View participants</Text>
-                </TouchableOpacity>
-            </View>
-            {new Date(currentDate) < new Date(raceData.closeDate) &&
-                <View style={styles.buttonContainer2}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonTextLarge}>Register for this race</Text>
-                    </TouchableOpacity>
+    <>
+        {raceData &&
+            <View style={styles.mainContainer}>
+        
+                <View style={styles.thumbnailContainer}>
+                    <Image style={styles.thumbnail} source={{ uri: thumbnailURL }}/>
                 </View>
-            }
-        </View>
 
-    </View>
+                <View style={styles.raceDataContainer}>
+                    <Text style={styles.raceTitle}>{raceData?.title}</Text>
+                    <Link href={`/organizer/${raceData?.creator}`} style={styles.organizerLink}>{decipheredOrgName}</Link>
+                    <Text style={styles.label}>Dates: <Text style={styles.raceDataTextNoMargin}>{raceData.startDate} - {raceData.endDate}</Text></Text>
+                    <Text style={styles.label}>Location: <Text style={styles.raceDataTextNoMargin}>{raceData.location}</Text></Text>
+                    <Text style={styles.label}>Race type: <Text style={styles.raceDataTextNoMargin}>{raceData.raceType}</Text></Text>
+                    <Text style={styles.label}>Distances:</Text>
+                    <View style={styles.categoriesAndDistancesContainer}>
+                        {raceData.raceEvents.map((ev, i) => {
+                            //map over events to display distances (if element is last in list, don't display comma)
+                            return (
+                                <Text style={styles.categoryText} key={i}>{ev.distance}{ev.distanceMetric}{raceData.raceEvents.indexOf(ev) !== raceData.raceEvents.length - 1 ? ',' : ''}</Text>
+                            )
+                        })}
+                    </View>
+                    <Text style={styles.label}>Craft categories:</Text>
+                    <View style={styles.categoriesAndDistancesContainer}>
+                        {raceData.craftCategories.map((cat, i) => {
+                            //map over craft categories and display (if element is last in list don't show comma)
+                            return (
+                                <Text style={styles.categoryText} key={i}>{cat}{raceData.craftCategories.indexOf(cat) !== raceData.craftCategories.length - 1 ? ',' : ''}</Text>
+                            )
+                        })}
+                    </View>
+                    <Text style={styles.label}>Participants: <Text style={styles.raceDataTextNoMargin}>{raceData.participants.length} <FontAwesomeIcon icon={faPerson} /></Text></Text>
+                    <View style={styles.buttonContainer1}>
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.buttonText}>View participants</Text>
+                        </TouchableOpacity>
+                    </View>
+                    {new Date(currentDate) < new Date(raceData.closeDate) &&
+                        <View style={styles.buttonContainer2}>
+                            <TouchableOpacity style={styles.button}>
+                                <Text style={styles.buttonTextLarge}>Register for this race</Text>
+                            </TouchableOpacity>
+                        </View>
+                    }
+                </View>
+
+            </View>
+        }
+    </>
   )
 }
 
