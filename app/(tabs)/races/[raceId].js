@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import React, { useCallback, useContext, useState } from 'react'
 
 import { useFocusEffect, useRouter } from 'expo-router'
@@ -11,6 +11,7 @@ import { AuthContext } from '../../firebase/authContext'
 import { getUser, resultsTableListener, singleRaceListener } from '../../firebase/firestore'
 import { getDownloadableURL } from '../../firebase/storage'
 import ThumbnailAndInfo from './singleRacePageComponents/ThumbnailAndInfo'
+import DetailsAndRegistrationButton from './singleRacePageComponents/DetailsAndRegistrationButton'
 
 const RacePage = () => {
 
@@ -65,7 +66,7 @@ const RacePage = () => {
         } else {
           //get the thumbnail url
           const getThumbnailURL = async () => {
-            const thumbnailURL = await getDownloadableURL(race.thumbnail)
+            const thumbnailURL = await getDownloadableURL(race.thumbNail)
             setThumbnail(thumbnailURL)
           }
 
@@ -123,7 +124,10 @@ const RacePage = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <ThumbnailAndInfo thumbnailURL={thumbnail} raceData={race} organizerData={organizer} setRegistrationWindowOpen={setRegistrationWindowOpen} currentUser={currentUser} raceId={raceId} setViewParticipants={setViewParticipants} keyData={keyData}/>
+      <ScrollView>
+        <ThumbnailAndInfo thumbnailURL={thumbnail} raceData={race} organizerData={organizer} setRegistrationWindowOpen={setRegistrationWindowOpen} currentUser={currentUser} raceId={raceId} setViewParticipants={setViewParticipants} keyData={keyData}/>
+        <DetailsAndRegistrationButton desc={race.description} currentUser={currentUser} startTimes={race.startTimes} endTimes={race.endTimes} setRegistrationWindowOpen={setRegistrationWindowOpen} raceData={race}/>
+      </ScrollView>
     </View>
   )
 }

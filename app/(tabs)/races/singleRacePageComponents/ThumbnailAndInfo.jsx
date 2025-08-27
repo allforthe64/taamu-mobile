@@ -1,6 +1,6 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { Link, useRouter } from 'expo-router'
+import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions, Linking } from 'react-native'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Link, useFocusEffect, useRouter } from 'expo-router'
 import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPerson } from '@fortawesome/free-solid-svg-icons'
@@ -18,7 +18,7 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
 
     
     //decipher org information
-    useEffect(() => {
+    useFocusEffect(useCallback(() => {
         if (organizerData && keyData) {
             //decipher orgName
             try {
@@ -55,8 +55,8 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
                 console.log('err within decipher function: ', error)
             }
         }
-    }, [organizerData, keyData])
-
+    }, [organizerData, keyData]))
+    
     //get device height to be used in setting container dimension
     const ScreenHeight = Dimensions.get("window").height
 
@@ -162,8 +162,30 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
             flexDirection: 'row',
             justifyContent: 'center',
             marginTop: 20
+        },
+        externalLinkText: {
+            color: 'white',
+            fontWeight: '600',
+            fontSize: 14
+        },
+        externalLinkContainer: {
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row'
         }
     })
+
+    //handle a link press
+    const handlePress = async (url) => {
+        //test if a link can be opened
+        const supported = await Linking.canOpenURL(url)
+    
+        if (supported) {
+            await Linking.openURL(url)
+        } else {
+            alert(`Unable to open external link: ${url}`)
+        }
+    }
 
   return (
     <>
@@ -204,6 +226,24 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
                             <Text style={styles.buttonText}>View participants</Text>
                         </TouchableOpacity>
                     </View>
+                    <Text style={styles.label}>Links to external rescources:</Text>
+                    <View style={styles.categoriesAndDistancesContainer}>
+                        {raceData.externalLinks.length > 0 &&
+                            raceData.map((externalLink, i) => {
+                                <View style={styles.externalLinkContainer} key={i}>
+                                    <Text style={styles.externalLinkText}>{'\u2022'}</Text>
+                                    <TouchableOpacity onPress={() => handlePress(externalLink)}>
+                                        <Text style={[styles.externalLinkText, {textDecorationLine: 'underline', marginLeft: 5}]}numberOfLines={1} 
+                                        ellipsizeMode="tail" >
+                                            {externalLink}
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+
+                            })
+                        }
+                    </View>
+                    
                     {new Date(currentDate) < new Date(raceData.closeDate) &&
                         <View style={styles.buttonContainer2}>
                             <TouchableOpacity style={styles.button}>
