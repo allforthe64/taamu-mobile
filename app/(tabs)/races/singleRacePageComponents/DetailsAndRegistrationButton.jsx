@@ -1,12 +1,12 @@
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { Component, useCallback } from 'react'
+import React, { Component, useState, useCallback } from 'react'
 
 //date-fns import
 import { format } from 'date-fns'
 
 //getDownloadableURL import from firebase storage function
-import { getDownloadableURL } from '../../../firebase/storage'
 import { useFocusEffect } from 'expo-router'
+import { getDownloadableURL } from '../../../firebase/storage'
 
 export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceData}) => {
     //initialize state to hold start and end times
@@ -14,45 +14,33 @@ export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceDa
     const [adjEndTimes, setAdjEndTimes] = useState([])
     const [waiverLinks, setWaiverLinks] = useState([])
 
+    //convert time to 12 hour format
+    const convertTo12Hour = (time) => {
+        if (!time) return null
+
+        let [hours, minutes] = time.split(":")
+        hours = Number(hours);
+        minutes = minutes.padStart(2, "0")
+
+        let dayPart = hours >= 12 ? " PM" : " AM"
+        let adjHour = hours % 12 || 12
+
+        return { text: `${adjHour}:${minutes}`, dayPart }
+    };
+
     //map over times and convert from military time to standard time
     useFocusEffect(
         useCallback(() => {
 
-            let adjTime = []
-            let adjEndTime = []
-
             if (startTimes) {
-                startTimes.forEach(startTime => {
-                    if (Number(startTime.split(':')[0]) === 24) {
-                        adjTime.push({text: '12:' + + startTime.split(':')[1], dayPart: ' AM'})
-                    } else if (Number(startTime.split(':')[0]) === 12) {
-                        adjTime.push({text: '12:' + + startTime.split(':')[1], dayPart: ' PM'})
-                    } else if (Number(startTime.split('.')[0]) % 12 > 12) {
-                        adjTime.push({text: `${Number(startTime.split(':')[0]) % 12}:` + startTime.split(':')[1], dayPart: 'PM'})
-                    } else {
-                        adjTime.push({text: `${Number(startTime.split(':')[0]) % 12}:` + startTime.split(':')[1], dayPart: ' AM'})
-                    }
-                })
+                setAdjStartTimes(startTimes.map(t => convertTo12Hour(t)))
             }
 
             if (endTimes) {
-                endTimes.forEach(endTime => {
-                    if (Number(endTime.split(':')[0]) === 24) {
-                    adjEndTime.push({text: '12:' + endTime.split(':')[1], dayPart: ' AM'})
-                    } else if (Number(endTime.split(':')[0]) === 12) {
-                    adjEndTime.push({text: '12:' + endTime.split(':')[1], dayPart: ' PM'})
-                    } else if (Number(endTime.split(':')[0]) > 12) {
-                    adjEndTime.push({text: `${Number(endTime.split(':')[0]) % 12}:` + endTime.split(':')[1], dayPart: ' PM'})
-                    } else {
-                    adjEndTime.push({text: `${Number(endTime.split(':')[0]) % 12}:` + endTime.split(':')[1], dayPart: ' AM'})
-                    }
-                })
+                setAdjEndTimes(endTimes.map(t => convertTo12Hour(t)))
             }
 
-            setAdjStartTimes(adjTime)
-            setAdjEndTimes(adjEndTime)
-
-        }, [])
+        }, [startTimes, endTimes])
     )
 
     //map over waivers and get the download urls
@@ -93,7 +81,7 @@ export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceDa
                                     {waiverLinks.map((waiver, i) => {
                                         return (
                                             <TouchableOpacity key={i} onPress={() => downloadWaiver(waiver)}>
-                                                <Text style={styles.waiverText}>{waiver.text}</Text>
+                                                <Text style={styles.waiverText}>{waiver?.name}</Text>
                                             </TouchableOpacity>
                                         )
                                     })}
