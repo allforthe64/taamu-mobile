@@ -8,7 +8,7 @@ import { useLocalSearchParams } from 'expo-router'
 
 import { AuthContext } from '../../firebase/authContext'
 
-import { getUser, resultsTableListener, singleRaceListener } from '../../firebase/firestore'
+import { getUser, resultsTableListener, singleRaceListener, getKey } from '../../firebase/firestore'
 import { getDownloadableURL } from '../../firebase/storage'
 import ThumbnailAndInfo from './singleRacePageComponents/ThumbnailAndInfo'
 import DetailsAndRegistrationButton from './singleRacePageComponents/DetailsAndRegistrationButton'
@@ -86,8 +86,14 @@ const RacePage = () => {
           }
 
           //call functions
-          getThumbnailURL()
-          getPhotoGalleryURLs()
+          if (race.thumbNail) {
+            getThumbnailURL()
+          }
+          
+          if (race.photos.length > 0) {
+            getPhotoGalleryURLs()
+          }
+          
           getOrganizer()
         }
       }
