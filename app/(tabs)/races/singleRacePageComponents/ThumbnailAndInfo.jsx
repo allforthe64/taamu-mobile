@@ -229,7 +229,7 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
                     <Text style={styles.label}>Links to external rescources:</Text>
                     <View style={styles.categoriesAndDistancesContainer}>
                         {raceData.externalLinks.length > 0 &&
-                            raceData.map((externalLink, i) => {
+                            raceData.externalLinks.map((externalLink, i) => {
                                 <View style={styles.externalLinkContainer} key={i}>
                                     <Text style={styles.externalLinkText}>{'\u2022'}</Text>
                                     <TouchableOpacity onPress={() => handlePress(externalLink)}>
