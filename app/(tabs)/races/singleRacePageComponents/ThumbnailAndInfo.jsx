@@ -220,7 +220,7 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
                             )
                         })}
                     </View>
-                    <Text style={styles.label}>Participants: <Text style={styles.raceDataTextNoMargin}>{raceData.participants.length} <FontAwesomeIcon icon={faPerson} /></Text></Text>
+                    <Text style={styles.label}>Participants: <Text style={styles.raceDataTextNoMargin}>{raceData.participants.length} <FontAwesomeIcon color='white' icon={faPerson} /></Text></Text>
                     <View style={styles.buttonContainer1}>
                         <TouchableOpacity style={styles.button}>
                             <Text style={styles.buttonText}>View participants</Text>

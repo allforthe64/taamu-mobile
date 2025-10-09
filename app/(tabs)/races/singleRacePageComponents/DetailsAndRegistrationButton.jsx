@@ -93,8 +93,8 @@ export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceDa
                             {adjStartTimes.map((time, i) => {
                                 return (
                                     <View key={i}>
-                                        <Text style={styles.timeText}>Day {i + 1} Start time: {time.text}{time.dayPart}</Text>
-                                        <Text style={styles.timeText}>Day {i + 1} end time: {adjEndTimes[i].text}{adjEndTimes[i].dayPart}</Text>
+                                        <Text style={styles.timeText}>Day {i + 1} Start time: {time?.text}{time?.dayPart}</Text>
+                                        <Text style={styles.timeText}>Day {i + 1} end time: {adjEndTimes[i]?.text}{adjEndTimes[i]?.dayPart}</Text>
                                     </View>
                                 )
                             })}
