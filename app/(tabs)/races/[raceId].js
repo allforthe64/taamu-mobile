@@ -131,8 +131,8 @@ const RacePage = () => {
   return (
     <View style={styles.mainContainer}>
       <ScrollView>
-        {/* <ThumbnailAndInfo thumbnailURL={thumbnail} raceData={race} organizerData={organizer} setRegistrationWindowOpen={setRegistrationWindowOpen} currentUser={currentUser} raceId={raceId} setViewParticipants={setViewParticipants} keyData={keyData}/>
-        <DetailsAndRegistrationButton desc={race?.description} currentUser={currentUser} startTimes={race?.startTimes} endTimes={race?.endTimes} setRegistrationWindowOpen={setRegistrationWindowOpen} raceData={race}/> */}
+        <ThumbnailAndInfo thumbnailURL={thumbnail} raceData={race} organizerData={organizer} setRegistrationWindowOpen={setRegistrationWindowOpen} currentUser={currentUser} raceId={raceId} setViewParticipants={setViewParticipants} keyData={keyData}/>
+        {/* <DetailsAndRegistrationButton desc={race?.description} currentUser={currentUser} startTimes={race?.startTimes} endTimes={race?.endTimes} setRegistrationWindowOpen={setRegistrationWindowOpen} raceData={race}/> */}
       </ScrollView>
     </View>
   )
