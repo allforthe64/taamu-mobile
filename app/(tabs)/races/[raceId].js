@@ -132,8 +132,6 @@ const RacePage = () => {
       }, [])
   )
 
-  console.log('photoGalleryURLs: ', photoGalleryURLs)
-
   return (
     <View style={styles.mainContainer}>
       <ScrollView>

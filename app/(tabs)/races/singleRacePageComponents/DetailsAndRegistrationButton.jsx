@@ -14,11 +14,6 @@ const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceData}) =>
     const [adjEndTimes, setAdjEndTimes] = useState([])
     const [waiverLinks, setWaiverLinks] = useState([])
 
-    console.log('adjStartTimes: ', adjStartTimes)
-    console.log('adjEndTimes: ', adjEndTimes)
-    console.log('raceData: ', raceData)
-    console.log('desc: ', desc)
-
     //convert time to 12 hour format
     const convertTo12Hour = (time) => {
         if (!time) return null

@@ -21,7 +21,7 @@ const PhotoGallery = ({ photos }) => {
         },
         pressableContainer: {
             width: '100%',
-            height: (ScreenHeight / 10) * 4
+            height: 100
         },
         racePhoto: {
             'width': '100%',
@@ -51,6 +51,8 @@ const PhotoGallery = ({ photos }) => {
             marginTop: '10%'
         }
     })
+
+    console.log('photos: ', photos)
 
   return (
     <>
