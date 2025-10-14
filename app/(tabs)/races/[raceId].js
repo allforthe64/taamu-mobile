@@ -75,6 +75,7 @@ const RacePage = () => {
 
           //map over photo gallery urls and get the downloadable url from each
           const getPhotoGalleryURLs = async () => {
+            alert('running')
             const galleryURLs = await Promise.all(race.photos.map(async url => {
               const photoURL = await getDownloadableURL(url)
               return photoURL
@@ -130,6 +131,8 @@ const RacePage = () => {
           getKeyData()
       }, [])
   )
+
+  console.log('photoGalleryURLs: ', photoGalleryURLs)
 
   return (
     <View style={styles.mainContainer}>
