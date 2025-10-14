@@ -21,7 +21,9 @@ const PhotoGallery = ({ photos }) => {
         },
         pressableContainer: {
             width: '100%',
-            height: 100
+            height: 100,
+            borderWidth: 2,
+            borderColor: 'white'
         },
         racePhoto: {
             'width': '100%',
