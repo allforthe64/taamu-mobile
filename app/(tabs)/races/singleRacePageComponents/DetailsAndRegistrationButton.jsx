@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
     mainContainer: {
         width: '100%',
         paddingLeft: '4.25%',
-        paddingBottom: 20,
+        paddingTop: 75,
+        paddingBottom: 75,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
@@ -125,7 +126,9 @@ const styles = StyleSheet.create({
     headings: {
         color: "#09CAC7",
         fontWeight: '600',
-        fontSize: 25
+        fontSize: 25,
+        width: '100%',
+        textAlign: 'left'
     },
     description: {
         color: 'white',
@@ -143,6 +146,7 @@ const styles = StyleSheet.create({
         width: '90%'
     },
     timeText: {
-
+        fontSize: 18,
+        color: 'white'
     }
 })
