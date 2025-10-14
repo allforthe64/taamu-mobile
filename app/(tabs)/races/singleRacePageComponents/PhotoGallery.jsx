@@ -21,9 +21,7 @@ const PhotoGallery = ({ photos }) => {
         },
         pressableContainer: {
             width: '100%',
-            height: 100,
-            borderWidth: 2,
-            borderColor: 'white'
+            height: (ScreenHeight / 10) * 4
         },
         racePhoto: {
             'width': '100%',
@@ -53,8 +51,6 @@ const PhotoGallery = ({ photos }) => {
             marginTop: '10%'
         }
     })
-
-    console.log('photos: ', photos)
 
   return (
     <>
@@ -86,8 +82,8 @@ const PhotoGallery = ({ photos }) => {
                 //map over array of photoUrls and display a photo for each
                 photos.map((photo, i) => {
                     return (
-                        <Pressable onPress={() => setFocusedPhoto(photo)} key={i}>
-                            <Image source={{ uri: photo }}/>
+                        <Pressable style={styles.imageContainer} onPress={() => setFocusedPhoto(photo)} key={i}>
+                            <Image style={styles.image} source={{ uri: photo }}/>
                         </Pressable>
                     )
                 })
