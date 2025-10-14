@@ -230,16 +230,17 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
                     <View style={styles.categoriesAndDistancesContainer}>
                         {raceData.externalLinks.length > 0 &&
                             raceData.externalLinks.map((externalLink, i) => {
-                                <View style={styles.externalLinkContainer} key={i}>
-                                    <Text style={styles.externalLinkText}>{'\u2022'}</Text>
-                                    <TouchableOpacity onPress={() => handlePress(externalLink)}>
-                                        <Text style={[styles.externalLinkText, {textDecorationLine: 'underline', marginLeft: 5}]}numberOfLines={1} 
-                                        ellipsizeMode="tail" >
-                                            {externalLink}
-                                        </Text>
-                                    </TouchableOpacity>
-                                </View>
-
+                                return (
+                                    <View style={styles.externalLinkContainer} key={i}>
+                                        <Text style={styles.externalLinkText}>{'\u2022'}</Text>
+                                        <TouchableOpacity onPress={() => handlePress(externalLink)}>
+                                            <Text style={[styles.externalLinkText, {textDecorationLine: 'underline', marginLeft: 5}]}numberOfLines={1} 
+                                            ellipsizeMode="tail" >
+                                                {externalLink}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                )
                             })
                         }
                     </View>
