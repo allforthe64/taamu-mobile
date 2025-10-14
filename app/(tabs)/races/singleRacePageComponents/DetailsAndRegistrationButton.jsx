@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { Component, useState, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 
 //date-fns import
 import { format } from 'date-fns'
@@ -8,7 +8,7 @@ import { format } from 'date-fns'
 import { useFocusEffect } from 'expo-router'
 import { getDownloadableURL } from '../../../firebase/storage'
 
-export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceData}) => {
+const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceData}) => {
     //initialize state to hold start and end times
     const [adjStartTimes, setAdjStartTimes] = useState([])
     const [adjEndTimes, setAdjEndTimes] = useState([])
@@ -79,7 +79,7 @@ export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceDa
                     <View style={styles.mainContainer}>
                         <Text style={styles.headings}>Race details:</Text>
                         <Text style={styles.description}>{desc}</Text>
-                        {/* {waiverLinks.length > 0 && raceData.waiversHandledOnSoftware &&
+                        {waiverLinks.length > 0 && raceData.waiversHandledOnSoftware &&
                             <>
                                 <Text style={[styles.headings, {marginTop: 20}]}>Download waivers:</Text>
                                 <View style={styles.waiverContainer}>
@@ -92,9 +92,9 @@ export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceDa
                                     })}
                                 </View>   
                             </>
-                        } */}
+                        }
                         <Text style={[styles.headings, {marginTop: 20}]}>Start and end times by day:</Text>
-                        {/* <View style={styles.timesContainer}>
+                        <View style={styles.timesContainer}>
                             {adjStartTimes.map((time, i) => {
                                 return (
                                     <View key={i}>
@@ -103,13 +103,15 @@ export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceDa
                                     </View>
                                 )
                             })}
-                        </View> */}
+                        </View>
                     </View>
                 </>   
             }
         </>
     )
 }
+
+export default DetailsAndRegistrationButton
 
 const styles = StyleSheet.create({
     mainContainer: {
