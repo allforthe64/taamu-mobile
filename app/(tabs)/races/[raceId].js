@@ -10,6 +10,8 @@ import { AuthContext } from '../../firebase/authContext'
 
 import { getUser, resultsTableListener, singleRaceListener, getKey } from '../../firebase/firestore'
 import { getDownloadableURL } from '../../firebase/storage'
+
+//component imports
 import ThumbnailAndInfo from './singleRacePageComponents/ThumbnailAndInfo'
 import DetailsAndRegistrationButton from './singleRacePageComponents/DetailsAndRegistrationButton'
 

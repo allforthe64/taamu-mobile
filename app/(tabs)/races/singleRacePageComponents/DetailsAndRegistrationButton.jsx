@@ -14,6 +14,11 @@ export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceDa
     const [adjEndTimes, setAdjEndTimes] = useState([])
     const [waiverLinks, setWaiverLinks] = useState([])
 
+    console.log('adjStartTimes: ', adjStartTimes)
+    console.log('adjEndTimes: ', adjEndTimes)
+    console.log('raceData: ', raceData)
+    console.log('desc: ', desc)
+
     //convert time to 12 hour format
     const convertTo12Hour = (time) => {
         if (!time) return null
@@ -64,17 +69,17 @@ export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceDa
 
     //download the waiver
     const downloadWaiver = (waiver) => {
-
+        return false
     }
 
     return (
         <>
-            {raceData &&
+            {raceData && desc &&
                 <>
                     <View style={styles.mainContainer}>
                         <Text style={styles.headings}>Race details:</Text>
                         <Text style={styles.description}>{desc}</Text>
-                        {waiverLinks.length > 0 && raceData.waiversHandledOnSoftware &&
+                        {/* {waiverLinks.length > 0 && raceData.waiversHandledOnSoftware &&
                             <>
                                 <Text style={[styles.headings, {marginTop: 20}]}>Download waivers:</Text>
                                 <View style={styles.waiverContainer}>
@@ -87,9 +92,9 @@ export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceDa
                                     })}
                                 </View>   
                             </>
-                        }
+                        } */}
                         <Text style={[styles.headings, {marginTop: 20}]}>Start and end times by day:</Text>
-                        <View style={styles.timesContainer}>
+                        {/* <View style={styles.timesContainer}>
                             {adjStartTimes.map((time, i) => {
                                 return (
                                     <View key={i}>
@@ -98,7 +103,7 @@ export const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceDa
                                     </View>
                                 )
                             })}
-                        </View>
+                        </View> */}
                     </View>
                 </>   
             }
