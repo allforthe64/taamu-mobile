@@ -44,6 +44,16 @@ const PhotoGallery = ({ photos }) => {
         image: {
             width: '100%', 
             height: '100%', 
+            objectFit: 'cover'
+        },
+        imageContainer: {
+            width: '100%',
+            height: '80%', 
+            marginTop: '10%'
+        },
+        expandedImage: {
+            width: '100%', 
+            height: '100%', 
             objectFit: 'contain'
         }
     })
@@ -67,7 +77,7 @@ const PhotoGallery = ({ photos }) => {
                             bindToBorders={true}
                             captureEvent={true}
                         >
-                            <Image source={{uri: `${fileURL}`}} style={styles.image}/>
+                            <Image source={{uri: `${fileURL}`}} style={styles.expandedImage}/>
                         </ReactNativeZoomableView>
                     </View>
                 </View>
@@ -78,7 +88,7 @@ const PhotoGallery = ({ photos }) => {
                 //map over array of photoUrls and display a photo for each
                 photos.map((photo, i) => {
                     return (
-                        <Pressable style={styles.pressableContainer} onPress={() => setFocusedPhoto(photo)} key={i}>
+                        <Pressable style={styles.pressableContainerContainer} onPress={() => setFocusedPhoto(photo)} key={i}>
                             <Image style={styles.image} source={{ uri: photo }}/>
                         </Pressable>
                     )
