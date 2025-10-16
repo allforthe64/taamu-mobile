@@ -45,10 +45,6 @@ const PhotoGallery = ({ photos }) => {
             width: '100%', 
             height: '100%', 
             objectFit: 'contain'
-        },
-        imageContainer: {
-            height: '80%', 
-            marginTop: '10%'
         }
     })
 
@@ -82,7 +78,7 @@ const PhotoGallery = ({ photos }) => {
                 //map over array of photoUrls and display a photo for each
                 photos.map((photo, i) => {
                     return (
-                        <Pressable style={styles.imageContainer} onPress={() => setFocusedPhoto(photo)} key={i}>
+                        <Pressable style={styles.pressableContainer} onPress={() => setFocusedPhoto(photo)} key={i}>
                             <Image style={styles.image} source={{ uri: photo }}/>
                         </Pressable>
                     )
