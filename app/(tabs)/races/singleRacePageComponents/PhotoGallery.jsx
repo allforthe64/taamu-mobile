@@ -68,7 +68,7 @@ const PhotoGallery = ({ photos }) => {
                             <FontAwesomeIcon icon={faXmark} color={'white'} size={30} />
                         </TouchableOpacity>
                     </View>
-                    <View style={imageContainer}>
+                    <View style={styles.imageContainer}>
                         <ReactNativeZoomableView
                             maxZoom={10}
                             minZoom={1}
@@ -77,7 +77,7 @@ const PhotoGallery = ({ photos }) => {
                             bindToBorders={true}
                             captureEvent={true}
                         >
-                            <Image source={{uri: `${fileURL}`}} style={styles.expandedImage}/>
+                            <Image source={{uri: `${focusedPhoto}`}} style={styles.expandedImage}/>
                         </ReactNativeZoomableView>
                     </View>
                 </View>
