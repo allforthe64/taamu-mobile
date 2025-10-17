@@ -5,6 +5,9 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
+//ReactNativeZoomableView component import
+import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view'
+
 const PhotoGallery = ({ photos }) => {
 
     const [focusedPhoto, setFocusedPhoto] = useState()

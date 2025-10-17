@@ -1,7 +1,15 @@
 import { Tabs } from "expo-router";
+
+//fontAwesome imports for navbar
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faHouse, faPerson, faFlagCheckered, faLock, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
+//AuthContextProvider import
 import { AuthContextProvider } from "../firebase/authContext";
+
+//toast context provider import
+import { ToastProvider } from "react-native-toast-notifications";
+
 import { useState, useEffect } from "react";
 
 //firebase auth import
@@ -13,73 +21,75 @@ export default function TabLayout() {
     
     return (
         <AuthContextProvider>
-            <Tabs screenOptions={{ tabBarActiveTintColor: '#09CAC7' }}>
-                <Tabs.Screen 
-                    name="races/[raceId]"
-                    options={{
-                        title: 'races/[raceId]',
-                        href: null,
-                        headerShown: false
-                    }}
-                />
-                <Tabs.Screen
-                    name="index"
-                    options={{
-                    title: 'Home',
-                    headerShown: false,
-                    tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faHouse} color={color} />,
-                    }}
-                />
-                <Tabs.Screen
-                    name="[racer]"
-                    options={{
-                        title: 'Racer Page',
+            <ToastProvider placement="top" offsetTop={150}>
+                <Tabs screenOptions={{ tabBarActiveTintColor: '#09CAC7' }}>
+                    <Tabs.Screen 
+                        name="races/[raceId]"
+                        options={{
+                            title: 'races/[raceId]',
+                            href: null,
+                            headerShown: false
+                        }}
+                    />
+                    <Tabs.Screen
+                        name="index"
+                        options={{
+                        title: 'Home',
                         headerShown: false,
-                        tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faPerson} color={color} />,
-                        href: firebaseAuth.currentUser === null ? null : {
-                            pathname: `/[${firebaseAuth.currentUser}]`,
-                            params: {
-                                racer: 'foobar'
+                        tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faHouse} color={color} />,
+                        }}
+                    />
+                    <Tabs.Screen
+                        name="[racer]"
+                        options={{
+                            title: 'Racer Page',
+                            headerShown: false,
+                            tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faPerson} color={color} />,
+                            href: firebaseAuth.currentUser === null ? null : {
+                                pathname: `/[${firebaseAuth.currentUser}]`,
+                                params: {
+                                    racer: 'foobar'
+                                }
                             }
-                        }
-                    }}
-                />
-                <Tabs.Screen
-                    name="races"
-                    options={{
-                    title: 'Search Races',
-                    headerShown: false,
-                    tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faFlagCheckered} color={color} />,
-                    }}
-                />
-                <Tabs.Screen
-                    name="logout"
-                    options={{
-                    title: 'Log Out',
-                    headerShown: false,
-                    tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faRightFromBracket} color={'red'} />,
-                    href: firebaseAuth.currentUser !== null ? {pathname: '/logout'} : null
-                    }}
-                />
-                <Tabs.Screen
-                    name="auth"
-                    options={{
-                    title: 'Log-in',
-                    headerShown: false,
-                    tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faLock} color={color} />,
-                    href: firebaseAuth.currentUser !== null ? null : {pathname: '/auth'}
-                    }}
-                />
-                <Tabs.Screen
-                    name="register"
-                    options={{
-                    title: 'Register',
-                    headerShown: false,
-                    tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faLock} color={color} />,
-                    href: null
-                    }}
-                />
-            </Tabs>
+                        }}
+                    />
+                    <Tabs.Screen
+                        name="races"
+                        options={{
+                        title: 'Search Races',
+                        headerShown: false,
+                        tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faFlagCheckered} color={color} />,
+                        }}
+                    />
+                    <Tabs.Screen
+                        name="logout"
+                        options={{
+                        title: 'Log Out',
+                        headerShown: false,
+                        tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faRightFromBracket} color={'red'} />,
+                        href: firebaseAuth.currentUser !== null ? {pathname: '/logout'} : null
+                        }}
+                    />
+                    <Tabs.Screen
+                        name="auth"
+                        options={{
+                        title: 'Log-in',
+                        headerShown: false,
+                        tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faLock} color={color} />,
+                        href: firebaseAuth.currentUser !== null ? null : {pathname: '/auth'}
+                        }}
+                    />
+                    <Tabs.Screen
+                        name="register"
+                        options={{
+                        title: 'Register',
+                        headerShown: false,
+                        tabBarIcon: ({ color }) => <FontAwesomeIcon size={28} icon={faLock} color={color} />,
+                        href: null
+                        }}
+                    />
+                </Tabs>
+            </ToastProvider>
         </AuthContextProvider>
     )
 }

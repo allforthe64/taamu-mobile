@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Modal } from 'react-native'
 import React, { useCallback, useContext, useState } from 'react'
 
 import { useFocusEffect, useRouter } from 'expo-router'
@@ -15,6 +15,7 @@ import { getDownloadableURL } from '../../firebase/storage'
 import ThumbnailAndInfo from './singleRacePageComponents/ThumbnailAndInfo'
 import DetailsAndRegistrationButton from './singleRacePageComponents/DetailsAndRegistrationButton'
 import PhotoGallery from './singleRacePageComponents/PhotoGallery'
+import RaceRegistrationMain from './singleRacePageComponents/RegistrationComponents/RaceRegistrationMain'
 
 const RacePage = () => {
 
@@ -134,6 +135,11 @@ const RacePage = () => {
 
   return (
     <View style={styles.mainContainer}>
+      {registrationWindowOpen &&
+        <Modal animationType='slide' presentationStyle='pageSheet'>
+          <RaceRegistrationMain keyData={keyData} raceData={race} organizerData={organizer} setRegistrationWindowOpen={setRegistrationWindowOpen}/>
+        </Modal>
+      }
       <ScrollView>
         <ThumbnailAndInfo thumbnailURL={thumbnail} raceData={race} organizerData={organizer} setRegistrationWindowOpen={setRegistrationWindowOpen} currentUser={currentUser} raceId={raceId} setViewParticipants={setViewParticipants} keyData={keyData}/>
         <DetailsAndRegistrationButton desc={race?.description} currentUser={currentUser} startTimes={race?.startTimes} endTimes={race?.endTimes} setRegistrationWindowOpen={setRegistrationWindowOpen} raceData={race}/>

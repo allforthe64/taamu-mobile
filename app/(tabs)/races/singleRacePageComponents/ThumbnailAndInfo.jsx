@@ -5,6 +5,9 @@ import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPerson } from '@fortawesome/free-solid-svg-icons'
 
+//import useToast hook
+import { useToast } from 'react-native-toast-notifications'
+
 const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrationWindowOpen, currentUser, raceId, setViewParticipants, keyData }) => {
 
     //initialize state
@@ -16,6 +19,8 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
     //create a current date object
     const currentDate = format(new Date(), 'MM/dd/yyyy')
 
+    //instantiate toast object
+    const toast = useToast()
     
     //decipher org information
     useFocusEffect(useCallback(() => {
@@ -187,6 +192,9 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
         }
     }
 
+    console.log('closeDate: ', raceData.closeDate)
+    console.log('currentDate: ', currentDate)
+
   return (
     <>
         {raceData &&
@@ -226,31 +234,45 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
                             <Text style={styles.buttonText}>View participants</Text>
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.label}>Links to external rescources:</Text>
-                    <View style={styles.categoriesAndDistancesContainer}>
-                        {raceData.externalLinks.length > 0 &&
-                            raceData.externalLinks.map((externalLink, i) => {
-                                return (
-                                    <View style={styles.externalLinkContainer} key={i}>
-                                        <Text style={styles.externalLinkText}>{'\u2022'}</Text>
-                                        <TouchableOpacity onPress={() => handlePress(externalLink)}>
-                                            <Text style={[styles.externalLinkText, {textDecorationLine: 'underline', marginLeft: 5}]}numberOfLines={1} 
-                                            ellipsizeMode="tail" >
-                                                {externalLink}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                )
-                            })
-                        }
-                    </View>
+                    {raceData.externalLinks.length > 0 &&
+                        <>
+                            <Text style={styles.label}>Links to external rescources:</Text>
+                            <View style={styles.categoriesAndDistancesContainer}>
+                                {
+                                    raceData.externalLinks.map((externalLink, i) => {
+                                        return (
+                                            <View style={styles.externalLinkContainer} key={i}>
+                                                <Text style={styles.externalLinkText}>{'\u2022'}</Text>
+                                                <TouchableOpacity onPress={() => handlePress(externalLink)}>
+                                                    <Text style={[styles.externalLinkText, {textDecorationLine: 'underline', marginLeft: 5}]}numberOfLines={1} 
+                                                    ellipsizeMode="tail" >
+                                                        {externalLink}
+                                                    </Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                        )
+                                    })
+                                }
+                            </View>
+                        </>
+                    }
                     
-                    {new Date(currentDate) < new Date(raceData.closeDate) &&
+                    {new Date(currentDate) < new Date(raceData.closeDate) && currentUser.role !== 'organization' ?
                         <View style={styles.buttonContainer2}>
-                            <TouchableOpacity style={styles.button}>
+                            <TouchableOpacity style={styles.button} onPress={() => {
+                                if (!currentUser) {
+                                    toast.show('Please login/register to sign up for this race!', {
+                                        type: 'danger'
+                                    })
+                                } else if (currentUser.role === 'racer' || currentUser.role === 'coach') {
+                                    setRegistrationWindowOpen(true)
+                                }
+                            }}>
                                 <Text style={styles.buttonTextLarge}>Register for this race</Text>
                             </TouchableOpacity>
                         </View>
+                    :
+                        <></>
                     }
                 </View>
 
