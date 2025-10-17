@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const RegistrationComponentRaceInfo = ({ organizerData, organizerData, raceData }) => {
+const RegistrationComponentRaceInfo = ({ keyData, organizerData, raceData }) => {
 
     //state to hold deciphered orgName
     const [decipheredOrgName, setDecipheredOrgName] = useState()
