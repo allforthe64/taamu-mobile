@@ -192,7 +192,7 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
         }
     }
 
-    console.log('closeDate: ', raceData.closeDate)
+    console.log('closeDate: ', raceData?.closeDate)
     console.log('currentDate: ', currentDate)
 
   return (
