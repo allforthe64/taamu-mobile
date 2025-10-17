@@ -257,7 +257,7 @@ const ThumbnailAndInfo = ({ thumbnailURL, raceData, organizerData, setRegistrati
                         </>
                     }
                     
-                    {new Date(currentDate) < new Date(raceData.closeDate) && currentUser.role !== 'organization' ?
+                    {new Date(currentDate) < new Date(raceData?.closeDate) && currentUser.role !== 'organization' ?
                         <View style={styles.buttonContainer2}>
                             <TouchableOpacity style={styles.button} onPress={() => {
                                 if (!currentUser) {
