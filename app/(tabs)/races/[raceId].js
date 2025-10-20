@@ -137,7 +137,7 @@ const RacePage = () => {
     <View style={styles.mainContainer}>
       {registrationWindowOpen &&
         <Modal animationType='slide' presentationStyle='pageSheet'>
-          <RaceRegistrationMain keyData={keyData} raceData={race} organizerData={organizer} setRegistrationWindowOpen={setRegistrationWindowOpen}/>
+          <RaceRegistrationMain keyData={keyData} raceData={race} organizerData={organizer} setRegistrationWindowOpen={setRegistrationWindowOpen} raceId={raceId}/>
         </Modal>
       }
       <ScrollView>
