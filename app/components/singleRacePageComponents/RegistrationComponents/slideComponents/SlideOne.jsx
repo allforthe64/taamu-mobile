@@ -1,10 +1,13 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native'
 import React from 'react'
 
 //Picker component import
 import {Picker} from '@react-native-picker/picker';
 
-const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBoat, selectedAge, setSelectedAge, backupAgeCategories, backupCraftCategories, events, gender, setGender, crew, currentUser, setCrew, crewAccountType, setCrewAccountType, currentUserCrews, selectedCrew, setSelectedCrew, fees, setFeeObj, parentalSignature, setParentalSignature, parentalConsent, setParentalConsent, setSlide, keyData }) => {
+//checkbox component import
+import { CheckBox } from '@rneui/themed';
+
+const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBoat, selectedAge, setSelectedAge, events, gender, setGender, crew, currentUser, setCrew, crewAccountType, setCrewAccountType, currentUserCrews, selectedCrew, setSelectedCrew, fees, setFeeObj, parentalSignature, setParentalSignature, parentalConsent, setParentalConsent, setSlide, keyData }) => {
 
     const isConditionMet =
     (['Age 8 to age 10', 'J12', 'J14', 'J16', 'J19'].includes(selectedAge) &&
@@ -30,6 +33,23 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
             }
         }
     }
+
+    //initialize arrays to hold the boat and age categories used when all boats or all ages are active
+    const backupAgeCategories = [
+        `${language === "fr" ? "Âge" : 'Age'} 8 ${language === "fr" ? "à l'âge de" : 'to age'} 10`,
+        'J12',
+        'J14',
+        'J16',
+        'J19',
+        /* `${language === "fr" ? "Novice Junior" : */ 'Junior Novice'/* }` */,
+        /* `${language === "fr" ? "Novice Adulte" : */ 'Adult Novice'/* }` */,
+        'Open',
+        'Masters 40s',
+        'Masters 50s',
+        'Masters 60s',
+        'Masters 70s',
+        'Masters 75+'
+    ]
 
     const backupCraftCategories = [
         'V1',
@@ -166,6 +186,54 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                             }
                         </Picker>
                     </View>
+                    {!crew ?
+                        <View style={styles.formSubContainer}>
+                            <Text style={styles.label}>Select an age category:</Text>
+                            <Picker
+                                mode='dropdown'
+                                style={styles.singleLineTextInputs}
+                                selectedValue={selectedBoat}
+                                onValueChange={(itemValue, itemIndex) => {
+                                    setSelectedAge(itemValue)
+                                }}
+                            >
+                                <Picker.Item key={''} label={'Choose one...'} value={''} />
+                                {selectedEvent && !selectedEvent.ageCategories.includes('All Ages') ? 
+                                    selectedEvent.ageCategories.map((cat, i) => {
+                                        return (
+                                            <Picker.Item key={i} label={cat} value={cat} />
+                                        )
+                                    })
+                                : selectedEvent ?
+                                    backupAgeCategories.map((cat, i) => {
+                                        return (
+                                            <Picker.Item key={i} label={cat} value={cat} />
+                                        )
+                                    })
+                                :
+                                    <></>
+                                }
+                            </Picker>
+                            {(selectedAge === 'Age 8 to age 10' || selectedAge === "Âge 8 à l'âge de 10" || selectedAge === 'J12' || selectedAge === 'J14' || selectedAge === 'J16' || selectedAge === 'J19') &&
+                                <View style={styles.fullWithSubcontainerWithMarginTop}>
+                                    <Text style={styles.label}>Parent/Guardian signature:</Text>
+                                    <TextInput style={styles.singleLineTextInputs} placeholder='Parent/Guardian Signature' value={parentalSignature} onChangeText={(e) => setParentalSignature(e)}/>
+                                    <View style={{width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 8}}>
+                                        <Text style={{color: 'white', fontSize: 14}}>I have parental/gaurdian consent to register:</Text>
+                                        <CheckBox 
+                                            center
+                                            checked={check1}
+                                            onPress={() => setParentalConsent(prev => !prev)}
+                                            checkedColor='white'
+                                            uncheckedColor='white'
+                                        />
+                                    </View>
+                                </View>
+                            }
+                        </View>
+                    :
+                        <></>
+                    }
                 </>
             }
         </View>
@@ -196,7 +264,11 @@ const styles = StyleSheet.create({
     formSubContainer: {
         width: '100%',
         marginLeft: 30
-    },  
+    }, 
+    fullWithSubcontainerWithMarginTop: {
+        width: '100%',
+        marginTop: 20
+    }, 
     label: {
         color: '#09CAC7',
         fontWeight: '800',

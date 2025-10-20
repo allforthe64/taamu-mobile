@@ -78,7 +78,7 @@ const RaceRegistrationMain = ({ keyData, raceData, organizerData, setRegistratio
             </View>
 
             {slide === 0 ?
-                <SlideOne selectedEvent={selectedEvent} setSelectedEvent={setSelectedEvent} selectedBoat={selectedBoat} setSelectedBoat={setSelectedBoat} selectedAge={selectedAge} setSelectedAge={setSelectedAge} backupAgeCategories={backupAgeCategories} backupCraftCategories={backupCraftCategories} events={raceData.raceEvents} gender={gender} setGender={setGender} crew={crew} setCrew={setCrew} currentUser={currentUser} crewAccountType={crewAccountType} setCrewAccountType={setCrewAccountType} currentUserCrews={currentUserCrews} selectedCrew={selectedCrew} setSelectedCrew={setSelectedCrew} setFeeObj={setFeeObj} fees={raceData.fees}parentalConsent={parentalConsent} setParentalConsent={setParentalConsent} parentalSignature={parentalSignature} setParentalSignature={setParentalSignature} setSlide={setSlide} keyData={keyData}/>
+                <SlideOne selectedEvent={selectedEvent} setSelectedEvent={setSelectedEvent} selectedBoat={selectedBoat} setSelectedBoat={setSelectedBoat} selectedAge={selectedAge} setSelectedAge={setSelectedAge} events={raceData.raceEvents} gender={gender} setGender={setGender} crew={crew} setCrew={setCrew} currentUser={currentUser} crewAccountType={crewAccountType} setCrewAccountType={setCrewAccountType} currentUserCrews={currentUserCrews} selectedCrew={selectedCrew} setSelectedCrew={setSelectedCrew} setFeeObj={setFeeObj} fees={raceData.fees}parentalConsent={parentalConsent} setParentalConsent={setParentalConsent} parentalSignature={parentalSignature} setParentalSignature={setParentalSignature} setSlide={setSlide} keyData={keyData}/>
             : slide === 1 ?
                 <></>
             :
