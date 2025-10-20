@@ -10,7 +10,7 @@ import RegistrationComponentRaceInfo from './RegistrationComponentRaceInfo'
 //slide component import
 import SlideOne from './slideComponents/SlideOne'
 
-const RaceRegistrationMain = ({ keyData, raceData, organizerData, setRegistrationWindowOpen, raceId }) => {
+const RaceRegistrationMain = ({ keyData, raceData, organizerData, setRegistrationWindowOpen, raceId, currentUser }) => {
 
     //initialize state for to hold race craft categories/age categories/distances/registration info/transaction data
     const [selectedEvent, setSelectedEvent] = useState()
