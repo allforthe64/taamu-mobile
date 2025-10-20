@@ -12,10 +12,10 @@ import { getUser, resultsTableListener, singleRaceListener, getKey } from '../..
 import { getDownloadableURL } from '../../firebase/storage'
 
 //component imports
-import ThumbnailAndInfo from './singleRacePageComponents/ThumbnailAndInfo'
-import DetailsAndRegistrationButton from './singleRacePageComponents/DetailsAndRegistrationButton'
-import PhotoGallery from './singleRacePageComponents/PhotoGallery'
-import RaceRegistrationMain from './singleRacePageComponents/RegistrationComponents/RaceRegistrationMain'
+import ThumbnailAndInfo from '../../components/singleRacePageComponents/ThumbnailAndInfo'
+import DetailsAndRegistrationButton from '../../components/singleRacePageComponents/DetailsAndRegistrationButton'
+import PhotoGallery from '../../components/singleRacePageComponents/PhotoGallery'
+import RaceRegistrationMain from '../../components/singleRacePageComponents/RegistrationComponents/RaceRegistrationMain'
 
 const RacePage = () => {
 
