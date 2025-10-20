@@ -35,9 +35,6 @@ const RaceRegistrationMain = ({ keyData, raceData, organizerData, setRegistratio
     const [transactionDocument, setTransactionDocument] = useState()
     const [feeObj, setFeeObj] = useState()
 
-    //encryption keyData
-    const [keyData, setKeyData] = useState()
-
     //message state
     const [message, setMessage] = useState('')
 
