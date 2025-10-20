@@ -14,16 +14,16 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
     (!parentalConsent || parentalSignature === ''));
 
     //set selectedCrew to the crew that matches the incoming crewId
-    const handleCrewChange = (e) => {
+    const handleCrewChange = (input) => {
         //filter for all participants who are coached crews
         const coachedCrews = selectedEvent.participants.filter(participant => participant.coachedCrew)
-        if (coachedCrews.some(crew => crew.crewId === e.target.value)) {
+        if (coachedCrews.some(crew => crew.crewId === input)) {
             setMessage(/* language === "fr" ? "Oups ! Il semble que vous avez déjà inscrit l'équipage sélectionné à cet événement" : */ "Oops! Looks like you've already registered the selected crew for that event")
             setSelectedCrew({id: ''})
             return false
         } else {
             //filter for the selected crew and make sure that the selected crew matches the craft category
-            const targetCrew = currentUserCrews.filter(crew => crew.id === e.target.value)[0]
+            const targetCrew = currentUserCrews.filter(crew => crew.id === input)[0]
 
             if (targetCrew.craftType === selectedBoat) {
                 setSelectedCrew(targetCrew)
@@ -232,7 +232,50 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                             }
                         </View>
                     :
-                        <></>
+                        <View style={styles.formSubContainer}>
+                            <Text style={styles.label}>Register as:</Text>
+                            <Picker
+                                mode='dropdown'
+                                style={styles.singleLineTextInputs}
+                                selectedValue={selectedBoat}
+                                onValueChange={(itemValue, itemIndex) => {
+                                    if (itemValue === 'captain') {
+                                        if (!currentUser.captain) {
+                                            language === "fr" ? setMessage("Vous devez être capitaine d'équipage pour inscrire votre équipage à cette course !")
+                                            : setMessage('You must be a crew captain to register your crew for this race!')
+                                        } else {
+                                            setCrewAccountType(itemValue)
+                                        }
+                                    } else if (itemValue === 'coach') {
+                                        if (!currentUser.coach) {
+                                            language === "fr" ? setMessage("Vous devez être coach pour inscrire un de vos équipages à cette course !")
+                                            : setMessage('You must be a coach to register one of your crews for this race!')
+                                        } else {
+                                            setCrewAccountType(itemValue)
+                                        }
+                                    }
+                                }}
+                            >
+                               <Picker.Item key={''} label={'Choose one...'} value={''} />
+                               <Picker.Item key={'captain'} label={'Team captain'} value={'captain'} /> 
+                               <Picker.Item key={'coach'} label={'Crew coach'} value={'coach'} />
+                            </Picker>
+                        </View>
+                    }
+                    {crewAccountType === 'coach' && selectedBoat !== 'V1' && selectedBoat !== 'OC1' && selectedBoat !== 'Surfski Single' && selectedBoat !== 'SUP' && keyData && crew &&
+                        <View style={styles.formSubContainer}>
+                            <Text style={styles.label}>Register as:</Text>
+                            <Picker
+                                mode='dropdown'
+                                style={styles.singleLineTextInputs}
+                                selectedValue={selectedBoat}
+                                onValueChange={(itemValue, itemIndex) => {
+                                    handleCrewChange(itemValue)
+                                }}
+                            >
+                                <Picker.Item key={''} label={'Choose one...'} value={''} />
+                            </Picker>
+                        </View>
                     }
                 </>
             }

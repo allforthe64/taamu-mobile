@@ -6,7 +6,7 @@ import { format } from 'date-fns'
 
 //getDownloadableURL import from firebase storage function
 import { useFocusEffect } from 'expo-router'
-import { getDownloadableURL } from '../../../firebase/storage'
+import { getDownloadableURL } from '../../firebase/storage'
 
 const DetailsAndRegistrationButton = ({desc, startTimes, endTimes, raceData}) => {
     //initialize state to hold start and end times
