@@ -274,6 +274,16 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                                 }}
                             >
                                 <Picker.Item key={''} label={'Choose one...'} value={''} />
+                                {/* {currentUserCrews.map((crew, i) => {
+
+                                    //decipher crew name
+                                    const teamNameDecipher = createDecipheriv('aes256', keyData.key, keyData.iv)
+                                    const decipheredTeamName = teamNameDecipher.update(crew.crewName, 'hex', 'utf-8') + teamNameDecipher.final('utf-8')
+
+                                    return (
+                                        <Picker.Item label={crewName} key={i} value={crew.id} />
+                                    )
+                                })} */}
                             </Picker>
                         </View>
                     }
