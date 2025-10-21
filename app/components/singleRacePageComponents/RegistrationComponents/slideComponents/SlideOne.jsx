@@ -91,7 +91,7 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                             if (currentUser.role !== 'coach') {
                                 if (!currentUser.captain) {
                                     if (events[itemValue].participants.some(participant => !participant.captainedCrew && (participant.user === currentUser.uid))) {
-                                        setMessage(language === "fr" ? "Oups ! On dirait que vous êtes déjà inscrit à cet événement" : "Oops! Looks like you've already registered for that event")
+                                        setMessage(/* language === "fr" ? "Oups ! On dirait que vous êtes déjà inscrit à cet événement" : */ "Oops! Looks like you've already registered for that event")
                                         return false
                                     } else {
                                         setSelectedEvent(events[itemValue])
@@ -102,11 +102,11 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                                     }
                                 } else {
                                     if (events[itemValue].participants.some(participant => participant.captainedCrew && (participant.user === currentUser.uid))) {
-                                        setMessage(language === "fr" ? "Oups ! On dirait que vous êtes déjà inscrit à cet événement" : "Oops! Looks like you've already registered for that event")
+                                        setMessage(/* language === "fr" ? "Oups ! On dirait que vous êtes déjà inscrit à cet événement" : */ "Oops! Looks like you've already registered for that event")
                                         return false
                                     } else {
                                         if (events[itemValue].participants.some(participant => !participant.captainedCrew && !participant.coachedCrew && (participant.user === currentUser.uid))) {
-                                            setMessage(language === "fr" ? "Oups ! On dirait que vous êtes déjà inscrit à cet événement" : "Oops! Looks like you've already registered for that event")
+                                            setMessage(/* language === "fr" ? "Oups ! On dirait que vous êtes déjà inscrit à cet événement" : */ "Oops! Looks like you've already registered for that event")
                                             return false
                                         } else {
                                             setSelectedEvent(events[itemValue])
@@ -120,7 +120,7 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                             } else {
                                 if (events[itemValue].team === 'No') {
                                     if (events[itemValue].participants.some(participant => !participant.captainedCrew && !participant.coachedCrew && (participant.user === currentUser.uid))) {
-                                        setMessage(language === "fr" ? "Oups ! On dirait que vous êtes déjà inscrit à cet événement" : "Oops! Looks like you've already registered for that event")
+                                        setMessage(/* language === "fr" ? "Oups ! On dirait que vous êtes déjà inscrit à cet événement" :  */"Oops! Looks like you've already registered for that event")
                                         return false
                                     } else {
                                         setSelectedEvent(events[itemValue])
@@ -241,15 +241,15 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                                 onValueChange={(itemValue, itemIndex) => {
                                     if (itemValue === 'captain') {
                                         if (!currentUser.captain) {
-                                            language === "fr" ? setMessage("Vous devez être capitaine d'équipage pour inscrire votre équipage à cette course !")
-                                            : setMessage('You must be a crew captain to register your crew for this race!')
+                                           /*  language === "fr" ? setMessage("Vous devez être capitaine d'équipage pour inscrire votre équipage à cette course !")
+                                            :  */setMessage('You must be a crew captain to register your crew for this race!')
                                         } else {
                                             setCrewAccountType(itemValue)
                                         }
                                     } else if (itemValue === 'coach') {
                                         if (!currentUser.coach) {
-                                            language === "fr" ? setMessage("Vous devez être coach pour inscrire un de vos équipages à cette course !")
-                                            : setMessage('You must be a coach to register one of your crews for this race!')
+                                            /* language === "fr" ? setMessage("Vous devez être coach pour inscrire un de vos équipages à cette course !")
+                                            : */ setMessage('You must be a coach to register one of your crews for this race!')
                                         } else {
                                             setCrewAccountType(itemValue)
                                         }
