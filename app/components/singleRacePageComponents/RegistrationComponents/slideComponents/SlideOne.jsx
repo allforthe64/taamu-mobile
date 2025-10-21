@@ -36,7 +36,7 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
 
     //initialize arrays to hold the boat and age categories used when all boats or all ages are active
     const backupAgeCategories = [
-        `${language === "fr" ? "Âge" : 'Age'} 8 ${language === "fr" ? "à l'âge de" : 'to age'} 10`,
+        /* `${language === "fr" ? "Âge" : 'Age'} 8 ${language === "fr" ? "à l'âge de" : 'to age'} 10` */ 'Age 8 to age 10',
         'J12',
         'J14',
         'J16',
