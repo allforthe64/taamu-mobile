@@ -192,7 +192,7 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                             <Picker
                                 mode='dropdown'
                                 style={styles.singleLineTextInputs}
-                                selectedValue={selectedBoat}
+                                selectedValue={selectedAge}
                                 onValueChange={(itemValue, itemIndex) => {
                                     setSelectedAge(itemValue)
                                 }}
@@ -222,7 +222,7 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                                         <Text style={{color: 'white', fontSize: 14}}>I have parental/gaurdian consent to register:</Text>
                                         <CheckBox 
                                             center
-                                            checked={check1}
+                                            checked={parentalConsent}
                                             onPress={() => setParentalConsent(prev => !prev)}
                                             checkedColor='white'
                                             uncheckedColor='white'
@@ -237,7 +237,7 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                             <Picker
                                 mode='dropdown'
                                 style={styles.singleLineTextInputs}
-                                selectedValue={selectedBoat}
+                                selectedValue={crewAccountType}
                                 onValueChange={(itemValue, itemIndex) => {
                                     if (itemValue === 'captain') {
                                         if (!currentUser.captain) {
@@ -268,7 +268,7 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                             <Picker
                                 mode='dropdown'
                                 style={styles.singleLineTextInputs}
-                                selectedValue={selectedBoat}
+                                selectedValue={selectedCrew.id}
                                 onValueChange={(itemValue, itemIndex) => {
                                     handleCrewChange(itemValue)
                                 }}
@@ -284,6 +284,24 @@ const SlideOne = ({ selectedEvent, setSelectedEvent, selectedBoat, setSelectedBo
                                         <Picker.Item label={crewName} key={i} value={crew.id} />
                                     )
                                 })} */}
+                            </Picker>
+                        </View>
+                    }
+                    {selectedEvent.eventGender === 'Mixed' && !crew &&
+                        <View style={styles.formSubContainer}>
+                            <Text style={styles.label}>Select a gender:</Text>
+                            <Picker
+                                mode='dropdown'
+                                style={styles.singleLineTextInputs}
+                                selectedValue={gender}
+                                onValueChange={(itemValue, itemIndex) => {
+                                    setGender(itemValue)
+                                }}
+                            >
+                                <Picker.Item key={''} label={'Choose one...'} value={''} />
+                                <Picker.Item key={'m'} label={'Male'} value={'m'} />
+                                <Picker.Item key={'f'} label={'Female'} value={'f'} />
+                                <Picker.Item key={'p'} label={'Prefer not to say'} value={'p'} />  
                             </Picker>
                         </View>
                     }
